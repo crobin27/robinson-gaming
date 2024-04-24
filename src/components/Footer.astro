@@ -1,0 +1,45 @@
+---
+// Footer.astro
+
+const baseUrl = "/";
+---
+
+<footer class="bg-gray-700 text-white p-4 mt-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
+        <div>
+            <span class="text-lg font-bold">Robinson Gaming</span>
+            <p class="text-sm">support@email.com</p>
+        </div>
+        <nav>
+            <ul class="flex space-x-4">
+                <li>
+                    <a href={`${baseUrl}about`} class="hover:text-gray-300"
+                        >About</a
+                    >
+                </li>
+                <li>
+                    <a href={`${baseUrl}contact`} class="hover:text-gray-300"
+                        >Contact</a
+                    >
+                </li>
+                <li>
+                    <a href={`${baseUrl}games`} class="hover:text-gray-300"
+                        >Games</a
+                    >
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <a
+                href="/privacy-number-crunch.html"
+                class="hover:text-gray-300 text-sm"
+                >Privacy Policy - Number Crunch Tiles</a
+            ><br />
+            <a
+                href="/privacy-word-match.html"
+                class="hover:text-gray-300 text-sm"
+                >Privacy Policy - Word Match Tiles</a
+            >
+        </div>
+    </div>
+</footer>

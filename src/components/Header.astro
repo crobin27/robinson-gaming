@@ -1,0 +1,38 @@
+---
+// Header.astro
+
+// Define a base URL for navigation; adjust according to your project structure
+const baseUrl = "/";
+---
+
+<header
+    class="bg-white-800 text-white py-5 px-10 flex justify-between items-center fixed top-0 left-0 w-full z-10"
+>
+    <div class="flex items-center">
+        <a href={baseUrl} class="flex items-center">
+            <img
+                src="images/Logo_By_Itself.png"
+                alt="Company Logo"
+                class="w-10 h-10 mr-2"
+            />
+            <span class="font-bold text-xl">Robinson Gaming</span>
+        </a>
+    </div>
+    <nav class="flex">
+        <ul class="flex space-x-4">
+            <li>
+                <a href={`${baseUrl}about`} class="hover:text-gray-300">About</a
+                >
+            </li>
+            <li>
+                <a href={`${baseUrl}contact`} class="hover:text-gray-300"
+                    >Contact</a
+                >
+            </li>
+            <li>
+                <a href={`${baseUrl}games`} class="hover:text-gray-300">Games</a
+                >
+            </li>
+        </ul>
+    </nav>
+</header>
