@@ -1,45 +1,68 @@
----
-// Footer.astro
-
-const baseUrl = "/";
----
-
-<footer class="bg-gray-700 text-white p-4 mt-8">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center">
-        <div>
-            <span class="text-lg font-bold">Robinson Gaming</span>
-            <p class="text-sm">support@email.com</p>
+<footer class="bg-gray-900 text-white p-5">
+    <div
+        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center"
+    >
+        <!-- Top Section: Logo & Download Buttons -->
+        <div class="flex flex-1 items-center justify-start">
+            <img
+                src="/images/header/Logo_By_Itself.png"
+                alt="Robinson Gaming Logo"
+                class="h-12 mr-4"
+            />
+            <span class="font-bold text-lg">Robinson Gaming</span>
         </div>
-        <nav>
-            <ul class="flex space-x-4">
-                <li>
-                    <a href={`${baseUrl}about`} class="hover:text-gray-300"
-                        >About</a
-                    >
-                </li>
-                <li>
-                    <a href={`${baseUrl}contact`} class="hover:text-gray-300"
-                        >Contact</a
-                    >
-                </li>
-                <li>
-                    <a href={`${baseUrl}games`} class="hover:text-gray-300"
-                        >Games</a
-                    >
-                </li>
-            </ul>
-        </nav>
-        <div>
-            <a
-                href="/privacy-number-crunch.html"
-                class="hover:text-gray-300 text-sm"
-                >Privacy Policy - Number Crunch Tiles</a
-            ><br />
-            <a
-                href="/privacy-word-match.html"
-                class="hover:text-gray-300 text-sm"
-                >Privacy Policy - Word Match Tiles</a
-            >
+        <div class="flex flex-1 items-center justify-end space-x-4">
+            <a href="https://play.google.com" target="_blank">
+                <img
+                    src="/images/footer/download_on_gp.png"
+                    alt="Download on Google Play"
+                    class="h-12"
+                />
+            </a>
+            <a href="https://apple.com/app-store" target="_blank">
+                <img
+                    src="/images/footer/download_on_as.png"
+                    alt="Download on Apple App Store"
+                    class="h-12"
+                />
+            </a>
+        </div>
+    </div>
+    <!-- Separator Line -->
+    <hr class="my-4 border-white opacity-25" />
+    <!-- Bottom Section: Contact, Policy, Social Media -->
+    <div
+        class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto"
+    >
+        <a href="mailto:support@robinsongaming.com" class="mb-2 md:mb-0"
+            >support@robinsongaming.com</a
+        >
+        <a href="/privacy-policy" class="mb-2 md:mb-0">Privacy Policy</a>
+        <div class="flex space-x-4">
+            <a href="https://facebook.com" target="_blank">
+                <img
+                    src="/images/footer/facebook.png"
+                    alt="Facebook"
+                    class="h-8"
+                />
+            </a>
+            <a href="https://instagram.com" target="_blank">
+                <img
+                    src="/images/footer/instagram.png"
+                    alt="Instagram"
+                    class="h-8"
+                />
+            </a>
+            <a href="https://tiktok.com" target="_blank">
+                <img src="/images/footer/tiktok.png" alt="TikTok" class="h-8" />
+            </a>
+            <a href="https://linkedin.com" target="_blank">
+                <img
+                    src="/images/footer/linkedin.png"
+                    alt="LinkedIn"
+                    class="h-8"
+                />
+            </a>
         </div>
     </div>
 </footer>

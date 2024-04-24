@@ -6,20 +6,20 @@ const baseUrl = "/";
 ---
 
 <header
-    class="bg-white-800 text-white py-5 px-10 flex justify-between items-center fixed top-0 left-0 w-full z-10"
+    class="bg-cover bg-center p-5 text-white flex justify-between items-center fixed top-0 left-0 w-full z-50 rounded-bl-2xl rounded-br-2xl"
+    style="background-image: url('images/header/header_image.png'); background-position: center; background-size: 100% 100%;"
 >
-    <div class="flex items-center">
-        <a href={baseUrl} class="flex items-center">
-            <img
-                src="images/Logo_By_Itself.png"
-                alt="Company Logo"
-                class="w-10 h-10 mr-2"
-            />
-            <span class="font-bold text-xl">Robinson Gaming</span>
-        </a>
-    </div>
+    <a href={baseUrl} class="flex items-center">
+        <img
+            src="images/header/Logo_By_Itself.png"
+            alt="Company Logo"
+            class="w-10 h-10 mr-2"
+        />
+        <span class="font-bold text-xl">Robinson Gaming</span>
+    </a>
+
     <nav class="flex">
-        <ul class="flex space-x-4">
+        <ul class="flex space-x-6">
             <li>
                 <a href={`${baseUrl}about`} class="hover:text-gray-300">About</a
                 >
