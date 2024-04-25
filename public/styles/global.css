@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* Add your custom styles below */
+p {
+    @apply mb-12; /* Tailwind utility for margin-bottom */
+}
 
 

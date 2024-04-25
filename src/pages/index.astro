@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import HomePageContent from "../components/HomePageContent.astro";
 ---
 
 <!doctype html>
@@ -8,59 +9,12 @@ import Footer from "../components/Footer.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Robinson Gaming - Home</title>
 		<link href="/styles/global.css" rel="stylesheet" />
 	</head>
 	<body class="text-white bg-gray-800">
 		<Header />
-		<main class="w-1/2 mx-auto pt-12">
-			<section class="text-center mt-10">
-				<p class="text-4xl font-bold mb-2">
-					Challenging Minds with Innovative Mobile Puzzle Games
-				</p>
-				<p class="text-lg mb-4 pt-4">
-					Robinson Gaming is an independent mobile gaming studio based
-					out of Orange County, California. I hope you enjoy our games
-					as much as I enjoy making them.
-				</p>
-				<a href="/about" class="hover:opacity-80">
-					<img
-						src="/images/about_button.png"
-						alt="About"
-						class="w-30 mx-auto"
-					/>
-				</a>
-				<p class="text-5xl font-bold my-16">Games</p>
-			</section>
-			<!-- Games Section -->
-			<div class="grid grid-cols-1 gap-y-10">
-				<!-- Individual Game Container -->
-				<div class="relative">
-					<img
-						src="/images/nct-frame.png"
-						alt="Game 1"
-						class="w-full h-auto"
-					/>
-					<div class="absolute bottom-0 left-0 pl-11 pb-6 space-y-4">
-						<a href="/download/android/game1" class="block">
-							<img
-								src="/images/footer/download_on_gp.png"
-								alt="Download for Android"
-								class="h-16"
-							/>
-						</a>
-						<a href="/download/ios/game1" class="block">
-							<img
-								src="/images/footer/download_on_as.png"
-								alt="Download for iOS"
-								class="h-16"
-							/>
-						</a>
-					</div>
-				</div>
-
-				<!-- Add more games as needed -->
-			</div>
-		</main>
+		<HomePageContent />
 		<Footer />
 	</body>
 </html>
