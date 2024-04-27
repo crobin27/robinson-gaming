@@ -1,0 +1,36 @@
+---
+// about page
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About - Robinson Gaming</title>
+        <link href="/styles/global.css" rel="stylesheet" />
+    </head>
+    <body class="text-white bg-gray-800">
+        <Header />
+        <main class="mx-auto w-1/2 text-center my-24">
+            <h1 class="text-3xl font-bold my-2">About Robinson Gaming</h1>
+            <p class="my-2 text-xl">
+                RobinsonGaming is an independent mobile gaming studio created
+                and operated by one developer. I strive to create challenging
+                yet satisfying mobile puzzle games. I hope you enjoy my games
+                while I work on building my portfolio and resume.
+            </p>
+            <img
+                src="/images/about-lake-tahoe.png"
+                alt="Robinson Gaming Logo"
+                class="mx-auto my-2"
+            />
+
+            <p class="my-2">Founded in Orange County, California.</p>
+            <p class="my-2">Operated in Lake Tahoe, California.</p>
+        </main>
+    </body>
+    <Footer />
+</html>
