@@ -1,15 +1,20 @@
 ---
 // about page
+import MetaTags from "../components/MetaTags.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+const meta = {
+    title: "About Robinson Gaming",
+    description:
+        "Learn more about Robinson Gaming, an independent mobile gaming studio created and operated by one developer.",
+};
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>About - Robinson Gaming</title>
+        <MetaTags title="{meta.title}" description="{meta.description}" />
         <link href="/styles/global.css" rel="stylesheet" />
     </head>
     <body class="text-white bg-gray-800">
@@ -31,6 +36,6 @@ import Footer from "../components/Footer.astro";
             <p class="my-2">Founded in Orange County, California.</p>
             <p class="my-2">Operated in Lake Tahoe, California.</p>
         </main>
+        <Footer />
     </body>
-    <Footer />
 </html>

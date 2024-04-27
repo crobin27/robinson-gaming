@@ -1,18 +1,21 @@
 ---
-// contact page
+// Contaact.astro - Page
+import MetaTags from "../components/MetaTags.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+const meta = {
+    title: "Contact",
+    description: "Contact us for all inquiries, concerns, or suggestions.",
+};
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Contact - Robinson Gaming</title>
+        <MetaTags title={meta.title} description={meta.description} />
         <link href="/styles/global.css" rel="stylesheet" />
-    </head>
-    <body class="text-white bg-gray-800">
+    </head><body class="text-white bg-gray-800">
         <Header />
         <main class="w-3/5 mx-auto text-center mt-24">
             <h1 class="font-bold text-3xl">Contact</h1>

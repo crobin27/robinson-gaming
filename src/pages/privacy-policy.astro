@@ -1,15 +1,19 @@
 ---
 // privacy-policy.astro
+import MetaTags from "../components/MetaTags.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+const meta = {
+    title: "Privacy Policy - Robinson Gaming",
+    description: "Robinson Gaming Privacy Policy",
+};
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Privacy Policy - Robinson Gaming</title>
+        <MetaTags title={meta.title} description={meta.description} />
         <link href="/styles/global.css" rel="stylesheet" />
     </head>
     <body class="text-white bg-gray-800">
