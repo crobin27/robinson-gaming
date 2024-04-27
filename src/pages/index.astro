@@ -1,16 +1,23 @@
 ---
+import MetaTags from "../components/MetaTags.astro";
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import HomePageContent from "../components/HomePageContent.astro";
+import Footer from "../components/Footer.astro";
+
+const meta = {
+	title: "Robinson Gaming - Mobile Puzzle Games",
+	description:
+		"Discover Robinson Gaming's innovative mobile puzzle games that challenge minds worldwide.",
+};
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Basic Meta Tags -->
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Robinson Gaming - Home</title>
-		<link href="/styles/global.css" rel="stylesheet" />
+		<MetaTags title={meta.title} description={meta.description} />
 	</head>
 	<body class="text-white bg-gray-800">
 		<Header />

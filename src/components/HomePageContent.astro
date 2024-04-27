@@ -1,20 +1,38 @@
+---
+// HomePageContent.astro
+import GameCard from "./GameCard.astro";
+// Define the games array
+const games = [
+    {
+        title: "Number Crunch Tiles",
+        androidUrl:
+            "https://play.google.com/store/apps/details?id=com.robinson.nc2048",
+        iosUrl: "https://apps.apple.com/us/app/number-crunch-tiles/id6462944098",
+        imageUrl: "/images/nct-frame.png",
+        altText: "Gameplay screenshot of Number Crunch Tiles",
+    },
+    {
+        title: "Word Match Tiles",
+        androidUrl:
+            "https://play.google.com/store/apps/details?id=com.robinson.wordmatchtiles",
+        iosUrl: "https://apps.apple.com/us/app/word-match-tiles/id6477621209",
+        imageUrl: "/images/wmt-frame.png",
+        altText: "Gameplay screenshot of Word Match Tiles",
+    },
+];
+---
+
 <main class="w-1/2 mx-auto pt-24">
-    <!-- Introduction Section -->
     <section class="text-center">
-        <!-- Main title with SEO-optimized H1 tag -->
         <h1 class="text-4xl font-bold mb-2">
-            <h1 class="text-4xl font-bold mb-2">
-                Challenging Minds with <br /> Innovative Mobile Puzzle Games
-            </h1>
+            Challenging Minds with <br /> Innovative Mobile Puzzle Games
         </h1>
-        <!-- Description with a focus on readability and SEO -->
         <p class="text-lg mb-4 pt-4">
             Robinson Gaming is an independent mobile gaming studio based out of
             Orange County, California. We aim to create engaging and
             thought-provoking puzzle games that are enjoyed by players around
             the world.
         </p>
-        <!-- About Us Link with enhanced accessibility features -->
         <a
             id="games"
             href="/about"
@@ -27,82 +45,23 @@
                 class="w-32 mx-auto"
             />
         </a>
-        <!-- Games Section Heading -->
         <h2 class="text-3xl font-bold mt-8 mb-4">Games</h2>
     </section>
 
     <!-- Games Showcase Section -->
     <div class="grid grid-cols-1 gap-y-10 my-4">
-        <!-- Individual Game Container with semantic HTML and accessibility enhancements -->
-        <article class="relative">
-            <img
-                src="/images/nct-frame.png"
-                alt="Game 1 screenshot"
-                class="w-full h-auto"
-            />
-            <!-- Download buttons with clear accessibility labels -->
-            <div class="absolute bottom-0 left-0 pl-11 pb-6 space-y-4">
-                <a
-                    href="https://play.google.com/store/apps/details?id=com.robinson.nc2048"
-                    target="_blank"
-                    class="block"
-                    aria-label="Download Number Crunch Tiles for Android"
-                >
-                    <img
-                        src="/images/footer/download_on_gp.png"
-                        alt="Download on Google Play"
-                        class="h-16 hover:opacity-90"
-                    />
-                </a>
-                <a
-                    href="https://apps.apple.com/us/app/number-crunch-tiles/id6462944098"
-                    target="_blank"
-                    class="block"
-                    aria-label="Download Number Crunch Tiles for iOS"
-                >
-                    <img
-                        src="/images/footer/download_on_as.png"
-                        alt="Download on Apple App Store"
-                        class="h-16 hover:opacity-90"
-                    />
-                </a>
-            </div>
-        </article>
-        <!-- Additional games would be added here with similar structure -->
-        <article class="relative">
-            <img
-                src="/images/wmt-frame.png"
-                alt="Game 2 screenshot"
-                class="w-full h-auto"
-            />
-            <!-- Download buttons with clear accessibility labels -->
-            <div class="absolute bottom-0 left-0 pl-11 pb-6 space-y-4">
-                <a
-                    href="https://play.google.com/store/apps/details?id=com.robinson.nc2048"
-                    target="_blank"
-                    class="block"
-                    aria-label="Download Word Match Tiles for Android"
-                >
-                    <img
-                        src="/images/footer/download_on_gp.png"
-                        alt="Download on Google Play"
-                        class="h-16 hover:opacity-90"
-                    />
-                </a>
-                <a
-                    href="https://apps.apple.com/us/app/number-crunch-tiles/id6462944098"
-                    target="_blank"
-                    class="block"
-                    aria-label="Download Word Match Tiles for iOS"
-                >
-                    <img
-                        src="/images/footer/download_on_as.png"
-                        alt="Download on Apple App Store"
-                        class="h-16 hover:opacity-90"
-                    />
-                </a>
-            </div>
-        </article>
+        {
+            games.map((game) => (
+                <GameCard
+                    title={game.title}
+                    androidUrl={game.androidUrl}
+                    iosUrl={game.iosUrl}
+                    imageUrl={game.imageUrl}
+                    altText={game.altText}
+                />
+            ))
+        }
+
         <article>
             <img
                 src="/images/rbm-frame.png"

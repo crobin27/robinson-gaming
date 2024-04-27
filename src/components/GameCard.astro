@@ -1,0 +1,35 @@
+---
+// GameCard.astro
+// Props: title, androidUrl, iosUrl, imageUrl, altText
+const { title, androidUrl, iosUrl, imageUrl, altText } = Astro.props;
+---
+
+<article class="relative">
+	<img src={imageUrl} alt={altText} class="w-full h-auto" />
+	<div class="absolute bottom-0 left-0 pl-11 pb-6 space-y-4">
+		<a
+			href={androidUrl}
+			target="_blank"
+			class="block"
+			aria-label={`Download ${title} for Android`}
+		>
+			<img
+				src="/images/footer/download_on_gp.png"
+				alt="Download on Google Play"
+				class="h-16 hover:opacity-90"
+			/>
+		</a>
+		<a
+			href={iosUrl}
+			target="_blank"
+			class="block"
+			aria-label={`Download ${title} for iOS`}
+		>
+			<img
+				src="/images/footer/download_on_as.png"
+				alt="Download on Apple App Store"
+				class="h-16 hover:opacity-90"
+			/>
+		</a>
+	</div>
+</article>
