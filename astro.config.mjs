@@ -4,6 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
+  publicDir: './public', // default is 'public'
   integrations: [
     tailwind(),
     sitemap({
