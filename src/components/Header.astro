@@ -6,9 +6,18 @@ const baseUrl = "/";
 
 <header
     class="bg-cover bg-center p-5 text-white flex justify-between items-center fixed top-0 left-0 w-full z-50 rounded-bl-2xl rounded-br-2xl"
-    style="background-image: url('images/header/header_image.png'); background-position: center; background-size: 100% 100%;"
+    style="background-image: url('/images/header/header_image.png'); background-position: center; background-size: cover;"
 >
-    <a href={baseUrl} class="flex items-center">
+    <a href={baseUrl} class="block sm:hidden">
+        <!-- Replace the individual logo and text with a combined logo image for mobile -->
+        <img
+            src="/images/header/Logo_With_Brand.png"
+            alt="Robinson Gaming Combined Logo"
+            class="w-20 h-20"
+        />
+    </a>
+    <a href={baseUrl} class="hidden sm:flex items-center">
+        <!-- Original logo and text visible only on larger screens -->
         <img
             src="/images/header/Logo_By_Itself.png"
             alt="Company Logo"
@@ -17,22 +26,30 @@ const baseUrl = "/";
         <span class="font-bold text-xl">Robinson Gaming</span>
     </a>
 
-    <nav class="flex">
-        <ul class="flex space-x-6">
+    <!-- Make navigation always visible and responsive -->
+    <nav class="block sm:flex">
+        <ul
+            class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
+        >
             <li>
                 <a
                     href={`${baseUrl}about`}
-                    class="hover:text-gray-300 font-bold">About</a
+                    class="hover:text-gray-300 font-bold text-sm sm:text-base"
+                    >About</a
                 >
             </li>
             <li>
                 <a
                     href={`${baseUrl}contact`}
-                    class="hover:text-gray-300 font-bold">Contact</a
+                    class="hover:text-gray-300 font-bold text-sm sm:text-base"
+                    >Contact</a
                 >
             </li>
             <li>
-                <a href="/#games" class="hover:text-gray-300 font-bold">Games</a
+                <a
+                    href="/#games"
+                    class="hover:text-gray-300 font-bold text-sm sm:text-base"
+                    >Games</a
                 >
             </li>
         </ul>

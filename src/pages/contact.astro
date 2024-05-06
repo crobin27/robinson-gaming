@@ -15,21 +15,24 @@ const meta = {
     <head>
         <MetaTags title={meta.title} description={meta.description} />
         <link href="/styles/global.css" rel="stylesheet" />
-    </head><body class="text-white bg-gray-800">
+    </head>
+    <body class="text-white bg-gray-800">
         <Header />
-        <main class="w-3/5 mx-auto text-center mt-24">
-            <h1 class="font-bold text-3xl">Contact</h1>
-            <p class="mt-4 w-3/5 text-xl mx-auto text-center">
+        <main class="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 text-center my-24">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold my-4">
+                Contact
+            </h1>
+            <p class="my-4 text-base sm:text-lg md:text-xl">
                 For all inquiries, concerns, or suggestions, please contact us
-                at <a
-                    href="mailto:robinson.games.help@gmail.com"
-                    class="underline">robinson.games.help@gmail.com</a
-                >
+                at
+                <a href="mailto:robinson.games.help@gmail.com" class="underline"
+                    >robinson.games.help@gmail.com</a
+                >.
             </p>
             <img
                 src="/images/contact-supporting-image.png"
                 alt="Contact Supporting Image"
-                class="my-8 mx-auto w-3/5"
+                class="mx-auto my-8 w-full max-w-md h-auto"
             />
         </main>
         <Footer />
