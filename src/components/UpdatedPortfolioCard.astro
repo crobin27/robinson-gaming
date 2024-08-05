@@ -1,0 +1,87 @@
+---
+interface Props {
+    desktopImageSrc: string;
+    mobileImageSrc: string;
+    googlePlayLink?: string;
+    appStoreLink?: string;
+}
+
+const { desktopImageSrc, mobileImageSrc, googlePlayLink, appStoreLink } =
+    Astro.props;
+---
+
+<div class="relative-container mx-auto my-8 max-w-[80%]">
+    <picture>
+        <source srcset={mobileImageSrc} media="(max-width: 768px)" />
+        <img
+            src={desktopImageSrc}
+            alt="Portfolio Card"
+            class="rounded-lg shadow-lg w-full"
+        />
+    </picture>
+    {
+        googlePlayLink && (
+            <a
+                href={googlePlayLink}
+                target="_blank"
+                class="overlay-button google-play-button absolute md:top-[80%] md:left-[45%] top-[80%] left-[45%] transform -translate-x-1/2 -translate-y-1/2"
+            >
+                <img
+                    src="/images/footer/download_on_gp.png"
+                    alt="Google Play"
+                    class="md:w-44 w-26"
+                />
+            </a>
+        )
+    }
+    {
+        appStoreLink && (
+            <a
+                href={appStoreLink}
+                target="_blank"
+                class="overlay-button app-store-button absolute md:top-[80%] md:left-[75%] top-[80%] left-[75%] transform -translate-x-1/2 -translate-y-1/2"
+            >
+                <img
+                    src="/images/footer/download_on_as.png"
+                    alt="App Store"
+                    class="md:w-44 w-26"
+                />
+            </a>
+        )
+    }
+</div>
+
+<style>
+    .relative-container {
+        position: relative;
+        width: 100%;
+    }
+    .overlay-button {
+        cursor: pointer;
+    }
+    /* Adjusting button positions for different screen sizes */
+    @media (max-width: 768px) {
+        .google-play-button {
+            top: 36%; /* Adjust vertical position for mobile */
+            left: 75%; /* Adjust horizontal position for mobile */
+            width: 30%; /* Adjust size for mobile */
+            transform: translate(-50%, -50%);
+        }
+        .app-store-button {
+            top: 50%; /* Adjust vertical position for mobile */
+            left: 75%; /* Adjust horizontal position for mobile */
+            width: 30%; /* Adjust size for mobile */
+            transform: translate(-50%, -50%);
+        }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .google-play-button {
+            top: 70%; /* Adjust vertical position for intermediate */
+            left: 35%; /* Adjust horizontal position for intermediate */
+        }
+        .app-store-button {
+            top: 70%; /* Adjust vertical position for intermediate */
+            left: 65%; /* Adjust horizontal position for intermediate */
+        }
+    }
+</style>
