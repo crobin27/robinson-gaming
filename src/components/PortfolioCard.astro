@@ -12,12 +12,18 @@ const { desktopImageSrc, mobileImageSrc, googlePlayLink, appStoreLink } =
 
 <div class="relative-container mx-auto my-8 max-w-[80%]">
     <picture>
-        <source srcset={mobileImageSrc} media="(max-width: 768px)" />
-        <img
-            src={desktopImageSrc}
-            alt="Portfolio Card"
-            class="rounded-lg shadow-lg w-full"
-        />
+        <picture>
+            <source
+                srcset={mobileImageSrc}
+                media="(max-width: 768px)"
+                class="mobile-img"
+            />
+            <img
+                src={desktopImageSrc}
+                alt="Portfolio Card"
+                class="desktop-img rounded-lg shadow-lg w-full"
+            />
+        </picture>
     </picture>
     {
         googlePlayLink && (
