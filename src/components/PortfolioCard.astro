@@ -4,26 +4,32 @@ interface Props {
     mobileImageSrc: string;
     googlePlayLink?: string;
     appStoreLink?: string;
+    googlePlayImageSrc?: string; // New prop for Google Play image
+    appStoreImageSrc?: string; // New prop for App Store image
 }
 
-const { desktopImageSrc, mobileImageSrc, googlePlayLink, appStoreLink } =
-    Astro.props;
+const {
+    desktopImageSrc,
+    mobileImageSrc,
+    googlePlayLink,
+    appStoreLink,
+    googlePlayImageSrc = "/images/footer/download_on_gp.png", // Default to original image if not provided
+    appStoreImageSrc = "/images/footer/download_on_as.png", // Default to original image if not provided
+} = Astro.props;
 ---
 
 <div class="relative-container mx-auto my-8 max-w-[80%]">
     <picture>
-        <picture>
-            <source
-                srcset={mobileImageSrc}
-                media="(max-width: 768px)"
-                class="mobile-img"
-            />
-            <img
-                src={desktopImageSrc}
-                alt="Portfolio Card"
-                class="desktop-img rounded-lg shadow-lg w-full"
-            />
-        </picture>
+        <source
+            srcset={mobileImageSrc}
+            media="(max-width: 768px)"
+            class="mobile-img"
+        />
+        <img
+            src={desktopImageSrc}
+            alt="Portfolio Card"
+            class="desktop-img rounded-lg shadow-lg w-full"
+        />
     </picture>
     {
         googlePlayLink && (
@@ -33,7 +39,7 @@ const { desktopImageSrc, mobileImageSrc, googlePlayLink, appStoreLink } =
                 class="overlay-button google-play-button absolute md:top-[80%] md:left-[45%] top-[80%] left-[45%] transform -translate-x-1/2 -translate-y-1/2"
             >
                 <img
-                    src="/images/footer/download_on_gp.png"
+                    src={googlePlayImageSrc}
                     alt="Google Play"
                     class="md:w-44 w-26"
                 />
@@ -48,7 +54,7 @@ const { desktopImageSrc, mobileImageSrc, googlePlayLink, appStoreLink } =
                 class="overlay-button app-store-button absolute md:top-[80%] md:left-[75%] top-[80%] left-[75%] transform -translate-x-1/2 -translate-y-1/2"
             >
                 <img
-                    src="/images/footer/download_on_as.png"
+                    src={appStoreImageSrc}
                     alt="App Store"
                     class="md:w-44 w-26"
                 />
