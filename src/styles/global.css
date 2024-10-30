@@ -1,10 +1,11 @@
 
 /* global.css */
 /* 3. Font Imports */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+/* global.css */
+
+/* Import Roboto font with specific weights */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap');
+
 
 /* 1. CSS Reset */
 *,
@@ -18,37 +19,37 @@
 /* 2. Custom Properties for Colors, Fonts, and Sizing */
 :root {
   /* Colors */
-  --color-primary: #002f5a;     /* Adjust based on your color palette */
-  --color-secondary: #00aaff;
-  --color-accent: #f3b600;
+  --color-primary: #3861ac;     /* Adjust based on your color palette */
+  --color-secondary: #35a7ff;
+  --color-accent: #ff5964;
   --color-background: #f9f9f9;
-  --color-text: #333;
+  --color-text: #060606;
 
   /* Font Sizes */
-  --font-size-small: 0.875rem; /* Equivalent to 14px */
-  --font-size-base: 1rem;      /* Equivalent to 16px */
-  --font-size-large: 1.25rem;  /* Equivalent to 20px */
-  --font-size-xlarge: 2rem;    /* Equivalent to 32px */
+  --font-size-small: 1rem; /* Equivalent to 14px */
+  --font-size-base: 1.375rem;      /* Equivalent to 16px */
+  --font-size-large: 1.875rem;  /* Equivalent to 20px */
+  --font-size-xlarge: 2.375px;    /* Equivalent to 32px */
 
   /* Fonts */
   --font-primary: 'Roboto', sans-serif;
-  --font-secondary: 'Open Sans', sans-serif;
-  --font-display: 'Lora', serif;
-  --font-special: 'Montserrat', sans-serif;
+
+  /*Container Styles*/
+  --container-width: 75vw;
 }
 
 
 /* 4. Body Styling */
 body {
-  font-family: var(--font-primary);
-  color: var(--color-text);
-  background-color: var(--color-background);
-  line-height: 1.6;
-  font-size: var(--font-size-base);
-}
+    font-family: 'Roboto', sans-serif;
+    color: var(--color-text); /* Assuming you've set a --color-text variable */
+    background-color: var(--color-background);
+    font-size: var(--font-size-base); /* Assuming you've set base font size */
+    line-height: 1.6;
+  }
 
 /* 5. Global Typography */
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3 {
   font-family: var(--font-display);
   margin: 0;
 }
@@ -61,8 +62,12 @@ h2 {
   font-size: var(--font-size-large);
 }
 
+h3 {
+    font-size: var(--font-size-base);
+}
+
 p {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-small);
 }
 
 /* 6. Utility Classes */
@@ -73,3 +78,12 @@ p {
 .mb-1 {
   margin-bottom: 1rem;
 }
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--color-secondary);
+  }

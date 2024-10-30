@@ -1,12 +1,16 @@
 /* layout.css */
-
-/* Container for consistent page width */
 .container {
-    width: var(--container-width, 1200px); /* You can override this in global.css */
-    max-width: 90%; /* Allows it to shrink on smaller screens */
-    margin: 0 auto;
-    padding: 0 1rem;
-  }
+    width: 100%; /* Allows the container to take full width up to the max-width */
+    max-width: 75vw; /* 75% of the viewport width on larger screens */
+    margin: 0 auto; /* Centers the container horizontally */
+    padding: 0 1rem; /* Adds horizontal padding to keep content from touching the edges */
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%; /* Shrinks to 90% of the screen width on smaller screens */
+    }
+}
   
   /* Layout for each section */
   .section {
