@@ -1,0 +1,41 @@
+/* layout.css */
+
+/* Container for consistent page width */
+.container {
+    width: var(--container-width, 1200px); /* You can override this in global.css */
+    max-width: 90%; /* Allows it to shrink on smaller screens */
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  /* Layout for each section */
+  .section {
+    padding: 4rem 0; /* Space above and below each section */
+  }
+  
+  /* Example for grid layout in "Projects" section */
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    gap: 2rem; /* Space between columns */
+  }
+  
+  @media (max-width: 768px) {
+    .grid-3 {
+      grid-template-columns: 1fr; /* Stacks columns on smaller screens */
+    }
+  }
+  
+  /* Example for flex layouts */
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  

@@ -1,7 +1,10 @@
-// postcss.config.js
-export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  }
-}
+const postcssjitprops = require("postcss-jit-props");
+const OpenProps = require("open-props");
+
+
+module.exports = {
+  plugins: [
+    postcssjitprops(OpenProps),
+    require('autoprefixer')
+  ]
+};

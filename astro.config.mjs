@@ -11,5 +11,12 @@ export default defineConfig({
       // Specify the site's base URL. Necessary for generating the correct links in the sitemap
       site: 'https://www.robinsongaming.com',
     })
-  ]
+  ],
+
+  vite: {
+    ssr: {
+      external: ["svgo"],
+    }
+  }
+
 });

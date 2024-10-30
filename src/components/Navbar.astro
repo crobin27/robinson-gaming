@@ -1,0 +1,45 @@
+---
+const navLinks = [
+    {
+        name: 'Home',
+        url: '/',
+        style: 'transparent',
+    },
+    {
+        name: 'Projects',
+        url: '#Projects',
+        style: 'transparent',
+    },
+    {
+        name: 'Photography',
+        url: '/photography',
+        style: 'transparent',
+    },
+    {
+        name: 'About', 
+        url: '/about',
+        style: 'transparent',
+    },
+];
+import "../styles/navbar.css";
+---
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <!-- Home Button as Image Link -->
+        <a href="/" class="home-icon">
+            <img src="/icons/Home.svg" alt="Home" />
+        </a>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            {navLinks.map((link) => (
+                <li>
+                    <a href={link.url} class={`nav-link ${link.style}`}>{link.name}</a>
+                </li>
+            ))}
+        </ul>
+    </div>
+</nav>
+
+

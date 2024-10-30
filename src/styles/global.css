@@ -1,0 +1,75 @@
+
+/* global.css */
+/* 3. Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+/* 1. CSS Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Custom Properties for Colors, Fonts, and Sizing */
+:root {
+  /* Colors */
+  --color-primary: #002f5a;     /* Adjust based on your color palette */
+  --color-secondary: #00aaff;
+  --color-accent: #f3b600;
+  --color-background: #f9f9f9;
+  --color-text: #333;
+
+  /* Font Sizes */
+  --font-size-small: 0.875rem; /* Equivalent to 14px */
+  --font-size-base: 1rem;      /* Equivalent to 16px */
+  --font-size-large: 1.25rem;  /* Equivalent to 20px */
+  --font-size-xlarge: 2rem;    /* Equivalent to 32px */
+
+  /* Fonts */
+  --font-primary: 'Roboto', sans-serif;
+  --font-secondary: 'Open Sans', sans-serif;
+  --font-display: 'Lora', serif;
+  --font-special: 'Montserrat', sans-serif;
+}
+
+
+/* 4. Body Styling */
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+/* 5. Global Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--font-size-xlarge);
+}
+
+h2 {
+  font-size: var(--font-size-large);
+}
+
+p {
+  font-size: var(--font-size-base);
+}
+
+/* 6. Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}

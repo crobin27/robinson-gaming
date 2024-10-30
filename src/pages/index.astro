@@ -1,26 +1,10 @@
 ---
-// index.astro - Home Page
-import MetaTags from "../components/MetaTags.astro";
-import Header from "../components/Header.astro";
-import HomePageContent from "../components/HomePageContent.astro";
-import Footer from "../components/Footer.astro";
-
-const meta = {
-	title: "Robinson Gaming - Mobile Puzzle Games",
-	description:
-		"Discover Robinson Gaming's innovative mobile puzzle games that challenge minds worldwide.",
-};
+import "../styles/global.css";
+import "../styles/layout.css";
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<MetaTags title={meta.title} description={meta.description} />
-		<link rel="stylesheet" href="/styles/global.css" />
-	</head>
-	<body class="text-white bg-gray-800 font-bold">
-		<Header />
-		<HomePageContent />
-		<Footer />
-	</body>
-</html>
+<BaseLayout title="Desgn Landing Page">
+  
+  
+</BaseLayout>
