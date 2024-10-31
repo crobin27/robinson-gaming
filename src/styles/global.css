@@ -1,6 +1,8 @@
 /* global.css */
-/* 3. Font Imports */
+
+/* the props */
 /* global.css */
+@import "open-props/open-props.min.css"; /* For the minified version */
 
 /* Import Roboto font with specific weights */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
@@ -23,18 +25,25 @@
   --color-accent: #ff5964;
   --color-background: #f9f9f9;
   --color-text: #060606;
+  --color-text-secondary: #535353;
 
   /* Font Sizes */
   --font-size-small: 1rem; /* Equivalent to 14px */
   --font-size-base: 1.375rem; /* Equivalent to 16px */
   --font-size-large: 1.875rem; /* Equivalent to 20px */
-  --font-size-xlarge: 2.375px; /* Equivalent to 32px */
+  --font-size-xlarge: 2.375rem; /* Equivalent to 32px */
 
   /* Fonts */
   --font-primary: "Roboto", sans-serif;
+  --font-title: "Rowdies", sans-serif;
 
   /*Container Styles*/
-  --container-width: 70vw;
+  --container-width: 78vw;
+}
+
+main {
+  display: grid;
+  gap: var(--size-fl);
 }
 
 /* 4. Body Styling */
@@ -47,27 +56,26 @@ body {
 }
 
 /* 5. Global Typography */
-h1,
-h2,
-h3 {
-  font-family: var(--font-display);
-  margin: 0;
-}
-
 h1 {
   font-size: var(--font-size-xlarge);
+  font-weight: 600;
+  line-height: 1.1;
 }
-
 h2 {
   font-size: var(--font-size-large);
+  font-weight: 600;
+  line-height: 1.1;
 }
-
 h3 {
   font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: 1.1;
 }
 
 p {
   font-size: var(--font-size-small);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 /* 6. Utility Classes */
@@ -86,4 +94,24 @@ a {
 
 a:hover {
   color: var(--color-secondary);
+}
+
+/*Increase font size on smaller screens */
+@media (max-width: 768px) {
+  html {
+    font-size: 120%;
+  }
+}
+
+.wrapper {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+main {
+  display: grid;
+  gap: var(--size-fluid-6);
+  padding: var(--size-fluid-5) var(--size-fluid-2);
 }

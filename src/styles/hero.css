@@ -2,17 +2,18 @@
 
 /* Hero Section */
 .hero {
-  padding: 4rem 0;
+  padding: var(--size-fluid-5) 0;
 }
 
 /* Wrapper for Left and Right Columns */
 .hero-content-wrapper {
   display: flex;
-  align-items: stretch; /* Ensures columns stretch to the same height */
+  align-items: stretch;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0; /* Removes padding to align content with container edges */
-  gap: 2rem;
+  padding: 0;
+  gap: var(--size-fluid-4);
+  max-width: var(--container-width);
 }
 
 /* Left Column Styling */
@@ -20,18 +21,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%; /* Takes up half the container width */
+  width: 50%;
 }
 
 /* Title Styling */
 .hero-title {
-  font-family: "Rowdies", sans-serif;
-  font-size: 6rem;
-  font-weight: 700;
+  font-size: 7.5rem;
+  font-family: var(
+    --font-title
+  ); /* Uses the Rowdies font defined in global.css */
   color: var(--color-secondary);
-  line-height: 0.42; /* Adjusted line height */
   margin: 0;
-  padding-bottom: 2.4rem;
+  padding-bottom: var(--size-fluid-2);
+  line-height: 0.45; /* Adjust line height if needed */
 }
 
 .hero-title span {
@@ -41,66 +43,68 @@
 
 /* Role and Subtitle */
 .hero-role {
-  font-size: 1.75rem;
-  font-weight: 600;
   color: var(--color-text);
-  margin-top: 0.5rem;
+  margin-top: var(--size-fluid-3);
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
-  color: var(--color-text);
-  margin: 0.3rem 0 0 0;
-  font-weight: 400;
+  color: var(--color-text-secondary); /* Slightly dimmed color */
+  margin-top: 0.2rem;
 }
 
 /* Download Buttons */
 .download-buttons {
   display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: var(--size-fluid-3);
+  margin-top: var(--size-fluid-3);
+  align-items: left;
+  justify-content: left;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
 
 .download-button img {
-  height: 55px;
+  max-width: 100%;
+  height: auto;
   width: auto;
+  max-height: 4rem;
 }
 
 /* Right Column: Image Styling */
 .hero-right {
-  width: 50%; /* Ensures it matches the left column width */
+  width: 50%;
   display: flex;
-  justify-content: flex-end; /* Aligns image to the far right */
+  justify-content: flex-end;
   align-items: center;
 }
 
 .hero-image {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: var(--size-radius-3);
+  box-shadow: var(--shadow-3);
 }
 
 /* Responsive Adjustments */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 5rem;
   }
 
   .hero-role {
-    font-size: 1.5rem;
+    font-size: var(--font-size-base);
   }
 
   .hero-subtitle {
-    font-size: 1rem;
+    font-size: var(--font-size-small);
   }
 
   .download-button img {
-    height: 50px;
+    max-height: 2.5rem;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 812px) {
   .hero-content-wrapper {
     flex-direction: column;
     align-items: center;
@@ -108,28 +112,21 @@
   }
 
   .hero-left {
-    width: 100%; /* Full width on smaller screens */
+    width: 100%;
   }
 
   .hero-title {
-    font-size: 3rem;
-  }
-
-  .hero-role {
-    font-size: 1.25rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
+    font-size: 4rem;
   }
 
   .download-buttons {
-    margin-top: 1.5rem;
+    margin-top: var(--size-fluid-2);
+    justify-content: center;
   }
 
   .hero-right {
     width: 80%;
-    margin-top: 2rem;
-    justify-content: center; /* Centers the image on mobile */
+    margin-top: var(--size-fluid-2);
+    justify-content: center;
   }
 }

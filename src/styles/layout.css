@@ -1,4 +1,7 @@
 /* layout.css */
+/* global.css */
+@import "open-props/open-props.min.css"; /* For the minified version */
+
 .container {
   width: 100%; /* Allows the container to take full width up to the max-width */
   max-width: var(
