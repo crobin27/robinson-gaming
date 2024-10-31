@@ -1,0 +1,49 @@
+---
+// Hero.astro
+import "../styles/hero.css";
+---
+
+<section class="hero">
+  <div class="container hero-content-wrapper">
+    <!-- Left Column: Title, Description, and Download Buttons -->
+    <div class="hero-left">
+      <h1 class="hero-title">
+        <span>Robinson</span>
+        <br />
+        <span>Gaming</span>
+      </h1>
+      <p class="hero-role">Software and Computer Engineer</p>
+      <p class="hero-subtitle">Small Gaming Studio by Cole Robinson</p>
+
+      <!-- Download Buttons -->
+      <div class="download-buttons">
+        <a
+          href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
+          class="download-button google-play"
+        >
+          <img
+            src="images/footer/download_on_gp.png"
+            alt="Get it on Google Play"
+          />
+        </a>
+        <a
+          href="https://apps.apple.com/us/developer/cole-robinson/id1703674983"
+          class="download-button app-store"
+        >
+          <img
+            src="images/footer/download_on_as.png"
+            alt="Download on the App Store"
+          />
+        </a>
+      </div>
+    </div>
+
+    <!-- Profile Image -->
+    <div class="hero-right">
+      <img
+        src="/images/hero/hero-profile.webp"
+        alt="Cole Robinson on a Mountain"
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,135 @@
+/* hero.css */
+
+/* Hero Section */
+.hero {
+  padding: 4rem 0;
+}
+
+/* Wrapper for Left and Right Columns */
+.hero-content-wrapper {
+  display: flex;
+  align-items: stretch; /* Ensures columns stretch to the same height */
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0; /* Removes padding to align content with container edges */
+  gap: 2rem;
+}
+
+/* Left Column Styling */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%; /* Takes up half the container width */
+}
+
+/* Title Styling */
+.hero-title {
+  font-family: "Rowdies", sans-serif;
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  line-height: 0.42; /* Adjusted line height */
+  margin: 0;
+  padding-bottom: 2.4rem;
+}
+
+.hero-title span {
+  display: block;
+  margin-bottom: -0.2rem;
+}
+
+/* Role and Subtitle */
+.hero-role {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin: 0.3rem 0 0 0;
+  font-weight: 400;
+}
+
+/* Download Buttons */
+.download-buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.download-button img {
+  height: 55px;
+  width: auto;
+}
+
+/* Right Column: Image Styling */
+.hero-right {
+  width: 50%; /* Ensures it matches the left column width */
+  display: flex;
+  justify-content: flex-end; /* Aligns image to the far right */
+  align-items: center;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-role {
+    font-size: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .download-button img {
+    height: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-left {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-role {
+    font-size: 1.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .download-buttons {
+    margin-top: 1.5rem;
+  }
+
+  .hero-right {
+    width: 80%;
+    margin-top: 2rem;
+    justify-content: center; /* Centers the image on mobile */
+  }
+}

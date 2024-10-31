@@ -1,83 +1,91 @@
 ---
 import "../styles/navbar.css";
 const navLinks = [
-    {
-        name: 'Home',
-        url: '/',
-        style: 'transparent',
-    },
-    {
-        name: 'Projects',
-        url: '#Projects',
-        style: 'transparent',
-    },
-    {
-        name: 'Photography',
-        url: '/photography',
-        style: 'transparent',
-    },
-    {
-        name: 'About', 
-        url: '/about',
-        style: 'transparent',
-    },
+  {
+    name: "Home",
+    url: "/",
+    style: "transparent",
+  },
+  {
+    name: "Projects",
+    url: "#Projects",
+    style: "transparent",
+  },
+  {
+    name: "Photography",
+    url: "/photography",
+    style: "transparent",
+  },
+  {
+    name: "About",
+    url: "/about",
+    style: "transparent",
+  },
 ];
 ---
+
 <nav class="navbar">
-    <div class="container navbar-content">
-        <!-- Home Icon -->
-        <a href="/" class="home-icon">
-            <img src="/icons/home.svg" alt="Home" />
-        </a>
+  <div class="container navbar-content">
+    <!-- Home Icon -->
+    <a href="/" class="home-icon">
+      <img src="/icons/home.svg" alt="Home" />
+    </a>
 
-        <!-- Navigation Links (hidden on smaller screens) -->
-        <ul class="nav-links">
-            {navLinks.map((link) => (
-                <li>
-                    <a href={link.url} class={`nav-link ${link.style}`}>{link.name}</a>
-                </li>
-            ))}
-        </ul>
+    <!-- Navigation Links (hidden on smaller screens) -->
+    <ul class="nav-links">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a href={link.url} class={`nav-link ${link.style}`}>
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
 
-        <!-- Hamburger Icon (visible only on smaller screens) -->
-        <img src="/icons/hamburger.svg" alt="Menu" class="hamburger-icon" />
-    </div>
+    <!-- Hamburger Icon (visible only on smaller screens) -->
+    <img src="/icons/hamburger.svg" alt="Menu" class="hamburger-icon" />
+  </div>
 </nav>
 
 <!-- Overlay Menu for Mobile -->
 <div class="overlay" id="overlay">
-    <button class="close-btn" id="closeBtn">&times;</button>
-    <ul class="overlay-menu">
-        {navLinks.map((link, index) => (
-            <li style={`animation-delay: ${index * 0.1}s;`}>
-                <a href={link.url} class="overlay-link">{link.name}</a>
-            </li>
-        ))}
-    </ul>
+  <button class="close-btn" id="closeBtn">&times;</button>
+  <ul class="overlay-menu">
+    {
+      navLinks.map((link, index) => (
+        <li style={`animation-delay: ${index * 0.1}s;`}>
+          <a href={link.url} class="overlay-link">
+            {link.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const hamburgerIcon = document.querySelector('.hamburger-icon');
-        const overlay = document.getElementById('overlay');
-        const closeBtn = document.getElementById('closeBtn');
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburgerIcon = document.querySelector(".hamburger-icon");
+    const overlay = document.getElementById("overlay");
+    const closeBtn = document.getElementById("closeBtn");
 
-        // Toggle overlay visibility
-        hamburgerIcon.addEventListener('click', () => {
-            overlay.classList.add('show');
-        });
-
-        // Close overlay
-        closeBtn.addEventListener('click', () => {
-            overlay.classList.remove('show');
-        });
-
-        // Optional: Close overlay when a link is clicked
-        document.querySelectorAll('.overlay-link').forEach(link => {
-            link.addEventListener('click', () => {
-                overlay.classList.remove('show');
-            });
-        });
+    // Toggle overlay visibility
+    hamburgerIcon.addEventListener("click", () => {
+      overlay.classList.add("show");
     });
-</script>
 
+    // Close overlay
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("show");
+    });
+
+    // Optional: Close overlay when a link is clicked
+    document.querySelectorAll(".overlay-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        overlay.classList.remove("show");
+      });
+    });
+  });
+</script>

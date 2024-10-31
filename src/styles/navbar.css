@@ -1,140 +1,138 @@
 /* navbar.css */
 
 .navbar {
-    background-color: var(--color-primary); /* Primary background color */
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+  background-color: var(--color-primary); /* Primary background color */
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 .navbar-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .home-icon {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .home-icon img {
-    height: 40px; /* Adjust size as needed */
-    width: 40px;
+  height: 40px; /* Adjust size as needed */
+  width: 40px;
 }
 
 .nav-links {
-    list-style-type: none;
-    display: flex;
-    gap: 1.5rem; /* Space between links */
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 1.5rem; /* Space between links */
+  margin: 0;
+  padding: 0;
 }
 
 /* Individual Link Styling */
 .nav-link {
-    color: var(--color-background);
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  color: var(--color-background);
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 /* Hover Effect */
 .nav-link:hover {
-    background-color: var(--color-secondary);
-    color: var(--color-background);
+  background-color: var(--color-secondary);
+  color: var(--color-background);
 }
 
 /* Hamburger Icon */
 .hamburger-icon {
-    display: none; /* Hide by default on larger screens */
-    height: 40px; /* Adjust size as needed */
-    width: 40px;
-    cursor: pointer; /* Shows a pointer on hover for usability */
+  display: none; /* Hide by default on larger screens */
+  height: 40px; /* Adjust size as needed */
+  width: 40px;
+  cursor: pointer; /* Shows a pointer on hover for usability */
 }
-
 
 /* Media Query for Small Screens */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Hide the nav links on smaller screens */
-    }
+  .nav-links {
+    display: none; /* Hide the nav links on smaller screens */
+  }
 
-    .hamburger-icon {
-        display: block; /* Show the hamburger icon on smaller screens */
-    }
+  .hamburger-icon {
+    display: block; /* Show the hamburger icon on smaller screens */
+  }
 }
 
 /* Overlay styles */
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9); /* Black with 80% opacity */
-    display: none; /* Hidden by default */
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    opacity: 0;
-    transition: opacity 0.3s ease; /* Fade in/out effect */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9); /* Black with 80% opacity */
+  display: none; /* Hidden by default */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Fade in/out effect */
 }
 
 .overlay.show {
-    display: flex; /* Show overlay when active */
-    opacity: 1;
+  display: flex; /* Show overlay when active */
+  opacity: 1;
 }
 
 /* Close button */
 .close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 /* Centered overlay menu */
 .overlay-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 
 .overlay-link {
-    color: white;
-    font-size: 2rem;
-    text-decoration: none;
-    display: block;
-    margin: 1rem 0;
-    opacity: 0; /* Start hidden for fade-in */
-    transform: translateY(20px); /* Start slightly offset for animation */
-    animation: fadeInUp 0.3s forwards; /* Fade in from below */
+  color: white;
+  font-size: 2rem;
+  text-decoration: none;
+  display: block;
+  margin: 1rem 0;
+  opacity: 0; /* Start hidden for fade-in */
+  transform: translateY(20px); /* Start slightly offset for animation */
+  animation: fadeInUp 0.3s forwards; /* Fade in from below */
 }
 
 /* Fade-in animation */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Staggered fade-in effect */
 .overlay-menu li {
-    animation: fadeInUp 0.3s forwards;
+  animation: fadeInUp 0.3s forwards;
 }
-
