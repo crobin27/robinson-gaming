@@ -1,0 +1,90 @@
+/* about-section.css */
+
+/* About Section */
+.about-section {
+  padding: var(--size-fluid-3) 0;
+}
+
+/* Wrapper for Left and Right Columns */
+.about-content-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0;
+  gap: var(--size-fluid-4);
+  max-width: var(--container-width); /* Uses container width for consistency */
+}
+
+/* Left Column Styling */
+.about-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+/* Right Column Styling */
+.about-right {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Subheading Text Styling */
+.subheading-text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.4;
+}
+
+/* Engagement Buttons */
+.engagement-buttons {
+  display: flex;
+  flex-direction: column; /* Stacks buttons vertically */
+  gap: var(--size-fluid-1);
+  margin-top: var(--size-fluid-3);
+  align-items: flex-start; /* Aligns buttons to the left */
+  max-width: 100%; /* Prevents overflow */
+}
+
+.engagement-button img {
+  max-width: 100%; /* Allows images to scale */
+  height: auto;
+  max-height: 3rem; /* Sets a max height for consistency */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  /* Adjusts font sizes and spacing for medium screens */
+  .subheading-text {
+    font-size: var(--font-size-small);
+  }
+
+  .engagement-button img {
+    max-height: 2.5rem;
+  }
+}
+
+@media (max-width: 812px) {
+  /* Stacks left and right columns vertically on small screens */
+  .about-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-left,
+  .about-right {
+    width: 100%;
+  }
+
+  .engagement-buttons {
+    align-items: center; /* Center-aligns buttons */
+  }
+
+  .about-right {
+    justify-content: center; /* Centers the image on small screens */
+  }
+}

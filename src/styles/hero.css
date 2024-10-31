@@ -2,7 +2,7 @@
 
 /* Hero Section */
 .hero {
-  padding: var(--size-fluid-5) 0;
+  padding: var(--size-fluid-3) 0;
 }
 
 /* Wrapper for Left and Right Columns */
@@ -76,13 +76,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
-
-.hero-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--size-radius-3);
-  box-shadow: var(--shadow-3);
 }
 
 /* Responsive Adjustments */
