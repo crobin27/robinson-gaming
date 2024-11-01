@@ -108,3 +108,7 @@ main {
   gap: var(--size-fluid-6);
   margin: 4rem 0 0 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}

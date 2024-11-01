@@ -3,15 +3,24 @@ html,
 body {
   padding: 0;
   margin: 0;
-  overflow-x: hidden; /* Prevent any horizontal overflow */
+  overflow-x: hidden;
 }
 
 .photography-section {
-  width: 100%; /* Ensure it takes up full viewport width */
-  margin: 0; /* Remove any potential inherited margin */
-  padding: 0; /* Remove any potential padding */
+  width: 100%;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  max-width: none;
+  opacity: 0; /* Initially hidden for fade-in effect */
+  transform: translateY(20px); /* Start slightly lower for slide-up effect */
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.photography-section.visible {
+  opacity: 1;
+  transform: translateY(0); /* Slide-up effect */
 }
 
 /* Background Image Styling */
@@ -19,9 +28,9 @@ body {
   background-image: url("/images/photography-section/tahoe-background.webp");
   background-size: cover;
   background-position: center;
-  height: 600px; /* Adjust height as needed */
-  width: 100%; /* Full viewport width */
-  display: flex; /* Makes it a flex container for centering content */
+  height: 600px;
+  width: 100%;
+  display: flex;
   align-items: flex-start;
   justify-content: center;
   position: relative;
@@ -29,13 +38,18 @@ body {
 
 /* Text Content Styling */
 .text-content {
-  position: absolute; /* Position text on top of image */
+  position: absolute;
   top: 10%;
   left: 5%;
   color: white;
-  z-index: 1; /* Place content above the background image */
+  z-index: 1;
+  opacity: 0; /* Start hidden for fade-in effect */
+  transform: translateY(-20px); /* Slight upward slide */
+  animation: fadeInDown 1s ease forwards;
+  animation-delay: 0.3s; /* Delay the fade-in for smoother entrance */
 }
 
+/* Animating title and subtitle */
 .section-title {
   font-size: var(--font-size-large);
   font-family: var(--font-title, sans-serif);
@@ -59,12 +73,29 @@ body {
   max-width: 100%;
   height: auto;
   max-height: 3rem;
+  transition: transform 0.3s ease; /* Smooth transition on hover */
+}
+
+.see-more-button:hover img {
+  transform: scale(1.1); /* Grow slightly on hover */
+}
+
+/* Fade In Down Animation */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .background-image {
-    height: 300px; /* Reduce height on smaller screens */
+    height: 300px;
   }
 
   .section-title {

@@ -6,25 +6,38 @@
   font-family: var(--font-primary);
 }
 
+/* Titles and subtitles initial state */
+.photography-title,
+.photography-subtitle,
+.section-heading {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* Specific styling for the photography title */
 .photography-title {
   font-size: 3rem;
-  font-family: var(--font-title);
+  font-family: var(--font-title, sans-serif); /* Ensures title font */
+  color: var(--color-secondary); /* Secondary color */
   text-align: center;
-  color: var(--color-secondary);
   margin-bottom: 1rem;
 }
 
+.photography-title.visible,
+.photography-subtitle.visible,
+.section-heading.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtitle styling */
 .photography-subtitle {
   text-align: center;
   margin-bottom: 2rem;
   color: #555;
-}
-
-/* Section Headings */
-.section-heading {
-  font-size: 2rem;
-  margin: 2rem 0 1rem;
-  color: var(--color-text-secondary);
 }
 
 /* Photo Grid Layout */
@@ -34,10 +47,13 @@
 }
 
 .landscape-grid {
+  padding-top: 1rem;
+
   grid-template-columns: repeat(2, 1fr);
 }
 
 .portrait-grid {
+  padding-top: 1rem;
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -47,6 +63,16 @@
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.photo-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .photo-thumbnail {
@@ -73,8 +99,8 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
-  visibility: hidden; /* Hide overlay initially */
-  z-index: 1; /* Ensure overlay is above the photo */
+  visibility: hidden;
+  z-index: 1;
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
@@ -82,7 +108,7 @@
 
 .photo-card:hover .overlay {
   opacity: 1;
-  visibility: visible; /* Show overlay on hover */
+  visibility: visible;
 }
 
 .photo-title {
@@ -105,7 +131,12 @@
 
 .download-button img {
   width: auto;
-  height: 32px; /* Adjust this height as needed */
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.download-button:hover img {
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
 /* Responsive Adjustments */

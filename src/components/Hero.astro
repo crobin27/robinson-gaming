@@ -1,5 +1,4 @@
 ---
-// Hero.astro
 import "../styles/hero.css";
 ---
 
@@ -8,9 +7,9 @@ import "../styles/hero.css";
     <!-- Left Column: Title, Description, and Download Buttons -->
     <div class="hero-left">
       <h1 class="hero-title">
-        <span>Robinson</span>
+        <span id="typing-robinson"></span>
         <br />
-        <span>Gaming</span>
+        <span id="typing-gaming"></span>
       </h1>
       <h2 class="hero-role">Software and Computer Engineer</h2>
       <p class="hero-subtitle">Small Gaming Studio by Cole Robinson</p>
@@ -47,3 +46,31 @@ import "../styles/hero.css";
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const robinsonElement = document.getElementById("typing-robinson");
+    const gamingElement = document.getElementById("typing-gaming");
+
+    const typeWord = (element, text, delay) => {
+      element.innerHTML = ""; // Clear initial text
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          element.innerHTML += text.charAt(index);
+          index++;
+          setTimeout(type, 65); // Adjust speed here
+        } else if (element === robinsonElement) {
+          // Start typing "Gaming" after "Robinson" completes
+          setTimeout(() => typeWord(gamingElement, "Gaming", 0), 100);
+        }
+      }
+
+      type();
+    };
+
+    // Start typing "Robinson" and then "Gaming"
+    typeWord(robinsonElement, "Robinson", 0);
+  });
+</script>

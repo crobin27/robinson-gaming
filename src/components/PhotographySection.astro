@@ -16,3 +16,23 @@ import "../styles/photography-section.css";
     </a>
   </div>
 </section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const photographySection = document.querySelector(".photography-section");
+
+    const observerOptions = {
+      threshold: 0.1, // Trigger when 10% of the section is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          photographySection.classList.add("visible"); // Add the "visible" class to trigger animation
+          observer.unobserve(entry.target); // Stop observing after animation starts
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(photographySection);
+  });
+</script>

@@ -30,3 +30,24 @@ import "../styles/about-section.css";
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const aboutSection = document.querySelector(".about-section");
+
+    const observerOptions = {
+      threshold: 0.1, // Trigger when 10% of the section is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          aboutSection.classList.add("visible"); // Add the "visible" class to trigger animation
+          observer.unobserve(entry.target); // Stop observing after animation starts
+        }
+      });
+    }, observerOptions);
+
+    observer.observe(aboutSection);
+  });
+</script>

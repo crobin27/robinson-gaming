@@ -3,6 +3,7 @@
 /* About Section */
 .about-section {
   padding: var(--size-fluid-3) 0;
+  overflow: hidden; /* Ensures elements don’t overflow during animations */
 }
 
 /* Wrapper for Left and Right Columns */
@@ -13,7 +14,18 @@
   margin: 0 auto;
   padding: 0;
   gap: var(--size-fluid-4);
-  max-width: var(--container-width); /* Uses container width for consistency */
+  max-width: var(--container-width);
+  opacity: 0; /* Initially hidden for fade-in effect */
+  transform: translateY(20px); /* Start slightly lower for slide-up effect */
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+/* Fade-in effect when in view */
+.about-section.visible .about-content-wrapper {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Left Column Styling */
@@ -42,22 +54,26 @@
 /* Engagement Buttons */
 .engagement-buttons {
   display: flex;
-  flex-direction: column; /* Stacks buttons vertically */
+  flex-direction: column;
   gap: var(--size-fluid-1);
   margin-top: var(--size-fluid-3);
-  align-items: flex-start; /* Aligns buttons to the left */
-  max-width: 100%; /* Prevents overflow */
+  align-items: flex-start;
+  max-width: 100%;
 }
 
 .engagement-button img {
-  max-width: 100%; /* Allows images to scale */
+  max-width: 100%;
   height: auto;
-  max-height: 3rem; /* Sets a max height for consistency */
+  max-height: 3rem;
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.engagement-button:hover img {
+  transform: scale(1.05); /* Slightly larger on hover */
 }
 
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
-  /* Adjusts font sizes and spacing for medium screens */
   .subheading-text {
     font-size: var(--font-size-small);
   }
@@ -68,7 +84,6 @@
 }
 
 @media (max-width: 812px) {
-  /* Stacks left and right columns vertically on small screens */
   .about-content-wrapper {
     flex-direction: column;
     align-items: center;
@@ -81,10 +96,10 @@
   }
 
   .engagement-buttons {
-    align-items: center; /* Center-aligns buttons */
+    align-items: center;
   }
 
   .about-right {
-    justify-content: center; /* Centers the image on small screens */
+    justify-content: center;
   }
 }

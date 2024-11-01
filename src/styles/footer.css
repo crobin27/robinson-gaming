@@ -22,27 +22,47 @@
   gap: 0.5rem;
 }
 
-.footer-left h1 {
+/* Make Robinson Gaming look clickable */
+.footer-left a {
   font-family: var(--font-title);
   font-size: var(--font-size-large);
   color: white;
-  margin: 0;
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
 }
 
+.footer-left a:hover {
+  color: var(--color-secondary); /* Change color on hover */
+  transform: scale(1.05); /* Slight enlarge on hover */
+}
+
+/* GitHub logo with enlarge effect */
 .github-link img {
   height: 2rem;
   padding-left: 1rem;
+  transition: transform 0.3s ease;
 }
 
-/* Right side: Download buttons */
+.github-link:hover img {
+  transform: scale(1.1);
+}
+
+/* Right side: Download buttons with enlarge effect */
 .footer-right {
   display: flex;
   gap: 1rem;
 }
 
-.footer-right img {
+.footer-right a img {
   height: 3rem;
   width: auto;
+  transition: transform 0.3s ease;
+}
+
+.footer-right a:hover img {
+  transform: scale(1.1);
 }
 
 /* Divider line */
@@ -97,10 +117,8 @@
     gap: 1rem;
   }
 
-  .footer-left h1 {
-    font-family: var(--font-title);
+  .footer-left a {
     font-size: var(--font-size-large);
-    color: white;
     padding-bottom: 1rem;
   }
 

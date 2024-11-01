@@ -135,3 +135,26 @@ const portraitPhotos: Photo[] = [
     }
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const observerOptions = {
+      threshold: 0.1,
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Select all elements that should have a fade-in effect
+    const fadeElements = document.querySelectorAll(
+      ".photography-title, .photography-subtitle, .section-heading, .photo-card",
+    );
+    fadeElements.forEach((el) => fadeInObserver.observe(el));
+  });
+</script>

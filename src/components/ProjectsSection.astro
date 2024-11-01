@@ -1,8 +1,10 @@
 ---
 import "../styles/projects-section.css";
+// ProjectsSection.astro
+const { id } = Astro.props;
 ---
 
-<section class="projects-section">
+<section id={id} class="projects-section">
   <!-- Background Image -->
   <div class="projects-background">
     <div class="container projects-content">
@@ -73,3 +75,28 @@ import "../styles/projects-section.css";
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const projectCards = document.querySelectorAll(".project-card");
+
+    const observerOptions = {
+      threshold: 0.1, // Trigger when 10% of the card is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          entry.target.setAttribute(
+            "style",
+            `animation-delay: ${index * 0.2}s`,
+          ); // Stagger effect
+          observer.unobserve(entry.target); // Stop observing once animation is applied
+        }
+      });
+    }, observerOptions);
+
+    projectCards.forEach((card) => observer.observe(card));
+  });
+</script>
