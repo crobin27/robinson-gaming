@@ -1,57 +1,50 @@
 ---
-// Footer.astro - Component
+import "../styles/footer.css";
 ---
 
-<footer class="bg-gray-900 text-white p-5">
-  <div
-    class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center"
-  >
-    <!-- Top Section: Logo & Download Buttons -->
-    <a href="/">
-      <div class="flex flex-1 items-center justify-start">
-        <img
-          src="/images/header/Logo_By_Itself.png"
-          alt="Robinson Gaming Logo"
-          class="h-12 mr-4"
-        />
-        <span class="font-bold text-lg">Robinson Gaming</span>
-      </div>
-    </a>
-    <div class="flex flex-1 items-center justify-end space-x-4">
-      <a
-        href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
-        target="_blank"
-      >
-        <img
-          src="/images/footer/download_on_gp.png"
-          alt="Download on Google Play"
-          class="h-12 hover:opacity-90"
-        />
+<footer class="footer">
+  <div class="container footer-content">
+    <!-- Left side: Robinson Gaming header and GitHub logo -->
+    <div class="footer-left">
+      <h1>Robinson Gaming</h1>
+      <a href="https://github.com/crobin27" target="_blank" class="github-link">
+        <img src="/icons/github.svg" alt="GitHub Logo" />
       </a>
+    </div>
+
+    <!-- Right side: Download buttons -->
+    <div class="footer-right">
       <a
         href="https://apps.apple.com/us/developer/cole-robinson/id1703674983"
         target="_blank"
+        class="app-store"
       >
         <img
-          src="/images/footer/download_on_as.png"
-          alt="Download on Apple App Store"
-          class="h-12 hover:opacity-90"
+          src="/images/footer/download_on_as.webp"
+          alt="Download on the App Store"
+        />
+      </a>
+      <a
+        href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
+        target="_blank"
+        class="google-play"
+      >
+        <img
+          src="/images/footer/download_on_gp.webp"
+          alt="Get it on Google Play"
         />
       </a>
     </div>
   </div>
-  <!-- Separator Line -->
-  <hr class="my-6 border-white opacity-35" />
-  <!-- Bottom Section: Contact, Policy, Social Media -->
-  <div
-    class="flex flex-col md:flex-row justify-around items-center text-center max-w-7xl mx-auto py-4 md:py-0"
-  >
-    <a
-      href="mailto:cole@robinsongaming.com"
-      class="mb-4 md:mb-0 text-sm sm:text-base">cole@robinsongaming.com</a
-    >
-    <a href="/privacy-policy" class="mb-4 md:mb-0 text-sm sm:text-base"
-      >Privacy Policy</a
+
+  <!-- Divider line -->
+  <div class="footer-divider"></div>
+
+  <!-- Bottom row: Privacy policy on the left and email on the right -->
+  <div class="container footer-bottom">
+    <a href="/privacy-policy" class="privacy-policy">Privacy Policy</a>
+    <a href="mailto:cole@robinsongaming.com" class="email"
+      >cole@robinsongaming.com</a
     >
   </div>
 </footer>

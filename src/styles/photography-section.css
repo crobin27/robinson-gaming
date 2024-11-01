@@ -1,0 +1,82 @@
+/* Remove padding and margin on html and body */
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden; /* Prevent any horizontal overflow */
+}
+
+/* Overall Section Styling */
+.photography-section {
+  width: 100vw; /* Full viewport width */
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background Image Styling */
+.background-image {
+  background-image: url("/images/photography-section/tahoe-background.webp");
+  background-size: cover;
+  background-position: center;
+  height: 600px; /* Adjust height as needed */
+  width: 100vw; /* Full viewport width */
+  display: flex; /* Makes it a flex container for centering content */
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+}
+
+/* Text Content Styling */
+.text-content {
+  position: absolute; /* Position text on top of image */
+  top: 10%;
+  left: 5%;
+  color: white;
+  z-index: 1; /* Place content above the background image */
+}
+
+.section-title {
+  font-size: var(--font-size-large);
+  font-family: var(--font-title, sans-serif);
+  font-weight: 700;
+}
+
+.section-subtitle {
+  margin-top: 0.2rem;
+  color: var(--color-text-secondary);
+}
+
+/* See More Button Styling */
+.see-more-button {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  z-index: 1;
+}
+
+.see-more-button img {
+  max-width: 100%;
+  height: auto;
+  max-height: 3rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .background-image {
+    height: 300px; /* Reduce height on smaller screens */
+  }
+
+  .section-title {
+    font-size: var(--font-size-base);
+  }
+
+  .section-subtitle {
+    font-size: var(--font-size-small);
+  }
+
+  .see-more-button img {
+    max-height: 2.5rem;
+  }
+}

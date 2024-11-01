@@ -1,0 +1,96 @@
+/* projects-section.css */
+
+/* Overall Projects Section */
+.projects-section {
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Background Image */
+.projects-background {
+  background-image: url("/images/projects/background-image.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 4rem 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Section Title */
+.projects-title {
+  text-align: center;
+
+  margin-bottom: 2rem;
+}
+
+/* Project Placards Grid */
+.project-placards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Individual Project Card */
+.project-card {
+  position: relative;
+  max-width: 320px;
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Project Image */
+.project-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Learn More Button */
+.learn-more-link {
+  position: absolute;
+  bottom: 65%; /* Position at 10% from the bottom of the project card */
+  left: 25%;
+  transform: translateX(-50%);
+}
+
+.learn-more-button {
+  max-width: 125px; /* Adjust button size as needed */
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.learn-more-link:hover .learn-more-button {
+  transform: scale(1.05); /* Slightly enlarges on hover for visual effect */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .projects-title {
+    font-size: 2.5rem;
+  }
+
+  .learn-more-button {
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-title {
+    font-size: 2rem;
+  }
+
+  .project-card {
+    max-width: 100%;
+  }
+
+  .learn-more-button {
+    max-width: 70px;
+  }
+}
