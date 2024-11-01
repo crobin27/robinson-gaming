@@ -1,8 +1,7 @@
 ---
 // privacy-policy.astro
 import MetaTags from "../components/MetaTags.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const meta = {
   title: "Privacy Policy - Robinson Gaming",
@@ -17,210 +16,216 @@ const meta = {
     <link href="/styles/global.css" rel="stylesheet" />
   </head>
   <body class="text-white bg-gray-800">
-    <Header />
-    <main class="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 my-24 py-10">
-      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
-        Privacy Policy - Robinson Gaming
-      </h1>
+    <BaseLayout title="Privacy Policy">
+      <main class="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 my-24 py-10">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
+          Privacy Policy - Robinson Gaming
+        </h1>
 
-      <p class="my-2">Effective Date: May 1st, 2024</p>
+        <p class="my-2">Effective Date: May 1st, 2024</p>
 
-      <p class="my-2">
-        RobinsonGaming is committed to protecting your privacy. This privacy
-        policy tells you about our online collection and use of data. The terms
-        of this policy apply to all RobinsonGaming games, sites and services.
-      </p>
+        <p class="my-2">
+          RobinsonGaming is committed to protecting your privacy. This privacy
+          policy tells you about our online collection and use of data. The
+          terms of this policy apply to all RobinsonGaming games, sites and
+          services.
+        </p>
 
-      <p class="my-2">
-        Robinson Gaming may periodically update this Privacy Policy by posting a
-        new version to RobinsonGaming.com. Your continued use of the service
-        will be subject to the new Privacy Policy
-      </p>
+        <p class="my-2">
+          Robinson Gaming may periodically update this Privacy Policy by posting
+          a new version to RobinsonGaming.com. Your continued use of the service
+          will be subject to the new Privacy Policy
+        </p>
 
-      <h2 class="text-2xl font-bold mt-4 mb-2">
-        Information Collection and Use
-      </h2>
+        <h2 class="text-2xl font-bold mt-4 mb-2">
+          Information Collection and Use
+        </h2>
 
-      <p class="my-2">
-        For a better experience, while using our Service, RobinsonGaming may
-        require you to provide us with certain personally identifiable
-        information, including but not limited to User ID, Approximate Location,
-        Purchase History, Diagnostics, Device ID’s, App Interactions, and other
-        installed applications on your device. The information that
-        RobinsonGaming requests will be retained on your device.
-      </p>
+        <p class="my-2">
+          For a better experience, while using our Service, RobinsonGaming may
+          require you to provide us with certain personally identifiable
+          information, including but not limited to User ID, Approximate
+          Location, Purchase History, Diagnostics, Device ID’s, App
+          Interactions, and other installed applications on your device. The
+          information that RobinsonGaming requests will be retained on your
+          device.
+        </p>
 
-      <p class="my-2">
-        If you are signed in using Google Play or Apple Game Center, then the
-        information pertained to these third party services may be shared with
-        me such as username or name.
-      </p>
+        <p class="my-2">
+          If you are signed in using Google Play or Apple Game Center, then the
+          information pertained to these third party services may be shared with
+          me such as username or name.
+        </p>
 
-      <p class="my-2">
-        RobinsonGaming collects Analytics and Crash Reporting info for personal
-        use and do not share this data with any third parties. RobinsonGaming
-        uses this data to better understand the users and to provide efficient
-        fixes to issues or drawbacks. This data is in no way tied to any
-        personably identifiable information.
-      </p>
+        <p class="my-2">
+          RobinsonGaming collects Analytics and Crash Reporting info for
+          personal use and do not share this data with any third parties.
+          RobinsonGaming uses this data to better understand the users and to
+          provide efficient fixes to issues or drawbacks. This data is in no way
+          tied to any personably identifiable information.
+        </p>
 
-      <p class="my-2">
-        The app does use third-party services that may collect information used
-        to identify you. Please be aware that by using this application, your
-        data may be shared with the third party services below.
-      </p>
+        <p class="my-2">
+          The app does use third-party services that may collect information
+          used to identify you. Please be aware that by using this application,
+          your data may be shared with the third party services below.
+        </p>
 
-      <p class="my-2">
-        For more information links to the privacy policy of third-party service
-        providers used by the app are listed below:
-      </p>
+        <p class="my-2">
+          For more information links to the privacy policy of third-party
+          service providers used by the app are listed below:
+        </p>
 
-      <ul
-        class="font-bold underline list-disc pl-5"
-        aria-label="Third-party services privacy policies"
-      >
-        <li>
-          <a
-            href="https://developers.is.com/ironsource-mobile/air/ironsource-mobile-privacy-policy/#step-1"
-          >
-            Ironsource
-          </a>
-        </li>
-        <li>
-          <a href="https://policies.google.com/privacy?hl=en"> Google Admob </a>
-        </li>
-        <li>
-          <a href="https://firebase.google.com/support/privacy/dpo">
-            Firebase
-          </a>
-        </li>
-        <li>
-          <a href="https://unity3d.com/legal/privacy-policy">
-            Unity Game Services
-          </a>
-        </li>
-        <li>
-          <a href="https://www.inmobi.com/privacy-policy"> InMobi </a>
-        </li>
-        <li>
-          <a href="https://www.applovin.com/privacy/"> AppLovin </a>
-        </li>
-      </ul>
-
-      <h2 class="text-2xl font-bold mt-4 mb-2">Log Data</h2>
-      <p class="my-2">
-        RobinsonGaming wants to inform you that whenever you use my Service, in
-        a case of an error in the app, RobinsonGaming collects data and
-        information (through third-party products) on your phone called Log
-        Data. This Log Data may include information such as your device Internet
-        Protocol (“IP”) address, device name, operating system version, the
-        configuration of the app when utilizing my Service, the time and date of
-        your use of the Service, and other statistics.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Cookies</h2>
-      <p class="my-2">
-        Cookies are files with a small amount of data that are commonly used as
-        anonymous unique identifiers. These are sent to your browser from the
-        websites that you visit and are stored on your device’s internal memory.
-      </p>
-      <p class="my-2">
-        This Service does not use these “cookies” explicitly. However, the apps
-        may use third-party code and libraries that use “cookies” to collect
-        information and improve their services. You have the option to either
-        accept or refuse these cookies and know when a cookie is being sent to
-        your device. If you choose to refuse our cookies, you may not be able to
-        use some portions of this Service.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Security</h2>
-      <p class="my-2">
-        RobinsongGaming values your trust in providing us your Personal
-        Information, thus we are striving to use commercially acceptable means
-        of protecting it. But remember that no method of transmission over the
-        internet, or method of electronic storage is 100% secure and reliable,
-        and RobinsonGaming cannot guarantee its absolute security.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Your Rights and Options</h2>
-      <p class="my-2">
-        You have the rights to opt-out of targeted advertising. To provide you
-        with better tailored ads in apps/games, we use third-party advertising
-        networks and their partners, including those listed above. To do so they
-        use personal and non-personal information such as advertising
-        identifiers, such as the Android advertising ID and/or Apple’s ID for
-        advertising (IDFA), and/or other tracking technologies to enable and
-        optimize this advertising procedure.
-      </p>
-      <p class="my-2">
-        You can opt-out from personalized advertisement experience, through the
-        following ways.
-      </p>
-
-      <div class="container mx-auto px-4">
-        <h2 class="text-2xl font-bold my-4">How to Manage Ad Tracking</h2>
-        <h2 class="text-xl font-semibold mt-3 mb-2">For iOS Devices:</h2>
-        <ul class="list-disc pl-5">
-          <li>Open <strong>Settings</strong></li>
-          <li>Select <strong>Privacy</strong></li>
-          <li>
-            Select <strong>Advertising</strong> and enable “Limit Ad Tracking” (iOS
-            13 and older versions)
-          </li>
-          <li>
-            Or select <strong>Tracking</strong> and turn off “Allow Apps to Request
-            to Track” (iOS 14 and later)
-          </li>
-        </ul>
-        <h2 class="text-xl font-semibold mt-3 mb-2">For Android Devices:</h2>
-        <ul class="list-disc pl-5">
-          <li>Open <strong>Settings</strong></li>
-          <li>Select <strong>Google</strong></li>
-          <li>
-            Select <strong>Ads</strong> and enable “Opt out of Ads Personalization”
-          </li>
-        </ul>
-      </div>
-
-      <p class="my-2">
-        After opting out, advertising networks will consider this choice as a
-        withdrawal of consent to personalized advertisement experience and they
-        will show contextual advertisements and not personalized advertisements
-        based on your interests. Note: Regardless of your choice and/or your
-        device settings, you will continue to see non-customized advertising and
-        you may continue to receive personalized ads from our third-party ad
-        networks that obtain your consent on other apps and/or websites.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Links to Other Sites</h2>
-      <p class="my-2">
-        This Service may contain links to other sites. If you click on a
-        third-party link, you will be directed to that site. Note that these
-        external sites are not operated by me. Therefore, I strongly advise you
-        to review the Privacy Policy of these websites. RobinsonGaming has no
-        control over and assumes no responsibility for the content, privacy
-        policies, or practices of any third-party sites or services.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Children's Privacy</h2>
-      <p class="my-2">
-        These Services are not intended for use by children under the age of
-        sixteen(16) (or other age as required by local law). We will not
-        knowingly collect personal information directly from children under the
-        age of sixteen (16) (or other age as required by local law) without
-        parental consent. If you are under the age of sixteen (16) (or other age
-        as required by local law), please do not provide us with information of
-        any kind whatsoever. We encourage parents and guardians to spend time
-        with their children online and to be familiar with the websites they
-        visit. If you have reason to believe that we may have accidentally
-        received information from a child under the age of sixteen (16) (or
-        other age as required by local law), please contact us with any
-        concerns.
-      </p>
-      <h2 class="text-2xl font-bold mt-4 mb-2">Contact Us</h2>
-      <p class="my-2" class="mb-4">
-        If you have any questions or suggestions about my Privacy Policy, do not
-        hesitate to contact me at
-        <a href="mailto:robinson.games.help@gmail.com"
-          >robinson.games.help@gmail.com</a
+        <ul
+          class="font-bold underline list-disc pl-5"
+          aria-label="Third-party services privacy policies"
         >
-      </p>
-    </main>
-    <Footer />
+          <li>
+            <a
+              href="https://developers.is.com/ironsource-mobile/air/ironsource-mobile-privacy-policy/#step-1"
+            >
+              Ironsource
+            </a>
+          </li>
+          <li>
+            <a href="https://policies.google.com/privacy?hl=en">
+              Google Admob
+            </a>
+          </li>
+          <li>
+            <a href="https://firebase.google.com/support/privacy/dpo">
+              Firebase
+            </a>
+          </li>
+          <li>
+            <a href="https://unity3d.com/legal/privacy-policy">
+              Unity Game Services
+            </a>
+          </li>
+          <li>
+            <a href="https://www.inmobi.com/privacy-policy"> InMobi </a>
+          </li>
+          <li>
+            <a href="https://www.applovin.com/privacy/"> AppLovin </a>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold mt-4 mb-2">Log Data</h2>
+        <p class="my-2">
+          RobinsonGaming wants to inform you that whenever you use my Service,
+          in a case of an error in the app, RobinsonGaming collects data and
+          information (through third-party products) on your phone called Log
+          Data. This Log Data may include information such as your device
+          Internet Protocol (“IP”) address, device name, operating system
+          version, the configuration of the app when utilizing my Service, the
+          time and date of your use of the Service, and other statistics.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Cookies</h2>
+        <p class="my-2">
+          Cookies are files with a small amount of data that are commonly used
+          as anonymous unique identifiers. These are sent to your browser from
+          the websites that you visit and are stored on your device’s internal
+          memory.
+        </p>
+        <p class="my-2">
+          This Service does not use these “cookies” explicitly. However, the
+          apps may use third-party code and libraries that use “cookies” to
+          collect information and improve their services. You have the option to
+          either accept or refuse these cookies and know when a cookie is being
+          sent to your device. If you choose to refuse our cookies, you may not
+          be able to use some portions of this Service.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Security</h2>
+        <p class="my-2">
+          RobinsongGaming values your trust in providing us your Personal
+          Information, thus we are striving to use commercially acceptable means
+          of protecting it. But remember that no method of transmission over the
+          internet, or method of electronic storage is 100% secure and reliable,
+          and RobinsonGaming cannot guarantee its absolute security.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Your Rights and Options</h2>
+        <p class="my-2">
+          You have the rights to opt-out of targeted advertising. To provide you
+          with better tailored ads in apps/games, we use third-party advertising
+          networks and their partners, including those listed above. To do so
+          they use personal and non-personal information such as advertising
+          identifiers, such as the Android advertising ID and/or Apple’s ID for
+          advertising (IDFA), and/or other tracking technologies to enable and
+          optimize this advertising procedure.
+        </p>
+        <p class="my-2">
+          You can opt-out from personalized advertisement experience, through
+          the following ways.
+        </p>
+
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl font-bold my-4">How to Manage Ad Tracking</h2>
+          <h2 class="text-xl font-semibold mt-3 mb-2">For iOS Devices:</h2>
+          <ul class="list-disc pl-5">
+            <li>Open <strong>Settings</strong></li>
+            <li>Select <strong>Privacy</strong></li>
+            <li>
+              Select <strong>Advertising</strong> and enable “Limit Ad Tracking”
+              (iOS 13 and older versions)
+            </li>
+            <li>
+              Or select <strong>Tracking</strong> and turn off “Allow Apps to Request
+              to Track” (iOS 14 and later)
+            </li>
+          </ul>
+          <h2 class="text-xl font-semibold mt-3 mb-2">For Android Devices:</h2>
+          <ul class="list-disc pl-5">
+            <li>Open <strong>Settings</strong></li>
+            <li>Select <strong>Google</strong></li>
+            <li>
+              Select <strong>Ads</strong> and enable “Opt out of Ads Personalization”
+            </li>
+          </ul>
+        </div>
+
+        <p class="my-2">
+          After opting out, advertising networks will consider this choice as a
+          withdrawal of consent to personalized advertisement experience and
+          they will show contextual advertisements and not personalized
+          advertisements based on your interests. Note: Regardless of your
+          choice and/or your device settings, you will continue to see
+          non-customized advertising and you may continue to receive
+          personalized ads from our third-party ad networks that obtain your
+          consent on other apps and/or websites.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Links to Other Sites</h2>
+        <p class="my-2">
+          This Service may contain links to other sites. If you click on a
+          third-party link, you will be directed to that site. Note that these
+          external sites are not operated by me. Therefore, I strongly advise
+          you to review the Privacy Policy of these websites. RobinsonGaming has
+          no control over and assumes no responsibility for the content, privacy
+          policies, or practices of any third-party sites or services.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Children's Privacy</h2>
+        <p class="my-2">
+          These Services are not intended for use by children under the age of
+          sixteen(16) (or other age as required by local law). We will not
+          knowingly collect personal information directly from children under
+          the age of sixteen (16) (or other age as required by local law)
+          without parental consent. If you are under the age of sixteen (16) (or
+          other age as required by local law), please do not provide us with
+          information of any kind whatsoever. We encourage parents and guardians
+          to spend time with their children online and to be familiar with the
+          websites they visit. If you have reason to believe that we may have
+          accidentally received information from a child under the age of
+          sixteen (16) (or other age as required by local law), please contact
+          us with any concerns.
+        </p>
+        <h2 class="text-2xl font-bold mt-4 mb-2">Contact Us</h2>
+        <p class="my-2" class="mb-4">
+          If you have any questions or suggestions about my Privacy Policy, do
+          not hesitate to contact me at
+          <a href="mailto:robinson.games.help@gmail.com"
+            >robinson.games.help@gmail.com</a
+          >
+        </p>
+      </main>
+    </BaseLayout>
   </body>
 </html>
