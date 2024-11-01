@@ -6,13 +6,12 @@ body {
   overflow-x: hidden; /* Prevent any horizontal overflow */
 }
 
-/* Overall Section Styling */
 .photography-section {
-  width: 100vw; /* Full viewport width */
-  position: relative;
+  width: 100%; /* Ensure it takes up full viewport width */
+  margin: 0; /* Remove any potential inherited margin */
+  padding: 0; /* Remove any potential padding */
   overflow: hidden;
-  margin: 0;
-  padding: 0;
+  max-width: none;
 }
 
 /* Background Image Styling */
@@ -21,7 +20,7 @@ body {
   background-size: cover;
   background-position: center;
   height: 600px; /* Adjust height as needed */
-  width: 100vw; /* Full viewport width */
+  width: 100%; /* Full viewport width */
   display: flex; /* Makes it a flex container for centering content */
   align-items: flex-start;
   justify-content: center;

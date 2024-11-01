@@ -9,7 +9,6 @@
     70vw
   ); /* 70% of the viewport width on larger screens */
   margin: 0 auto; /* Centers the container horizontally */
-  padding: 0 1rem; /* Adds horizontal padding to keep content from touching the edges */
 }
 
 @media (max-width: 768px) {
@@ -20,7 +19,7 @@
 
 /* Layout for each section */
 .section {
-  padding: 4rem 0; /* Space above and below each section */
+  padding: 2rem 0; /* Space above and below each section */
 }
 
 /* Example for grid layout in "Projects" section */

@@ -103,15 +103,8 @@ a:hover {
   }
 }
 
-.wrapper {
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
-}
-
 main {
   display: grid;
   gap: var(--size-fluid-6);
-  padding: var(--size-fluid-5) var(--size-fluid-2);
+  margin: 4rem 0 0 0;
 }
