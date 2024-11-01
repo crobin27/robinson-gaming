@@ -1,0 +1,75 @@
+/* Container styling */
+.PrivacyPolicy {
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 856px) {
+  .PrivacyPolicy {
+    max-width: 90%;
+  }
+}
+
+/* Title styling */
+.PrivacyPolicy h1 {
+  font-family: var(--font-title);
+  color: var(--color-secondary);
+  font-size: var(--font-size-xlarge);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.PrivacyPolicy h2 {
+  font-size: var(--font-size-small);
+}
+
+/* Subtitle styling for effective date */
+.PrivacyPolicy h3:first-of-type {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Section heading styling */
+.PrivacyPolicy h3 {
+  font-size: var(--font-size-large);
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.rights-list {
+  font-size: var(--font-size-small);
+}
+
+/* Paragraph styling */
+.PrivacyPolicy p {
+  font-size: var(--font-size-small);
+  color: #333333; /* Dark gray */
+  margin-bottom: 1rem;
+}
+
+/* List styling */
+.PrivacyPolicy ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: var(--font-size-small);
+}
+
+/* Link styling */
+.PrivacyPolicy a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.PrivacyPolicy a:hover {
+  color: var(--color-secondary);
+}
