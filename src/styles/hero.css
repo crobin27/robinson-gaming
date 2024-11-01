@@ -26,7 +26,7 @@
 
 /* Title Styling */
 .hero-title {
-  font-size: 7.5rem;
+  font-size: 7rem;
   font-family: var(
     --font-title
   ); /* Uses the Rowdies font defined in global.css */
@@ -110,6 +110,7 @@
 
   .hero-title {
     font-size: 4rem;
+    text-align: center;
   }
 
   .download-buttons {
