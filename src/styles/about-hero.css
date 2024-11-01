@@ -1,0 +1,118 @@
+/* about-hero.css */
+
+/* Overall Hero Section */
+.about-hero {
+  padding: var(--size-fluid-3) 0;
+}
+
+/* Wrapper for Left and Right Columns */
+.hero-content-wrapper {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0;
+  gap: var(--size-fluid-4);
+  max-width: var(--container-width);
+}
+
+/* Left Column Styling */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+}
+
+/* Title Styling */
+.hero-title {
+  font-family: var(--font-title, sans-serif);
+  color: var(--color-secondary);
+  line-height: 0.45;
+  font-size: 6rem;
+  margin: 0;
+  padding-bottom: var(--size-fluid-3);
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-subtitle {
+  color: var(--color-text-secondary);
+}
+
+/* Contact Button */
+.contact-button {
+  display: flex;
+  justify-content: left; /* Centers the button */
+  margin-top: var(--size-fluid-3);
+}
+
+.contact-link img {
+  max-width: 320px; /* Adjust size as needed */
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+.contact-link:hover img {
+  transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+/* Right Column: Profile Image Styling */
+.hero-right {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.hero-right img {
+  max-width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 5rem;
+  }
+  .hero-role {
+    font-size: var(--font-size-base);
+  }
+  .hero-subtitle {
+    font-size: var(--font-size-small);
+  }
+
+  .contact-link img {
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 856px) {
+  .hero-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-left {
+    width: 100%;
+  }
+  .hero-title {
+    font-size: 3rem;
+  }
+  .contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ensures centering on smaller screens */
+    width: 100%; /* Ensures the button is centered horizontally */
+  }
+  .contact-link img {
+    max-width: 200px;
+  }
+
+  .hero-right {
+    width: 80%;
+    margin-top: var(--size-fluid-2);
+    justify-content: center;
+  }
+}
