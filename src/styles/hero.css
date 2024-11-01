@@ -97,7 +97,7 @@
   }
 }
 
-@media (max-width: 812px) {
+@media (max-width: 756px) {
   .hero-content-wrapper {
     flex-direction: column;
     align-items: center;
@@ -109,7 +109,7 @@
   }
 
   .hero-title {
-    font-size: 4rem;
+    font-size: 3.75rem;
     text-align: center;
   }
 
