@@ -1,0 +1,137 @@
+---
+import "../styles/photography-component.css";
+
+// Define TypeScript interface for photos
+interface Photo {
+  title: string;
+  location: string;
+  jpg: string;
+  dng?: string; // Make 'dng' optional
+}
+
+// Sample data for each image (title, location, and file paths)
+const landscapePhotos: Photo[] = [
+  {
+    title: "Trail Crest",
+    location: "Mt. Whitney, California",
+    jpg: "photography/landscape/trail-crest.jpg",
+    dng: "photography/landscape/trail-crest.dng",
+  },
+  {
+    title: "Whitney Face",
+    location: "Sierra Nevadas",
+    jpg: "photography/landscape/whitney-face.jpg",
+    dng: "photography/landscape/whitney-face.dng",
+  },
+  {
+    title: "Mammoth Valley",
+    location: "Benton Crossing",
+    jpg: "photography/landscape/mammoth-valley.jpg",
+  },
+  {
+    title: "Pink Glass",
+    location: "Tahoma, California",
+    jpg: "photography/landscape/tahoma.jpg",
+    dng: "photography/landscape/tahoma.dng",
+  },
+];
+
+const portraitPhotos: Photo[] = [
+  {
+    title: "Greater Nevada Stadium",
+    location: "Reno, Nevada",
+    jpg: "photography/portrait/greater-nevada-stadium.jpg",
+  },
+  {
+    title: "Manzanita Tree",
+    location: "Gardens of Golden Gate Park",
+    jpg: "photography/portrait/manzanita-tree.jpg",
+  },
+  {
+    title: "High Entropy",
+    location: "Carnelian Bay, California",
+    jpg: "photography/portrait/pebbles.jpg",
+  },
+];
+---
+
+<section class="photography-page container">
+  <!-- Title -->
+  <h1 class="photography-title">Photography</h1>
+  <p class="photography-subtitle">
+    All photos are taken by me and are free to use and download. No attribution
+    necessary.
+  </p>
+
+  <!-- Landscape Section -->
+  <h2 class="section-heading">Landscape</h2>
+  <div class="photo-grid landscape-grid">
+    {
+      landscapePhotos.map((photo) => (
+        <div class="photo-card">
+          <img
+            src={photo.jpg}
+            alt={`${photo.title} - ${photo.location}`}
+            class="photo-thumbnail"
+          />
+          <div class="overlay">
+            <h3 class="photo-title">{photo.title}</h3>
+            <p class="photo-location">{photo.location}</p>
+            <div class="download-buttons">
+              <a href={photo.jpg} download class="download-button">
+                <img
+                  src="/images/photography-section/download-jpg.webp"
+                  alt="Download .JPG"
+                />
+              </a>
+              {photo.dng && (
+                <a href={photo.dng} download class="download-button">
+                  <img
+                    src="/images/photography-section/download-dng.webp"
+                    alt="Download .DNG"
+                  />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Portrait Section -->
+  <h2 class="section-heading">Portrait</h2>
+  <div class="photo-grid portrait-grid">
+    {
+      portraitPhotos.map((photo) => (
+        <div class="photo-card">
+          <img
+            src={photo.jpg}
+            alt={`${photo.title} - ${photo.location}`}
+            class="photo-thumbnail"
+          />
+          <div class="overlay">
+            <h3 class="photo-title">{photo.title}</h3>
+            <p class="photo-location">{photo.location}</p>
+            <div class="download-buttons">
+              <a href={photo.jpg} download class="download-button">
+                <img
+                  src="/images/photography-section/download-jpg.webp"
+                  alt="Download .JPG"
+                />
+              </a>
+              {photo.dng && (
+                <a href={photo.dng} download class="download-button">
+                  <img
+                    src="/images/photography-section/download-dng.webp"
+                    alt="Download .DNG"
+                  />
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

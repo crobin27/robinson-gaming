@@ -44,7 +44,7 @@ body {
 }
 
 .section-subtitle {
-  margin-top: 0.2rem;
+  margin-top: 0rem;
   color: var(--color-text-secondary);
 }
 
@@ -73,10 +73,10 @@ body {
   }
 
   .section-subtitle {
-    font-size: var(--font-size-small);
+    font-size: 0.8rem;
   }
 
   .see-more-button img {
-    max-height: 2.5rem;
+    max-height: 1.5rem;
   }
 }

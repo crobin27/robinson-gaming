@@ -75,21 +75,24 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9); /* Black with 80% opacity */
-  display: none; /* Hidden by default */
+  background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  visibility: hidden; /* Initially hidden */
   opacity: 0;
-  transition: opacity 0.3s ease; /* Fade in/out effect */
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+  z-index: 9999; /* Ensure it is above all other content */
 }
 
 .overlay.show {
-  display: flex; /* Show overlay when active */
+  visibility: visible;
   opacity: 1;
 }
 
-/* Close button */
+/* Close button styling */
 .close-btn {
   position: absolute;
   top: 1rem;
@@ -99,6 +102,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  z-index: 10000; /* Ensures the close button is always visible */
 }
 
 /* Centered overlay menu */
@@ -115,12 +119,11 @@
   text-decoration: none;
   display: block;
   margin: 1rem 0;
-  opacity: 0; /* Start hidden for fade-in */
-  transform: translateY(20px); /* Start slightly offset for animation */
-  animation: fadeInUp 0.3s forwards; /* Fade in from below */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.3s forwards;
 }
 
-/* Fade-in animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -132,7 +135,6 @@
   }
 }
 
-/* Staggered fade-in effect */
 .overlay-menu li {
   animation: fadeInUp 0.3s forwards;
 }

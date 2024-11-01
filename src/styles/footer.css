@@ -96,4 +96,16 @@
   .footer-bottom {
     gap: 1rem;
   }
+
+  .footer-left h1 {
+    font-family: var(--font-title);
+    font-size: var(--font-size-large);
+    color: white;
+    padding-bottom: 1rem;
+  }
+
+  .github-link img {
+    height: 4rem;
+    padding-left: 1rem;
+  }
 }

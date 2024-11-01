@@ -71,21 +71,23 @@ const navLinks = [
     const overlay = document.getElementById("overlay");
     const closeBtn = document.getElementById("closeBtn");
 
-    // Toggle overlay visibility
-    hamburgerIcon.addEventListener("click", () => {
-      overlay.classList.add("show");
-    });
+    if (hamburgerIcon && overlay && closeBtn) {
+      // Toggle overlay visibility
+      hamburgerIcon.addEventListener("click", () => {
+        overlay.classList.add("show");
+      });
 
-    // Close overlay
-    closeBtn.addEventListener("click", () => {
-      overlay.classList.remove("show");
-    });
-
-    // Optional: Close overlay when a link is clicked
-    document.querySelectorAll(".overlay-link").forEach((link) => {
-      link.addEventListener("click", () => {
+      // Close overlay
+      closeBtn.addEventListener("click", () => {
         overlay.classList.remove("show");
       });
-    });
+
+      // Close overlay when a link is clicked
+      document.querySelectorAll(".overlay-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          overlay.classList.remove("show");
+        });
+      });
+    }
   });
 </script>
