@@ -3,6 +3,10 @@ import "../styles/global.css";
 import "../styles/layout.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AboutHero from "../components/AboutHero.astro";
+import AboutPageComponent from "../components/AboutPageComponent.astro";
 ---
 
-<BaseLayout class="About the Developer"> <AboutHero /></BaseLayout>
+<BaseLayout class="About the Developer">
+  <AboutHero />
+  <AboutPageComponent />
+</BaseLayout>

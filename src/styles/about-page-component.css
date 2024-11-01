@@ -1,0 +1,113 @@
+/* about-page.css */
+
+/* Overall Section Styling */
+.about-page {
+  padding: 4rem 2rem;
+  background-image: url("/images/about/about-background.webp"); /* Path to your background image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Title Styling */
+.about-title {
+  text-align: left;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+/* Main Content Wrapper */
+.about-content-wrapper {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Image Styling */
+.about-image img {
+  max-width: 500px; /* Adjust for larger screens */
+  height: auto;
+  display: block;
+}
+
+/* Intro Paragraph Styling */
+.intro-paragraph {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Lists Wrapper */
+.about-lists {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* Individual List Section */
+.list-section {
+  width: 25%;
+}
+
+/* List Titles */
+.list-title {
+  margin-bottom: 0.5rem;
+}
+
+/* List Items */
+.list-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-items li {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #d0d0d0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .about-title {
+    text-align: center;
+  }
+
+  .about-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-image img {
+    max-width: 100%;
+    margin-bottom: 0rem;
+    align-items: center;
+  }
+
+  .intro-paragraph {
+    text-align: center;
+    width: 90%; /* Adds a slight margin from screen edges */
+  }
+
+  .about-lists {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .list-section {
+    width: 100%;
+    text-align: center;
+  }
+
+  .list-title {
+    text-align: center;
+  }
+}
