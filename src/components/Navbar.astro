@@ -24,19 +24,23 @@ const navLinks = [
 ];
 ---
 
-<nav class="navbar">
+<nav class="navbar" role="navigation" aria-label="Main Navigation">
   <div class="container navbar-content">
     <!-- Home Icon -->
-    <a href="/" class="home-icon">
-      <img src="/icons/Home.svg" alt="Home" />
+    <a href="/" class="home-icon" aria-label="Navigate to Home">
+      <img src="/icons/Home.svg" alt="Home Icon for Robinson Gaming" />
     </a>
 
     <!-- Navigation Links (hidden on smaller screens) -->
-    <ul class="nav-links">
+    <ul class="nav-links" aria-label="Primary Navigation Links">
       {
         navLinks.map((link) => (
           <li>
-            <a href={link.url} class={`nav-link ${link.style}`}>
+            <a
+              href={link.url}
+              class={`nav-link ${link.style}`}
+              aria-label={`Navigate to ${link.name}`}
+            >
               {link.name}
             </a>
           </li>
@@ -45,18 +49,26 @@ const navLinks = [
     </ul>
 
     <!-- Hamburger Icon (visible only on smaller screens) -->
-    <img src="/icons/hamburger.svg" alt="Menu" class="hamburger-icon" />
+    <button aria-label="Open Menu" class="hamburger-icon">
+      <img src="/icons/hamburger.svg" alt="Menu Icon" />
+    </button>
   </div>
 </nav>
 
 <!-- Overlay Menu for Mobile -->
-<div class="overlay" id="overlay">
-  <button class="close-btn" id="closeBtn">&times;</button>
-  <ul class="overlay-menu">
+<div class="overlay" id="overlay" aria-hidden="true">
+  <button class="close-btn" id="closeBtn" aria-label="Close Menu"
+    >&times;</button
+  >
+  <ul class="overlay-menu" aria-label="Overlay Navigation Links">
     {
       navLinks.map((link, index) => (
         <li style={`animation-delay: ${index * 0.1}s;`}>
-          <a href={link.url} class="overlay-link">
+          <a
+            href={link.url}
+            class="overlay-link"
+            aria-label={`Navigate to ${link.name}`}
+          >
             {link.name}
           </a>
         </li>
@@ -75,17 +87,20 @@ const navLinks = [
       // Toggle overlay visibility
       hamburgerIcon.addEventListener("click", () => {
         overlay.classList.add("show");
+        overlay.setAttribute("aria-hidden", "false");
       });
 
       // Close overlay
       closeBtn.addEventListener("click", () => {
         overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden", "true");
       });
 
       // Close overlay when a link is clicked
       document.querySelectorAll(".overlay-link").forEach((link) => {
         link.addEventListener("click", () => {
           overlay.classList.remove("show");
+          overlay.setAttribute("aria-hidden", "true");
         });
       });
     }

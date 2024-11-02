@@ -3,9 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/layout.css";
 import "../styles/global.css";
 import "../styles/privacy-policy.css";
+const pageTitle = "Privacy Policy - Robinson Gaming";
+const pageDescription =
+  "Read the privacy policy for Robinson Gaming to understand how we handle your data and ensure your privacy across all our games and services.";
 ---
 
-<BaseLayout title="Privacy Policy">
+<BaseLayout title={pageTitle} description={pageDescription} }>
   <section class="container PrivacyPolicy">
     <h1 class="title">Privacy Policy</h1><h3>Effective Date: May 1st, 2024</h3>
     <p>

@@ -2,75 +2,97 @@
 import "../styles/hero.css";
 ---
 
-<section class="hero">
-  <div class="container hero-content-wrapper">
-    <!-- Left Column: Title, Description, and Download Buttons -->
-    <div class="hero-left">
-      <h1 class="hero-title">
-        <span id="typing-robinson"></span>
-        <br />
-        <span id="typing-gaming"></span>
-      </h1>
-      <h2 class="hero-role">Software and Computer Engineer</h2>
-      <p class="hero-subtitle">Small Gaming Studio by Cole Robinson</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Cole Robinson's Robinson Gaming - A showcase of games, projects, and expertise in software and game development."
+  />
+  <meta
+    name="keywords"
+    content="Cole Robinson, Robinson Gaming, game development, software engineer, portfolio"
+  />
+  <title>Robinson Gaming | Cole Robinson</title>
 
-      <!-- Download Buttons -->
-      <div class="download-buttons">
-        <a
-          href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
-          class="download-button google-play"
-        >
-          <img
-            src="images/footer/download_on_gp.webp"
-            alt="Get it on Google Play"
-          />
-        </a>
-        <a
-          href="https://apps.apple.com/us/developer/cole-robinson/id1703674983"
-          class="download-button app-store"
-        >
-          <img
-            src="images/footer/download_on_as.webp"
-            alt="Download on the App Store"
-          />
-        </a>
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="Robinson Gaming | Cole Robinson" />
+  <meta
+    property="og:description"
+    content="Explore games, projects, and more from Cole Robinson's Robinson Gaming."
+  />
+  <meta property="og:image" content="/images/hero/hero-profile.webp" />
+  <meta property="og:url" content="https://www.robinsongaming.com" />
+  <meta property="og:type" content="website" />
+  <section class="hero">
+    <div class="container hero-content-wrapper">
+      <!-- Left Column: Title, Description, and Download Buttons -->
+      <div class="hero-left">
+        <h1 class="hero-title">
+          <span id="typing-robinson"></span>
+          <br />
+          <span id="typing-gaming"></span>
+        </h1>
+        <h2 class="hero-role">Software and Computer Engineer</h2>
+        <p class="hero-subtitle">Small Gaming Studio by Cole Robinson</p>
+
+        <div class="download-buttons">
+          <a
+            href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
+            class="download-button google-play"
+          >
+            <img
+              src="images/footer/download_on_gp.webp"
+              alt="Google Play download button for Robinson Gaming"
+            />
+          </a>
+          <a
+            href="https://apps.apple.com/us/developer/cole-robinson/id1703674983"
+            class="download-button app-store"
+          >
+            <img
+              src="images/footer/download_on_as.webp"
+              alt="App Store download button for Robinson Gaming"
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- Profile Image with Descriptive Alt Text -->
+      <div class="hero-right">
+        <img
+          src="/images/hero/hero-profile.webp"
+          alt="Cole Robinson on a mountain showcasing Robinson Gaming projects"
+        />
       </div>
     </div>
 
-    <!-- Profile Image -->
-    <div class="hero-right">
-      <img
-        src="/images/hero/hero-profile.webp"
-        alt="Cole Robinson on a Mountain"
-      />
-    </div>
-  </div>
-</section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const robinsonElement = document.getElementById("typing-robinson");
+        const gamingElement = document.getElementById("typing-gaming");
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const robinsonElement = document.getElementById("typing-robinson");
-    const gamingElement = document.getElementById("typing-gaming");
+        const typeWord = (element, text, delay) => {
+          element.innerHTML = ""; // Clear initial text
+          let index = 0;
 
-    const typeWord = (element, text, delay) => {
-      element.innerHTML = ""; // Clear initial text
-      let index = 0;
+          function type() {
+            if (index < text.length) {
+              element.innerHTML += text.charAt(index);
+              index++;
+              setTimeout(type, 65); // Adjust speed here
+            } else if (element === robinsonElement) {
+              // Start typing "Gaming" after "Robinson" completes
+              setTimeout(() => typeWord(gamingElement, "Gaming", 0), 100);
+            }
+          }
 
-      function type() {
-        if (index < text.length) {
-          element.innerHTML += text.charAt(index);
-          index++;
-          setTimeout(type, 65); // Adjust speed here
-        } else if (element === robinsonElement) {
-          // Start typing "Gaming" after "Robinson" completes
-          setTimeout(() => typeWord(gamingElement, "Gaming", 0), 100);
-        }
-      }
+          type();
+        };
 
-      type();
-    };
-
-    // Start typing "Robinson" and then "Gaming"
-    typeWord(robinsonElement, "Robinson", 0);
-  });
-</script>
+        // Start typing "Robinson" and then "Gaming"
+        typeWord(robinsonElement, "Robinson", 0);
+      });
+    </script>
+  </section>
+</head>

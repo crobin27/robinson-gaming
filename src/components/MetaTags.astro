@@ -1,36 +1,33 @@
 ---
 // MetaTags.astro
 const { title, description } = Astro.props;
+const defaultImageUrl =
+  "https://robinsongaming.com/public/social-media-photo.png";
+const fullUrl = `https://www.robinsongaming.com/${Astro.url.pathname}`;
 ---
 
+<!-- Character Encoding and Viewport -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Basic Meta Tags -->
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="icon" type="image/png" href="/images/favicon.png" />
-<link
-  rel="canonical"
-  href={`https://www.robinsongaming.com/${Astro.url.pathname}`}
-/>
+
+<!-- Canonical Link for SEO -->
+<link rel="canonical" href={fullUrl} />
+
+<!-- Open Graph Metadata for Social Media -->
 <meta property="og:type" content="website" />
-<meta
-  property="og:url"
-  content={`https://www.robinsongaming.com/${Astro.url.pathname}`}
-/>
+<meta property="og:url" content={fullUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta
-  property="og:image"
-  content="https://robinsongaming.com/public_images/social-media-photo.png"
-/>
+<meta property="og:image" content={defaultImageUrl} />
+
+<!-- Twitter Metadata for Social Media -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta
-  name="twitter:url"
-  content={`https://www.robinsongaming.com/${Astro.url.pathname}`}
-/>
+<meta name="twitter:url" content={fullUrl} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
-<meta
-  name="twitter:image"
-  content="https://robinsongaming.com/public_images/social-media-photo.png"
-/>
+<meta name="twitter:image" content={defaultImageUrl} />

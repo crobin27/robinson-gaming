@@ -1,6 +1,7 @@
-const postcssjitprops = require("postcss-jit-props");
-const OpenProps = require("open-props");
+import postcssJitProps from "postcss-jit-props";
+import OpenProps from "open-props";
+import autoprefixer from "autoprefixer";
 
-module.exports = {
-  plugins: [postcssjitprops(OpenProps), require("autoprefixer")],
+export default {
+  plugins: [postcssJitProps(OpenProps), autoprefixer],
 };

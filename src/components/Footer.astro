@@ -7,14 +7,18 @@ import "../styles/footer.css";
     <!-- Left side: Robinson Gaming header and GitHub logo -->
     <div class="footer-left">
       <!-- Robinson Gaming Link to Home -->
-      <a href="/" aria-label="Go to homepage">Robinson Gaming</a>
+      <a href="/" aria-label="Go to Robinson Gaming homepage">Robinson Gaming</a
+      >
       <a
         href="https://github.com/crobin27"
         target="_blank"
         class="github-link"
-        aria-label="GitHub Profile"
+        aria-label="Visit Cole Robinson's GitHub profile"
       >
-        <img src="/icons/github.svg" alt="GitHub Logo" />
+        <img
+          src="/icons/github.svg"
+          alt="GitHub Logo for Cole Robinson's GitHub"
+        />
       </a>
     </div>
 
@@ -24,35 +28,45 @@ import "../styles/footer.css";
         href="https://apps.apple.com/us/developer/cole-robinson/id1703674983"
         target="_blank"
         class="app-store"
-        aria-label="Download on the App Store"
+        aria-label="Download Robinson Gaming apps on the App Store"
       >
         <img
           src="/images/footer/download_on_as.webp"
-          alt="Download on the App Store"
+          alt="Download Robinson Gaming apps on the App Store"
         />
       </a>
       <a
         href="https://play.google.com/store/apps/developer?id=RobinsonGaming"
         target="_blank"
         class="google-play"
-        aria-label="Get it on Google Play"
+        aria-label="Get Robinson Gaming apps on Google Play"
       >
         <img
           src="/images/footer/download_on_gp.webp"
-          alt="Get it on Google Play"
+          alt="Get Robinson Gaming apps on Google Play"
         />
       </a>
     </div>
   </div>
 
   <!-- Divider line -->
-  <div class="footer-divider"></div>
+  <div class="footer-divider" aria-hidden="true"></div>
 
   <!-- Bottom row: Privacy policy on the left and email on the right -->
   <div class="container footer-bottom">
-    <a href="/privacy-policy" class="privacy-policy">Privacy Policy</a>
-    <a href="mailto:cole@robinsongaming.com" class="email"
-      >cole@robinsongaming.com</a
+    <a
+      href="/privacy-policy"
+      class="privacy-policy"
+      aria-label="View Privacy Policy"
     >
+      Privacy Policy
+    </a>
+    <a
+      href="mailto:cole@robinsongaming.com"
+      class="email"
+      aria-label="Contact Cole Robinson via email"
+    >
+      cole@robinsongaming.com
+    </a>
   </div>
 </footer>

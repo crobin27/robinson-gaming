@@ -4,9 +4,12 @@ import "../styles/layout.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AboutHero from "../components/AboutHero.astro";
 import AboutPageComponent from "../components/AboutPageComponent.astro";
+const pageTitle = "About Cole Robinson - Software Engineer & Game Developer";
+const pageDescription =
+  "Learn about Cole Robinson, a software engineer specializing in game development, cloud infrastructure, and embedded systems, and currently seeking employment.";
 ---
 
-<BaseLayout title="About the Developer">
+<BaseLayout title={pageTitle} description={pageDescription}>
   <AboutHero />
   <AboutPageComponent />
 </BaseLayout>

@@ -6,9 +6,12 @@ import Hero from "../components/Hero.astro";
 import AboutSection from "../components/AboutSection.astro";
 import PhotographySection from "../components/PhotographySection.astro";
 import ProjectsSection from "../components/ProjectsSection.astro";
+const pageTitle = "Robinson Gaming - Software Engineer";
+const pageDescription =
+  "Discover Robinson Gaming, an indie game development studio led by Cole Robinson, focusing on mobile games, web applications, and IoT solutions.";
 ---
 
-<BaseLayout title="Robinson Gaming">
+<BaseLayout title={pageTitle} description={pageDescription}>
   <Hero />
   <ProjectsSection id="Projects" />
   <AboutSection />

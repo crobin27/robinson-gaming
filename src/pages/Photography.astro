@@ -3,8 +3,11 @@ import "../styles/global.css";
 import "../styles/layout.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PhotographyComponent from "../components/PhotographyComponent.astro";
+const pageTitle = "Photography by Cole Robinson ";
+const pageDescription =
+  "Explore landscape and portrait photography by Cole Robinson, featuring scenic shots from Lake Tahoe, Mt. Whitney, and more.";
 ---
 
-<BaseLayout title="Photography">
+<BaseLayout title={pageTitle} description={pageDescription}>
   <PhotographyComponent />
 </BaseLayout>
