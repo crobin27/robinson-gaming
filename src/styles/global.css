@@ -1,12 +1,6 @@
-/* global.css */
-
-/* the props */
-/* global.css */
-@import "open-props/open-props.min.css"; /* For the minified version */
-
-/* Import Roboto font with specific weights */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap");
+@import "open-props/open-props.min.css"; /* For the minified version */
 
 /* 1. CSS Reset */
 *,

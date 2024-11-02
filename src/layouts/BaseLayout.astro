@@ -1,5 +1,7 @@
 ---
 // Import Navbar and Footer
+import "/src/styles/global.css";
+import "../styles/layout.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
@@ -50,7 +52,7 @@ const { title, description } = Astro.props;
     />
 
     <!-- Global Styles -->
-    <link rel="stylesheet" href="../styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
   </head>
   <body>
     <div class="wrapper">
