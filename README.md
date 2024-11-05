@@ -1,4 +1,4 @@
-# Robinson Gaming Portfolio Website
+# Robinson Gaming Portfolio Website [![Visit Live Site](https://img.shields.io/badge/Visit-Live_Site-brightgreen)](https://robinsongaming.com)
 
 ![Social Media Image](./public/images/social-media-photo.png)
 
