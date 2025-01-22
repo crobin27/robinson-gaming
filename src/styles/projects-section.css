@@ -39,7 +39,7 @@
 /* Individual Project Card */
 .project-card {
   position: relative;
-  max-width: 320px;
+  max-width: 360px;
   text-align: center;
   border-radius: 12px;
   overflow: hidden;
