@@ -6,7 +6,9 @@ import PokerTable from "./PokerTable.astro";
   <div class="container">
     <div class="poker-section-header">
       <h2 class="section-title">Live Poker Demo</h2>
-      <p class="section-subtitle">Watch an automated Texas Hold'em game in action</p>
+      <p class="section-subtitle">
+        Watch an automated Texas Hold'em game in action
+      </p>
     </div>
     <PokerTable />
   </div>
@@ -33,10 +35,12 @@ import PokerTable from "./PokerTable.astro";
   }
 
   .container {
-    max-width: 1400px;
+    max-width: 1600px;
+    width: 100%;
     margin: 0 auto;
     position: relative;
     z-index: 1;
+    padding: 0 1rem;
   }
 
   .poker-section-header {
@@ -68,4 +72,3 @@ import PokerTable from "./PokerTable.astro";
     }
   }
 </style>
-

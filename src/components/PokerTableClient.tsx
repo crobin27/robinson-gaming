@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Suit = "♠" | "♥" | "♦" | "♣";
 
@@ -18,6 +18,7 @@ type Rank =
   | "2";
 
 type StageName =
+  | "Dealing"
   | "Pre-Flop"
   | "Flop"
   | "Flop Betting"
@@ -38,6 +39,7 @@ type Player = {
   hand: Card[];
   bets: { stage: StageName; amount: number }[];
   isWinner: boolean;
+  cardsDealt: number; // Track how many cards have been dealt to this player
 };
 
 type GameState = {
@@ -47,6 +49,7 @@ type GameState = {
   currentStage: StageName;
   log: string[];
   winnerId: number | null;
+  dealerPosition: number; // Index of the dealer
 };
 
 type TimeoutId = ReturnType<typeof setTimeout>;
@@ -72,6 +75,25 @@ const PLAYER_COUNT = 7;
 
 const randomInt = (min: number, max: number) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
+
+// More realistic betting patterns
+const getBettingAmount = (stage: StageName): number => {
+  const baseBet = randomInt(20, 100);
+  const stageMultiplier: Partial<Record<StageName, number>> = {
+    "Pre-Flop": 1,
+    "Flop Betting": 1.5,
+    "Turn Betting": 2,
+    "River Betting": 2.5,
+  };
+
+  const multiplier = stageMultiplier[stage] || 1;
+
+  // Sometimes make bigger bets (bluffs or strong hands)
+  const isBigBet = Math.random() < 0.2;
+  const betSize = isBigBet ? baseBet * 3 : baseBet;
+
+  return Math.floor(betSize * multiplier);
+};
 
 const createDeck = () => {
   const deck: Card[] = [];
@@ -127,27 +149,21 @@ const getCardImagePath = (card: Card | undefined): string => {
   return `/images/playing-cards/${suitName} ${rankNumber}.png`;
 };
 
-const CHIP_ASSETS = [
-  "images/chips-red.png",
-  "images/chips-blue.png",
-  "images/chips-green.png",
-  "images/chips-black.png",
-];
-
-const CARD_ASSET_TEMPLATE = "images/cards/{rank}_of_{suit}.png";
 
 const PokerTableClient = () => {
   const [gameState, setGameState] = useState<GameState>({
     players: [],
     community: [],
     pot: 0,
-    currentStage: "Pre-Flop",
+    currentStage: "Dealing",
     log: [],
     winnerId: null,
+    dealerPosition: 0,
   });
 
   const timeouts = useRef<TimeoutId[]>([]);
   const deckRef = useRef<Card[]>([]);
+  const dealerPositionRef = useRef<number>(-1); // Track dealer position across hands (starts at -1, first hand will be 0)
 
   // Available assets for future visual enhancements
   // const availableAssets = useMemo(
@@ -194,33 +210,33 @@ const PokerTableClient = () => {
 
   const addBettingRound = (stage: StageName) => {
     setGameState((prev: GameState) => {
-      const betEvents: { player: Player; amount: number }[] = prev.players.map(
-        (player: Player) => ({
-          player,
-          amount: randomInt(10, 120),
-        }),
-      );
+      // Some players fold (don't bet) - create a map of player bets
+      const playerBets = new Map<number, number>();
+      const logEntries = [`${stage} begins.`];
+      let potIncrease = 0;
 
-      const updatedPlayers = prev.players.map(
-        (player: Player, index: number) => ({
-          ...player,
-          bets: [...player.bets, { stage, amount: betEvents[index].amount }],
-        }),
-      );
+      prev.players.forEach((player: Player) => {
+        // 15% chance to fold (not bet)
+        if (Math.random() > 0.15) {
+          const betAmount = getBettingAmount(stage);
+          playerBets.set(player.id, betAmount);
+          potIncrease += betAmount;
+          logEntries.push(`${player.name} bets ${betAmount} chips.`);
+        } else {
+          logEntries.push(`${player.name} folds.`);
+        }
+      });
 
-      const logEntries = [
-        `${stage} begins.`,
-        ...betEvents.map(
-          (event: { player: Player; amount: number }) =>
-            `${event.player.name} bets ${event.amount} chips.`,
-        ),
-      ];
-
-      const potIncrease = betEvents.reduce(
-        (sum: number, event: { player: Player; amount: number }) =>
-          sum + event.amount,
-        0,
-      );
+      const updatedPlayers = prev.players.map((player: Player) => {
+        const betAmount = playerBets.get(player.id);
+        if (betAmount !== undefined) {
+          return {
+            ...player,
+            bets: [...player.bets, { stage, amount: betAmount }],
+          };
+        }
+        return player; // Player folded, no new bet
+      });
 
       return {
         ...prev,
@@ -239,33 +255,132 @@ const PokerTableClient = () => {
     shuffleDeck(deck);
     deckRef.current = deck;
 
+    // Rotate dealer position (clockwise)
+    dealerPositionRef.current = (dealerPositionRef.current + 1) % PLAYER_COUNT;
+    const dealerPos = dealerPositionRef.current;
+
+    // Calculate blind positions
+    const smallBlindPos = (dealerPos + 1) % PLAYER_COUNT;
+    const bigBlindPos = (dealerPos + 2) % PLAYER_COUNT;
+
+    const SMALL_BLIND = 25;
+    const BIG_BLIND = 50;
+
+    // Create players with no cards initially
     const players: Player[] = Array.from(
       { length: PLAYER_COUNT },
-      (_, index) => ({
-        id: index + 1,
-        name: `Player ${index + 1}`,
-        hand: drawCards(2),
-        bets: [],
-        isWinner: false,
-      }),
+      (_, index) => {
+        const bets = [];
+        // Post blinds
+        if (index === smallBlindPos) {
+          bets.push({ stage: "Pre-Flop" as StageName, amount: SMALL_BLIND });
+        } else if (index === bigBlindPos) {
+          bets.push({ stage: "Pre-Flop" as StageName, amount: BIG_BLIND });
+        }
+
+        return {
+          id: index + 1,
+          name: `Player ${index + 1}`,
+          hand: [],
+          bets,
+          isWinner: false,
+          cardsDealt: 0,
+        };
+      },
     );
+
+    const initialPot = SMALL_BLIND + BIG_BLIND;
+    const dealerName = players[dealerPos].name;
+    const sbName = players[smallBlindPos].name;
+    const bbName = players[bigBlindPos].name;
 
     setGameState({
       players,
       community: [],
-      pot: 0,
-      currentStage: "Pre-Flop",
+      pot: initialPot,
+      currentStage: "Dealing",
       log: [
-        "A new hand is dealt.",
-        ...players.map(
-          (player: Player) =>
-            `${player.name} receives ${formatCard(player.hand[0])} and ${formatCard(player.hand[1])}.`,
-        ),
+        `New hand begins. ${dealerName} has the dealer button.`,
+        `${sbName} posts small blind ($${SMALL_BLIND})`,
+        `${bbName} posts big blind ($${BIG_BLIND})`,
+        "Dealer shuffles and begins dealing..."
       ],
       winnerId: null,
+      dealerPosition: dealerPos,
     });
 
-    scheduleStage(4000, "Flop", () => {
+    // Deal cards sequentially with animation
+    // Deal 2 rounds (each player gets 2 cards)
+    const dealingDelay = 150; // ms between each card
+    const allPlayerCards: Card[][] = players.map(() => drawCards(2));
+
+    // Deal first card to each player
+    players.forEach((_, playerIndex) => {
+      const cardDelay = playerIndex * dealingDelay;
+      const timeoutId = setTimeout(() => {
+        setGameState((prev) => ({
+          ...prev,
+          players: prev.players.map((p, idx) =>
+            idx === playerIndex
+              ? {
+                ...p,
+                hand: [allPlayerCards[playerIndex][0]],
+                cardsDealt: 1,
+              }
+              : p
+          ),
+        }));
+      }, cardDelay);
+      timeouts.current.push(timeoutId);
+    });
+
+    // Deal second card to each player
+    players.forEach((_, playerIndex) => {
+      const cardDelay = (PLAYER_COUNT + playerIndex) * dealingDelay;
+      const timeoutId = setTimeout(() => {
+        setGameState((prev) => ({
+          ...prev,
+          players: prev.players.map((p, idx) =>
+            idx === playerIndex
+              ? {
+                ...p,
+                hand: [allPlayerCards[playerIndex][0], allPlayerCards[playerIndex][1]],
+                cardsDealt: 2,
+              }
+              : p
+          ),
+        }));
+      }, cardDelay);
+      timeouts.current.push(timeoutId);
+    });
+
+    // Transition to Pre-Flop after dealing is complete
+    const dealingCompleteDelay = PLAYER_COUNT * 2 * dealingDelay + 500;
+    scheduleStage(dealingCompleteDelay, "Pre-Flop", () => {
+      setGameState((prev: GameState) => ({
+        ...prev,
+        log: [
+          ...prev.log,
+          "All players have been dealt their cards.",
+          ...prev.players.map(
+            (player: Player) =>
+              `${player.name} receives ${formatCard(player.hand[0])} and ${formatCard(player.hand[1])}.`,
+          ),
+        ],
+      }));
+    });
+
+    // Add initial betting round (blinds)
+    const bettingDelay = dealingCompleteDelay + 1000;
+    const bettingTimeout = setTimeout(() => {
+      addBettingRound("Pre-Flop");
+    }, bettingDelay);
+    timeouts.current.push(bettingTimeout);
+
+    // Adjust all subsequent stage timings to account for dealing phase
+    const baseOffset = dealingCompleteDelay + 2500; // Add extra time after dealing and betting
+
+    scheduleStage(baseOffset + 1500, "Flop", () => {
       const flop = drawCards(3);
       setGameState((prev: GameState) => ({
         ...prev,
@@ -277,11 +392,11 @@ const PokerTableClient = () => {
       }));
     });
 
-    scheduleStage(7000, "Flop Betting", () => {
+    scheduleStage(baseOffset + 4000, "Flop Betting", () => {
       addBettingRound("Flop Betting");
     });
 
-    scheduleStage(10000, "Turn", () => {
+    scheduleStage(baseOffset + 6500, "Turn", () => {
       const turn = drawCards(1)[0];
       setGameState((prev: GameState) => ({
         ...prev,
@@ -290,11 +405,11 @@ const PokerTableClient = () => {
       }));
     });
 
-    scheduleStage(13000, "Turn Betting", () => {
+    scheduleStage(baseOffset + 9000, "Turn Betting", () => {
       addBettingRound("Turn Betting");
     });
 
-    scheduleStage(16000, "River", () => {
+    scheduleStage(baseOffset + 11500, "River", () => {
       const river = drawCards(1)[0];
       setGameState((prev: GameState) => ({
         ...prev,
@@ -303,11 +418,11 @@ const PokerTableClient = () => {
       }));
     });
 
-    scheduleStage(19000, "River Betting", () => {
+    scheduleStage(baseOffset + 14000, "River Betting", () => {
       addBettingRound("River Betting");
     });
 
-    scheduleStage(22000, "Showdown", () => {
+    scheduleStage(baseOffset + 16500, "Showdown", () => {
       setGameState((prev: GameState) => {
         const winnerIndex = randomInt(0, prev.players.length - 1);
         const updatedPlayers = prev.players.map(
@@ -330,20 +445,20 @@ const PokerTableClient = () => {
       });
     });
 
-    scheduleStage(28000, "Pre-Flop", () => {
+    scheduleStage(baseOffset + 22000, "Dealing", () => {
       startNewGame();
     });
   };
 
-  // Position players around the table: Dealer(top), 3 left, 3 right, 1 bottom
+  // Position players around the table in an elliptical pattern
   const positionedPlayers = [
-    { player: gameState.players[0], position: "top", label: "Dealer" },
-    { player: gameState.players[1], position: "left-1", label: "Player 2" },
-    { player: gameState.players[2], position: "left-2", label: "Player 3" },
-    { player: gameState.players[3], position: "left-3", label: "Player 4" },
-    { player: gameState.players[4], position: "right-1", label: "Player 5" },
-    { player: gameState.players[5], position: "right-2", label: "Player 6" },
-    { player: gameState.players[6], position: "bottom", label: "Player 7" },
+    { player: gameState.players[0], position: "dealer", label: "Dealer" },
+    { player: gameState.players[1], position: "player-1", label: "Player 2" },
+    { player: gameState.players[2], position: "player-2", label: "Player 3" },
+    { player: gameState.players[3], position: "player-3", label: "Player 4" },
+    { player: gameState.players[4], position: "player-4", label: "Player 5" },
+    { player: gameState.players[5], position: "player-5", label: "Player 6" },
+    { player: gameState.players[6], position: "player-6", label: "Player 7" },
   ];
 
   return (
@@ -357,23 +472,31 @@ const PokerTableClient = () => {
 
       <div className="poker-table">
         <div className="table-felt">
-          {/* Community Cards in Center */}
+          {/* Community Cards and Pot in Center - Horizontal Layout */}
           <div className="center-area">
             <div className="pot-indicator">
               <span className="pot-label">POT</span>
-              <span className="pot-amount">{gameState.pot}</span>
+              <span className="pot-amount">${gameState.pot.toLocaleString()}</span>
             </div>
             <div className="community-cards">
               {Array.from({ length: 5 }).map((_, index: number) => {
                 const card = gameState.community[index];
+                const shouldReveal =
+                  (index < 3 && ["Flop", "Flop Betting", "Turn", "Turn Betting", "River", "River Betting", "Showdown"].includes(gameState.currentStage)) ||
+                  (index === 3 && ["Turn", "Turn Betting", "River", "River Betting", "Showdown"].includes(gameState.currentStage)) ||
+                  (index === 4 && ["River", "River Betting", "Showdown"].includes(gameState.currentStage));
+
                 return (
                   <div
-                    className={`card ${card ? "revealed" : ""}`}
+                    className={`card ${card && shouldReveal ? "revealed" : ""}`}
                     key={`community-${index}`}
+                    style={{
+                      animationDelay: card ? `${index * 0.15}s` : "0s"
+                    }}
                   >
                     <img
-                      src={getCardImagePath(card)}
-                      alt={card ? formatCard(card) : "Face down card"}
+                      src={getCardImagePath(card && shouldReveal ? card : undefined)}
+                      alt={card && shouldReveal ? formatCard(card) : "Face down card"}
                       className="card-image"
                     />
                   </div>
@@ -383,34 +506,116 @@ const PokerTableClient = () => {
           </div>
 
           {/* Players Around Table */}
-          {positionedPlayers.map(({ player, position, label }) =>
-            player ? (
+          {positionedPlayers.map(({ player, position, label }, index) => {
+            if (!player) return null;
+
+            const playerIndex = index;
+            const isDealer = playerIndex === gameState.dealerPosition;
+            const isSmallBlind = playerIndex === (gameState.dealerPosition + 1) % PLAYER_COUNT;
+            const isBigBlind = playerIndex === (gameState.dealerPosition + 2) % PLAYER_COUNT;
+
+            return (
               <div
                 key={player.id}
                 className={`player-seat ${position} ${player.isWinner ? "winner" : ""}`}
               >
                 <div className="player-card">
-                  <div className="player-name">{label}</div>
+                  {/* Position badges above player name */}
+                  {(isDealer || isSmallBlind || isBigBlind) && (
+                    <div style={{
+                      display: "flex",
+                      gap: "4px",
+                      marginBottom: "4px",
+                      justifyContent: "center"
+                    }}>
+                      {isDealer && (
+                        <span style={{
+                          padding: "2px 6px",
+                          fontSize: "9px",
+                          fontWeight: "700",
+                          background: "linear-gradient(135deg, #ffd700, #ffb700)",
+                          color: "#000",
+                          borderRadius: "4px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          boxShadow: "0 2px 4px rgba(255,215,0,0.4)"
+                        }}>
+                          D
+                        </span>
+                      )}
+                      {isSmallBlind && (
+                        <span style={{
+                          padding: "2px 6px",
+                          fontSize: "9px",
+                          fontWeight: "700",
+                          background: "linear-gradient(135deg, #4a90e2, #357abd)",
+                          color: "#fff",
+                          borderRadius: "4px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          boxShadow: "0 2px 4px rgba(74,144,226,0.4)"
+                        }}>
+                          SB
+                        </span>
+                      )}
+                      {isBigBlind && (
+                        <span style={{
+                          padding: "2px 6px",
+                          fontSize: "9px",
+                          fontWeight: "700",
+                          background: "linear-gradient(135deg, #e74c3c, #c0392b)",
+                          color: "#fff",
+                          borderRadius: "4px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.5px",
+                          boxShadow: "0 2px 4px rgba(231,76,60,0.4)"
+                        }}>
+                          BB
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  <div className="player-name">
+                    {label}
+                  </div>
                   <div className="player-cards">
-                    {player.hand.map((card: Card, index: number) => (
-                      <div key={`${player.id}-card-${index}`} className="card">
-                        <img
-                          src={getCardImagePath(card)}
-                          alt={formatCard(card)}
-                          className="card-image"
-                        />
-                      </div>
-                    ))}
+                    {/* Show placeholders for 2 cards */}
+                    {[0, 1].map((cardIndex) => {
+                      const card = player.hand[cardIndex];
+                      const showCard = gameState.currentStage === "Showdown" || player.isWinner;
+                      const isDealing = gameState.currentStage === "Dealing" && card;
+                      const cardClass = isDealing ? "card card-dealing" : showCard && card ? "card revealed" : "card";
+
+                      return (
+                        <div
+                          key={`${player.id}-card-${cardIndex}`}
+                          className={cardClass}
+                          style={{
+                            animationDelay: showCard && card ? `${cardIndex * 0.1}s` : "0s",
+                            opacity: !card ? 0 : 1,
+                            transition: "opacity 0.2s ease"
+                          }}
+                        >
+                          {card && (
+                            <img
+                              src={getCardImagePath(showCard ? card : undefined)}
+                              alt={showCard ? formatCard(card) : "Hidden card"}
+                              className="card-image"
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                   {player.bets.length > 0 && (
                     <div className="player-bet">
-                      Bet: {player.bets[player.bets.length - 1]?.amount || 0}
+                      ${(player.bets[player.bets.length - 1]?.amount || 0).toLocaleString()}
                     </div>
                   )}
                 </div>
               </div>
-            ) : null,
-          )}
+            );
+          })}
         </div>
       </div>
     </div>
