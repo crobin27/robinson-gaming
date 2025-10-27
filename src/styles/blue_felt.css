@@ -1,0 +1,50 @@
+:root {
+  /* Casino blue felt colors - royal blue like high-stakes tables */
+  --felt-light: #4a7ba7; /* bright center blue */
+  --felt-mid: #3a6a94; /* mid-tone blue */
+  --felt-dark: #2a5278; /* darker edge blue */
+  --felt-darkest: #1a3a5a; /* darkest outer edge */
+}
+
+/* Full-page felt background */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  /* Poker table felt - light in center, dark on edges */
+  background: radial-gradient(
+    ellipse 100% 80% at center,
+    var(--felt-light) 0%,
+    var(--felt-mid) 40%,
+    var(--felt-dark) 70%,
+    var(--felt-darkest) 100%
+  );
+  /* Vibrant poker table blue */
+  filter: saturate(1.1) brightness(1);
+}
+
+/* Noise overlay to break up banding and simulate fibers - disabled until texture is available */
+/*
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: url("/textures/noise-256.png");
+  background-size: 256px 256px;
+  mix-blend-mode: multiply;
+  image-rendering: pixelated;
+  will-change: transform;
+}
+*/
+
+/* Respect reduced motion (some folks get motion sickness even from subtle drift) - disabled since texture is disabled */
+/*
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+*/
+

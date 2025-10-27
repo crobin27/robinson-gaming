@@ -3,6 +3,7 @@
   max-width: 50%;
   margin: 0 auto;
   padding: 2rem;
+  background: inherit; /* Use the global felt background */
   line-height: 1.6;
 }
 
@@ -12,13 +13,18 @@
   }
 }
 
-/* Title styling */
+/* Title styling - Casino Gold */
 .PrivacyPolicy h1 {
   font-family: var(--font-title);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   font-size: var(--font-size-xlarge);
   margin-bottom: 1.5rem;
   text-align: center;
+  text-shadow: 
+    0 0 20px var(--color-chip-shadow),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .PrivacyPolicy h2 {
@@ -35,13 +41,14 @@
   text-align: center;
 }
 
-/* Section heading styling */
+/* Section heading styling - Casino Gold */
 .PrivacyPolicy h3 {
   font-size: var(--font-size-large);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--color-chip-shadow);
 }
 
 .rights-list {
@@ -51,7 +58,7 @@
 /* Paragraph styling */
 .PrivacyPolicy p {
   font-size: var(--font-size-small);
-  color: #333333; /* Dark gray */
+  color: var(--color-text); /* Light color for dark background */
   margin-bottom: 1rem;
 }
 

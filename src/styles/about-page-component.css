@@ -3,10 +3,7 @@
 /* Overall Section Styling */
 .about-page {
   padding: 4rem 2rem;
-  background-image: url("/images/about/about-background.webp"); /* Path to your background image */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: inherit; /* Use the global felt background */
   color: white;
   font-family: var(--font-primary);
   display: flex;

@@ -57,6 +57,8 @@ import "../styles/about-section.css";
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const aboutSection = document.querySelector(".about-section");
+    
+    if (!aboutSection) return;
 
     const observerOptions = {
       threshold: 0.1, // Trigger when 10% of the section is in view

@@ -23,11 +23,9 @@ body {
   transform: translateY(0); /* Slide-up effect */
 }
 
-/* Background Image Styling */
+/* Background - Inherits felt background from global styles */
 .background-image {
-  background-image: url("/images/photography-section/tahoe-background.webp");
-  background-size: cover;
-  background-position: center;
+  background: inherit; /* Use the global felt background */
   height: 600px;
   width: 100%;
   display: flex;
@@ -49,11 +47,17 @@ body {
   animation-delay: 0.3s; /* Delay the fade-in for smoother entrance */
 }
 
-/* Animating title and subtitle */
+/* Animating title and subtitle - Casino Gold */
 .section-title {
   font-size: var(--font-size-large);
   font-family: var(--font-title, sans-serif);
   font-weight: 700;
+  color: var(--color-primary);
+  text-shadow: 
+    0 0 15px var(--color-chip-shadow),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .section-subtitle {
@@ -61,23 +65,40 @@ body {
   color: var(--color-text-secondary);
 }
 
-/* See More Button Styling */
+/* See More Button Styling - Casino Style */
 .see-more-button {
   position: absolute;
   bottom: 5%;
   right: 5%;
   z-index: 1;
+  border: 2px solid var(--color-chip-border);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.5),
+    0 0 15px var(--color-chip-shadow);
+  transition: all 0.3s ease;
 }
 
 .see-more-button img {
   max-width: 100%;
   height: auto;
   max-height: 3rem;
-  transition: transform 0.3s ease; /* Smooth transition on hover */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.see-more-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.6),
+    0 0 30px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
 .see-more-button:hover img {
-  transform: scale(1.1); /* Grow slightly on hover */
+  transform: scale(1.05);
 }
 
 /* Fade In Down Animation */

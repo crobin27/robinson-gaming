@@ -13,13 +13,15 @@
 
 /* 2. Custom Properties for Colors, Fonts, and Sizing */
 :root {
-  /* Colors */
-  --color-primary: #3861ac; /* Adjust based on your color palette */
-  --color-secondary: #35a7ff;
-  --color-accent: #ff5964;
-  --color-background: #f9f9f9;
-  --color-text: #060606;
-  --color-text-secondary: #535353;
+  /* Colors - Casino/Poker Table Theme */
+  --color-primary: #ffd700; /* casino gold */
+  --color-secondary: #fdb931; /* lighter gold */
+  --color-accent: #dc2626; /* casino red */
+  --color-background: transparent; /* Let green felt background show through */
+  --color-text: #ffffff; /* pure white for maximum contrast on felt */
+  --color-text-secondary: #d4af37; /* soft gold text */
+  --color-chip-border: #ffd700; /* gold chip border */
+  --color-chip-shadow: rgba(255, 215, 0, 0.4); /* gold glow */
 
   /* Font Sizes */
   --font-size-small: 1rem; /* Equivalent to 14px */
@@ -44,7 +46,7 @@ main {
 body {
   font-family: "Roboto", sans-serif;
   color: var(--color-text); /* Assuming you've set a --color-text variable */
-  background-color: var(--color-background);
+  background-color: transparent; /* Let green felt background show through */
   font-size: var(--font-size-base); /* Assuming you've set base font size */
   line-height: 1.6;
 }
@@ -84,10 +86,66 @@ p {
 a {
   color: var(--color-primary);
   text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 a:hover {
   color: var(--color-secondary);
+  text-shadow: 0 0 12px var(--color-chip-shadow); /* gold glow effect */
+}
+
+/* Casino Button Styles - Poker Chip Aesthetic */
+.casino-button {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  border: 3px solid var(--color-chip-border);
+  border-radius: 50px; /* Rounded like a chip */
+  color: var(--color-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--color-chip-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.casino-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 215, 0, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.casino-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--color-chip-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: var(--color-secondary);
+}
+
+.casino-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.casino-button:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 0 15px var(--color-chip-shadow);
 }
 
 /*Increase font size on smaller screens */

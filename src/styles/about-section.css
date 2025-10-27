@@ -61,15 +61,36 @@
   max-width: 100%;
 }
 
+.engagement-button {
+  border: 2px solid var(--color-chip-border);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.4),
+    0 0 15px var(--color-chip-shadow);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
 .engagement-button img {
   max-width: 100%;
   height: auto;
   max-height: 3rem;
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.engagement-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
 .engagement-button:hover img {
-  transform: scale(1.05); /* Slightly larger on hover */
+  transform: scale(1.05);
 }
 
 /* Responsive Adjustments */

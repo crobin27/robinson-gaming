@@ -8,12 +8,9 @@
   margin: 0;
   padding: 0;
 }
-/* Background Image */
+/* Background - Inherits felt background from global styles */
 .projects-background {
-  background-image: url("/images/projects/background-image.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: inherit; /* Use the global felt background */
   padding: 4rem 0;
   display: flex;
   justify-content: center;
@@ -22,10 +19,16 @@
   height: auto; /* Let the height adjust based on content */
 }
 
-/* Section Title */
+/* Section Title - Casino Gold */
 .projects-title {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--color-primary);
+  text-shadow: 
+    0 0 20px var(--color-chip-shadow),
+    2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Project Placards Grid */
@@ -36,7 +39,7 @@
   justify-content: center;
 }
 
-/* Individual Project Card */
+/* Individual Project Card - Casino Display Style */
 .project-card {
   position: relative;
   max-width: 360px;
@@ -47,7 +50,21 @@
   transform: translateY(30px); /* Start slightly lower for slide-up effect */
   transition:
     opacity 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 3px solid var(--color-chip-border);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.5),
+    0 0 20px var(--color-chip-shadow);
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+}
+
+.project-card:hover {
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.6),
+    0 0 40px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
+  transform: translateY(28px) scale(1.02);
 }
 
 /* Project Image */
@@ -65,10 +82,29 @@
   transform: translateX(-50%);
 }
 
+.learn-more-link {
+  border: 2px solid var(--color-chip-border);
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  background: linear-gradient(145deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4));
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 0 10px var(--color-chip-shadow);
+  transition: all 0.3s ease;
+}
+
 .learn-more-button {
   max-width: 125px;
   height: auto;
+  display: block;
   transition: transform 0.3s ease;
+}
+
+.learn-more-link:hover {
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.6),
+    0 0 20px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
 .learn-more-link:hover .learn-more-button {

@@ -9,6 +9,13 @@
   margin: 0 auto; /* Centers the container horizontally */
 }
 
+/* Adjust for left sidebar on desktop */
+@media (min-width: 769px) {
+  .container {
+    padding-left: 2rem; /* Add left padding to prevent content from touching sidebar edge */
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     max-width: 90%; /* Shrinks to 90% of the screen width on smaller screens */
