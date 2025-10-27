@@ -1,0 +1,375 @@
+.poker-simulation {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  color: #f6f3ff;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.felt {
+  position: relative;
+  width: min(90vw, 960px);
+  min-height: 520px;
+  padding: 3.5rem;
+  border-radius: 55% / 45%;
+  background: radial-gradient(circle at 50% 45%, #2a8f5a 0%, #115534 55%, #052414 100%);
+  border: 16px solid #593117;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), inset 0 0 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+.table-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.table-header h2 {
+  font-size: clamp(1.4rem, 2vw + 1rem, 2.2rem);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.phase-title {
+  margin: 0.25rem 0;
+  font-weight: 600;
+}
+
+.phase-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0.25rem auto 0.75rem;
+  max-width: 560px;
+}
+
+.pot-display {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(255, 221, 128, 0.8), rgba(255, 180, 64, 0.95));
+  color: #1b1206;
+  font-weight: 700;
+  padding: 0.4rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+}
+
+.community-cards {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.community-cards h3 {
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.card-row {
+  display: inline-flex;
+  gap: 0.6rem;
+}
+
+.card {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 3rem;
+  height: 4.2rem;
+  padding: 0.35rem;
+  border-radius: 0.6rem;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(210, 210, 210, 0.85));
+  color: #0f172a;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.35);
+  opacity: 1;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.card-red {
+  color: #b91c1c;
+}
+
+.card-hidden {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+}
+
+.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card-rank {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.card-suit {
+  font-size: 1.1rem;
+}
+
+.player-seat {
+  position: absolute;
+  width: 160px;
+  padding: 0.8rem;
+  border-radius: 1rem;
+  background: rgba(13, 23, 16, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  text-align: center;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.45);
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.player-seat:hover {
+  transform: translate(-50%, -50%) scale(1.04);
+  box-shadow: 0 20px 32px rgba(0, 0, 0, 0.55);
+}
+
+.player-seat.winner {
+  border-color: rgba(255, 215, 0, 0.7);
+  box-shadow: 0 18px 36px rgba(255, 198, 61, 0.45);
+}
+
+.player-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.player-name {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.player-stack {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.player-cards {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.player-stats dt {
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+}
+
+.player-stats dd {
+  margin: 0;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.winner-banner {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffe08a;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.seat-1 {
+  top: 8%;
+  left: 50%;
+}
+
+.seat-2 {
+  top: 26%;
+  left: 86%;
+}
+
+.seat-3 {
+  top: 68%;
+  left: 88%;
+}
+
+.seat-4 {
+  top: 92%;
+  left: 50%;
+}
+
+.seat-5 {
+  top: 68%;
+  left: 12%;
+}
+
+.seat-6 {
+  top: 26%;
+  left: 14%;
+}
+
+.seat-7 {
+  top: 8%;
+  left: 22%;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.control-button {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff7ed;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.phase-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 1.5rem;
+  background: rgba(7, 12, 9, 0.88);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: grid;
+  gap: 1rem;
+}
+
+.timeline-item {
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.timeline-item h4 {
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.timeline-item p {
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.timeline-pot {
+  font-weight: 600;
+  color: #ffe08a;
+}
+
+.timeline-item.active {
+  border-color: rgba(255, 208, 80, 0.75);
+  background: rgba(255, 208, 80, 0.14);
+}
+
+.timeline-item.complete {
+  border-color: rgba(16, 185, 129, 0.55);
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.asset-notes {
+  background: rgba(8, 14, 10, 0.92);
+  border-radius: 1.5rem;
+  padding: 1.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  line-height: 1.6;
+}
+
+.asset-notes h3 {
+  margin-top: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.asset-notes ul {
+  margin: 0.8rem 0 0 1rem;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.asset-notes code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+@media (max-width: 900px) {
+  .player-seat {
+    width: 140px;
+    padding: 0.65rem;
+  }
+
+  .seat-2 {
+    left: 88%;
+  }
+
+  .seat-3 {
+    left: 86%;
+  }
+
+  .seat-5 {
+    left: 14%;
+  }
+
+  .seat-6 {
+    left: 16%;
+  }
+
+  .seat-7 {
+    left: 26%;
+  }
+}
+
+@media (max-width: 640px) {
+  .felt {
+    padding: 2.8rem 2.2rem;
+  }
+
+  .player-seat {
+    width: 120px;
+    padding: 0.55rem;
+  }
+
+  .card {
+    width: 2.5rem;
+    height: 3.6rem;
+  }
+
+  .phase-timeline {
+    padding: 1rem;
+  }
+}
