@@ -21,8 +21,10 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "test:all": "npm run typecheck && npm run lint:all && npm run test && npm run test:e2e",
     "lighthouse:ci": "node scripts/lighthouse.mjs",
-    "a11y": "node scripts/a11y.mjs"
+    "a11y": "node scripts/a11y.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "18": "^0.0.0",
@@ -53,6 +55,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^15.11.0",
+    "husky": "^9.1.7",
     "open-props": "^1.7.7",
     "postcss": "^8.4.47",
     "postcss-jit-props": "^1.0.14",

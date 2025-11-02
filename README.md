@@ -25,6 +25,78 @@ This project uses a combination of front-end frameworks, storage solutions, and 
 - **Cloudflare R2**: For scalable, affordable file storage, especially for downloadable assets.
 - **Git**: Version control with GitHub as the remote repository.
 
+## Development Workflow
+
+### Getting Started
+
+1. **Install dependencies**:
+
+```bash
+npm install
+```
+
+2. **Install Playwright browsers** (for E2E tests):
+
+```bash
+npx playwright install
+```
+
+3. **Start development server**:
+
+```bash
+npm run dev
+```
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run lint` - Run ESLint
+- `npm run lint:css` - Run Stylelint
+- `npm run lint:all` - Run all linters
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+- `npm run test` - Run unit tests
+- `npm run test:watch` - Run unit tests in watch mode
+- `npm run test:e2e` - Run E2E tests with Playwright
+- `npm run test:e2e:ui` - Run E2E tests with Playwright UI
+- `npm run test:all` - Run all checks (typecheck, lint, unit tests, E2E tests)
+
+### Git Hooks
+
+This project uses [Husky](https://typicode.github.io/husky/) to enforce code quality before commits and pushes:
+
+#### Pre-commit Hook
+
+Runs automatically before each commit:
+
+- ✅ Code formatting check
+- ✅ Linting (ESLint & Stylelint)
+
+#### Pre-push Hook
+
+Runs automatically before each push:
+
+- ✅ TypeScript type checking
+- ✅ Linting
+- ✅ Unit tests
+- ✅ E2E tests
+
+**Tip**: If you need to skip hooks temporarily (not recommended), use:
+
+```bash
+git commit --no-verify
+git push --no-verify
+```
+
+**Run all checks manually**:
+
+```bash
+npm run test:all
+```
+
 ## Key Features Implemented
 
 - **Responsive Layouts**: CSS media queries and custom breakpoints ensure layouts adapt to different screen sizes.

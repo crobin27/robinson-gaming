@@ -275,4 +275,3 @@ git commit -m "fix: resolve E2E test failures - optimize browser config and fix 
 - Fix failing about and photography route tests
 
 **Time to ship! 🚀**
-
