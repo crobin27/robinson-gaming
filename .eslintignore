@@ -1,0 +1,24 @@
+# Build output
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.*
+
+# Cache
+.cache/
+*.log
+
+# Generated files
+lighthouserc.json
+.lighthouseci/
+.a11y-results.json
+

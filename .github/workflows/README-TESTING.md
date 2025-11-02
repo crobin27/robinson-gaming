@@ -7,21 +7,25 @@
 ### Installation
 
 **Windows (using Chocolatey):**
+
 ```bash
 choco install act-cli
 ```
 
 **Windows (using Scoop):**
+
 ```bash
 scoop install act
 ```
 
 **macOS:**
+
 ```bash
 brew install act
 ```
 
 **Linux:**
+
 ```bash
 curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 ```
@@ -42,6 +46,7 @@ act -l
 ### Create Test Event File
 
 Create `test-event.json`:
+
 ```json
 {
   "pull_request": {
@@ -107,7 +112,7 @@ actionlint .github/workflows/preview-comment.yml
 ## Best Practice
 
 For critical workflows:
+
 1. Test syntax locally with `actionlint`
 2. Test basic functionality with `act`
 3. Verify in a test repository before merging to main
-

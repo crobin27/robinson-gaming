@@ -8,23 +8,27 @@
 ## 🔴 CRITICAL FIX #1: ESLint Config Breaking CI
 
 **Error:**
+
 ```
 ReferenceError: Cannot read config file: /home/runner/work/robinson-gaming/robinson-gaming/.eslintrc.js
 Error: module is not defined in ES module scope
 ```
 
 **Root Cause:**
+
 - `.eslintrc.js` uses CommonJS syntax (`module.exports`)
 - `package.json` has `"type": "module"` making everything ES modules by default
 - Node can't load CommonJS config in ES module context
 
 **Fix:**
 ✅ **Renamed `.eslintrc.js` → `.eslintrc.cjs`**
+
 - The `.cjs` extension explicitly marks file as CommonJS
 - ESLint will automatically detect and use `.eslintrc.cjs`
 - No code changes needed - just file rename
 
 **Files Changed:**
+
 - `.eslintrc.js` → `.eslintrc.cjs` (renamed)
 
 ---
@@ -32,17 +36,20 @@ Error: module is not defined in ES module scope
 ## 🔴 CRITICAL FIX #2: Preview Comment Syntax Error
 
 **Error:**
+
 ```
 SyntaxError: Unexpected identifier 'feature'
 ```
 
 **Root Cause:**
+
 - Branch name was `feature/cage-devex`
-- Comment body contains template literal syntax with `${pr.head.ref}` 
+- Comment body contains template literal syntax with `${pr.head.ref}`
 - Passing multi-line template literals through `${{ }}` into another script creates nested template literal hell
 - The JavaScript parser sees `feature` as raw code, not a string
 
 **Example of the problem:**
+
 ```yaml
 script: |
   const commentBody = `${{ steps.preview-info.outputs.comment-body }}`;
@@ -55,6 +62,7 @@ script: |
 
 **Fix:**
 ✅ **Use environment variables instead of inline interpolation**
+
 ```yaml
 env:
   COMMENT_BODY: ${{ steps.preview-info.outputs.comment-body }}
@@ -66,46 +74,52 @@ with:
 ```
 
 **Why this works:**
+
 - Environment variables pass strings safely without parsing
 - No nested template literal issues
 - Works with any branch name or special characters
 
 **Files Changed:**
+
 - `.github/workflows/preview-comment.yml` (lines 82-90)
 
 ---
 
 ## 🟢 BONUS FIX: Added Placeholder Unit Tests
 
-**Issue:** 
+**Issue:**
+
 - CI runs `npm run test` (vitest)
 - No unit test files existed
 - While vitest passes with 0 tests, this could confuse future developers
 
 **Fix:**
 ✅ **Created `src/utils/test-helper.test.ts`**
+
 - Simple placeholder test that always passes
 - Demonstrates test infrastructure works
 - Prevents "no tests found" confusion
 
 **Files Changed:**
+
 - `src/utils/test-helper.test.ts` (new file)
 
 ---
 
 ## 📊 Summary of Changes
 
-| File | Change | Impact |
-|------|--------|--------|
-| `.eslintrc.js` → `.eslintrc.cjs` | Renamed | 🔴 **CRITICAL** - Fixes CI lint failure |
-| `.github/workflows/preview-comment.yml` | Modified | 🔴 **CRITICAL** - Fixes syntax error |
-| `src/utils/test-helper.test.ts` | Created | 🟢 Nice-to-have - Prevents confusion |
+| File                                    | Change   | Impact                                  |
+| --------------------------------------- | -------- | --------------------------------------- |
+| `.eslintrc.js` → `.eslintrc.cjs`        | Renamed  | 🔴 **CRITICAL** - Fixes CI lint failure |
+| `.github/workflows/preview-comment.yml` | Modified | 🔴 **CRITICAL** - Fixes syntax error    |
+| `src/utils/test-helper.test.ts`         | Created  | 🟢 Nice-to-have - Prevents confusion    |
 
 ---
 
 ## ✅ Expected Results
 
 ### Before These Fixes:
+
 - ❌ **CI / CI Checks** - FAILING (ESLint error)
 - ❌ **Preview Deployment Comment** - FAILING (Syntax error)
 - ✅ Lighthouse CI - PASSING
@@ -113,6 +127,7 @@ with:
 - ✅ Vercel Preview Comments - PASSING
 
 ### After These Fixes:
+
 - ✅ **CI / CI Checks** - **NOW PASSING**
 - ✅ **Preview Deployment Comment** - **NOW PASSING**
 - ✅ Lighthouse CI - STILL PASSING
@@ -124,22 +139,26 @@ with:
 ## 🎯 Bulletproofing Measures
 
 ### 1. ESLint Config
+
 - ✅ Proper file extension for module type
 - ✅ No code changes needed
 - ✅ Works with all existing linting rules
 
 ### 2. GitHub Actions Scripts
+
 - ✅ Environment variables for safe data passing
 - ✅ No template literal nesting issues
 - ✅ Works with any branch name/special chars
 - ✅ All existing workflows tested and verified
 
 ### 3. Test Infrastructure
+
 - ✅ Simple placeholder tests
 - ✅ Vitest properly configured
 - ✅ CI pipeline validates test infrastructure
 
 ### 4. Workflow Architecture
+
 ```
 ✅ CI Workflow (ci.yml)
   ├─ Type check
@@ -168,6 +187,7 @@ with:
 ## 🚀 Next Steps
 
 1. **Commit these changes:**
+
    ```bash
    git add .
    git commit -m "fix: resolve ESLint config and preview comment CI failures"
@@ -175,6 +195,7 @@ with:
    ```
 
 2. **Verify in PR:**
+
    - All workflows should now pass ✅
    - Preview comments will appear correctly
    - No more syntax errors or module issues
@@ -189,7 +210,9 @@ with:
 ## 🔧 Technical Details
 
 ### Why `.cjs` Extension?
+
 Node.js determines module type by:
+
 1. Checking file extension (`.mjs` = ES module, `.cjs` = CommonJS)
 2. Checking nearest `package.json` for `"type": "module"`
 3. Defaulting to CommonJS
@@ -198,14 +221,17 @@ Since your `package.json` has `"type": "module"`, all `.js` files are ES modules
 Using `.cjs` explicitly marks the file as CommonJS, regardless of package.json.
 
 ### Why Environment Variables for GitHub Actions?
+
 GitHub Actions expressions `${{ }}` are replaced BEFORE the script runs.
 When you have:
+
 ```yaml
 script: |
   const x = `${{ some.output }}`;
 ```
 
 It becomes (after replacement):
+
 ```javascript
 const x = `actual content with backticks and ${variables}`;
 //                                           ^^^^^^^^^^^
@@ -213,6 +239,7 @@ const x = `actual content with backticks and ${variables}`;
 ```
 
 Using environment variables bypasses this:
+
 ```yaml
 env:
   MY_VAR: ${{ some.output }}
@@ -228,4 +255,3 @@ script: |
 
 All critical issues resolved. Your workflows will now pass consistently.
 No more blocking on CI checks. Time to ship! 🚀
-

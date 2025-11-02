@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     "eslint:recommended",
-    "@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:astro/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
@@ -36,6 +36,12 @@ module.exports = {
       rules: {
         "astro/no-set-html-directive": "error",
         "astro/no-unused-css-selector": "error",
+        // Astro files use 'class' not 'className'
+        "react/no-unknown-property": "off",
+        "react/jsx-no-target-blank": "off",
+        "react/no-unescaped-entities": "off",
+        "react/jsx-key": "off",
+        "react/jsx-no-duplicate-props": "off",
       },
     },
     {
