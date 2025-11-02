@@ -10,7 +10,19 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "astro check",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --max-warnings 0",
+    "lint:css": "stylelint \"**/*.css\" --max-warnings 0",
+    "lint:all": "npm run lint && npm run lint:css",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md,astro}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,scss,md,astro}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "lighthouse:ci": "node scripts/lighthouse.mjs",
+    "a11y": "node scripts/a11y.mjs"
   },
   "dependencies": {
     "18": "^0.0.0",
@@ -35,6 +47,17 @@
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.2",
     "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "@playwright/test": "^1.40.0",
+    "@axe-core/playwright": "^4.8.0",
+    "@lhci/cli": "^0.12.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "vitest": "^1.0.4",
+    "@vitest/ui": "^1.0.4",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0"
   }
 }
