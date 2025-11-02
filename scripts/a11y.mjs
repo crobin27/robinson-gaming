@@ -16,7 +16,7 @@ const rootDir = join(__dirname, '..');
 // Get preview URL from environment or use default
 const previewUrl = process.env.PREVIEW_URL || process.env.VERCEL_URL || process.env.NETLIFY_URL || 'http://localhost:4321';
 
-console.log(`? Running accessibility audit against: ${previewUrl}`);
+console.log(`♿ Running accessibility audit against: ${previewUrl}`);
 
 try {
   // Run Playwright a11y test
@@ -40,13 +40,13 @@ try {
     try {
       const results = JSON.parse(readFileSync(resultsPath, 'utf-8'));
       
-      console.log(`\n?? Accessibility Results:`);
+      console.log(`\n📊 Accessibility Results:`);
       console.log(`   Violations: ${results.violations?.length || 0}`);
       console.log(`   Passes: ${results.passes?.length || 0}`);
       console.log(`   Incomplete: ${results.incomplete?.length || 0}`);
       
       if (results.violations && results.violations.length > 0) {
-        console.log(`\n??  Top accessibility violations:`);
+        console.log(`\n⚠️  Top accessibility violations:`);
         results.violations.slice(0, 10).forEach((violation, idx) => {
           console.log(`   ${idx + 1}. ${violation.id}: ${violation.description}`);
           if (violation.nodes && violation.nodes.length > 0) {
@@ -58,7 +58,7 @@ try {
         }
         console.log(`\n   Full report saved to: .a11y-results.json`);
       } else {
-        console.log(`\n? No accessibility violations found!`);
+        console.log(`\n✅ No accessibility violations found!`);
       }
     } catch (readError) {
       console.warn('Could not read accessibility results:', readError.message);
@@ -68,10 +68,10 @@ try {
     console.warn('Ensure the a11y test writes results to .a11y-results.json');
   }
 
-  console.log('? Accessibility audit completed');
+  console.log('✅ Accessibility audit completed');
   process.exit(0);
 } catch (error) {
-  console.error('? Accessibility audit failed:', error.message);
+  console.error('❌ Accessibility audit failed:', error.message);
   // Don't fail the build, but log the error
   process.exit(0);
 }

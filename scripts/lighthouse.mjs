@@ -16,7 +16,7 @@ const rootDir = join(__dirname, '..');
 // Get preview URL from environment or use default
 const previewUrl = process.env.PREVIEW_URL || process.env.VERCEL_URL || process.env.NETLIFY_URL || 'http://localhost:4321';
 
-console.log(`?? Running Lighthouse CI against: ${previewUrl}`);
+console.log(`🔍 Running Lighthouse CI against: ${previewUrl}`);
 
 // Ensure .lighthouseci directory exists
 const lhciDir = join(rootDir, '.lighthouseci');
@@ -59,10 +59,10 @@ try {
     },
   });
 
-  console.log('? Lighthouse CI completed successfully');
+  console.log('✅ Lighthouse CI completed successfully');
   process.exit(0);
 } catch (error) {
-  console.error('? Lighthouse CI failed:', error.message);
+  console.error('❌ Lighthouse CI failed:', error.message);
   // Don't fail the build, but log the error
   process.exit(0);
 }
