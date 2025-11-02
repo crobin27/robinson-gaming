@@ -105,11 +105,6 @@ npm install
 2. Enable PR previews
 3. Preview URLs will appear automatically
 
-**Netlify:**
-1. Connect GitHub repo at netlify.com
-2. Enable PR previews in Deploy contexts
-3. Preview URLs will appear automatically
-
 See `scripts/setup-preview-deployments.md` for detailed instructions.
 
 ### 3. Enable Branch Protection

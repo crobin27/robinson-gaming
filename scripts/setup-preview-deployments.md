@@ -19,19 +19,6 @@ This document outlines the steps to set up automatic preview deployments for pul
 - No additional secrets required for basic setup
 - Vercel GitHub App integration handles authentication automatically
 
-## Netlify Setup
-
-1. Go to [netlify.com](https://netlify.com) and sign in with GitHub
-2. Click "Add new site" ? "Import an existing project"
-3. Choose your GitHub repository
-4. Configure build settings:
-   - **Build command:** `npm run build`
-   - **Publish directory:** `dist`
-   - **Base directory:** (leave empty)
-5. Click "Deploy site"
-6. In Site settings ? Build & deploy ? Deploy contexts:
-   - Enable "Deploy previews" for all pull requests
-
 ### Required Secrets
 - No additional secrets required for basic setup
 - Netlify GitHub App integration handles authentication automatically
@@ -40,7 +27,6 @@ This document outlines the steps to set up automatic preview deployments for pul
 
 The `preview-comment.yml` workflow will automatically detect and post preview URLs from:
 - Vercel (via GitHub App integration)
-- Netlify (via GitHub App integration)
 
 If you need to manually specify a preview URL, you can set it as an environment variable in your workflow or add it to the PR description.
 
