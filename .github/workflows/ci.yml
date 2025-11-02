@@ -50,16 +50,13 @@ jobs:
         run: npm run test
         continue-on-error: false
 
-      # E2E tests are now run via pre-push hook locally for faster feedback
-      # Keeping this step only for prod branch as final safety check
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
-        if: github.ref == 'refs/heads/prod'
+        if: always()
 
       - name: Run E2E smoke tests
         run: npm run test:e2e
         continue-on-error: false
-        if: github.ref == 'refs/heads/prod'
         env:
           BASE_URL: http://localhost:4321
 
