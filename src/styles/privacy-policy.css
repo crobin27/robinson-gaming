@@ -7,7 +7,7 @@
   line-height: 1.6;
 }
 
-@media (max-width: 856px) {
+@media (width <= 856px) {
   .PrivacyPolicy {
     max-width: 90%;
   }
@@ -20,25 +20,15 @@
   font-size: var(--font-size-xlarge);
   margin-bottom: 1.5rem;
   text-align: center;
-  text-shadow: 
+  text-shadow:
     0 0 20px var(--color-chip-shadow),
-    2px 2px 4px rgba(0, 0, 0, 0.8);
+    2px 2px 4px rgb(0 0 0 / 80%);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 .PrivacyPolicy h2 {
   font-size: var(--font-size-small);
-}
-
-/* Subtitle styling for effective date */
-.PrivacyPolicy h3:first-of-type {
-  font-size: var(--font-size-small);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  font-style: italic;
-  margin-bottom: 1.5rem;
-  text-align: center;
 }
 
 /* Section heading styling - Casino Gold */
@@ -49,6 +39,16 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
   text-shadow: 0 0 10px var(--color-chip-shadow);
+}
+
+/* Subtitle styling for effective date */
+.PrivacyPolicy h3:first-of-type {
+  font-size: var(--font-size-small);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .rights-list {

@@ -10,6 +10,7 @@
   flex-direction: column;
   align-items: center;
 }
+
 /* Title Styling */
 .about-title {
   text-align: left;
@@ -70,7 +71,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .about-title {
     text-align: center;
   }
@@ -83,7 +84,7 @@
 
   .about-image img {
     max-width: 100%;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     align-items: center;
   }
 

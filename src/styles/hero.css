@@ -41,9 +41,9 @@
   line-height: 0.9;
   overflow: visible;
   white-space: normal; /* Allow line breaks */
-  text-shadow: 
+  text-shadow:
     0 0 20px var(--color-chip-shadow),
-    2px 2px 4px rgba(0, 0, 0, 0.8); /* Gold glow with depth */
+    2px 2px 4px rgb(0 0 0 / 80%); /* Gold glow with depth */
 }
 
 /* Typing Effect */
@@ -82,9 +82,9 @@
   border: 2px solid var(--color-chip-border);
   border-radius: 12px;
   padding: 0.5rem;
-  background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.4),
+  background: linear-gradient(145deg, rgb(0 0 0 / 30%), rgb(0 0 0 / 10%));
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 40%),
     0 0 15px var(--color-chip-shadow);
   transition: all 0.3s ease;
 }
@@ -100,8 +100,8 @@
 
 .download-button:hover {
   transform: translateY(-3px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
     0 0 30px var(--color-chip-shadow);
   border-color: var(--color-secondary);
 }
@@ -110,13 +110,13 @@
   transform: scale(1.05);
 }
 
-
 /* Keyframes for Fade In and Typing */
 @keyframes fadeInUp {
   from {
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -128,6 +128,7 @@
     transform: translateY(-20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -135,7 +136,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .hero-title {
     font-size: 5rem;
   }
@@ -153,7 +154,7 @@
   }
 }
 
-@media (max-width: 756px) {
+@media (width <= 756px) {
   .hero-title {
     font-size: 3.75rem;
   }

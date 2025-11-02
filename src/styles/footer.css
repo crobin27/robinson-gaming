@@ -28,20 +28,31 @@
   font-size: var(--font-size-large);
   color: var(--color-primary);
   text-decoration: none;
-  text-shadow: 
+  text-shadow:
     0 0 15px var(--color-chip-shadow),
-    2px 2px 4px rgba(0, 0, 0, 0.8);
+    2px 2px 4px rgb(0 0 0 / 80%);
   transition:
     color 0.3s ease,
     transform 0.3s ease,
     text-shadow 0.3s ease;
 }
 
+.footer-right a {
+  border: 2px solid var(--color-chip-border);
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(145deg, rgb(0 0 0 / 40%), rgb(0 0 0 / 20%));
+  box-shadow:
+    0 3px 6px rgb(0 0 0 / 40%),
+    0 0 12px var(--color-chip-shadow);
+  transition: all 0.3s ease;
+}
+
 .footer-left a:hover {
   color: var(--color-secondary);
-  text-shadow: 
+  text-shadow:
     0 0 25px var(--color-chip-shadow),
-    2px 2px 4px rgba(0, 0, 0, 0.8);
+    2px 2px 4px rgb(0 0 0 / 80%);
   transform: scale(1.05);
 }
 
@@ -52,25 +63,10 @@
   transition: transform 0.3s ease;
 }
 
-.github-link:hover img {
-  transform: scale(1.1);
-}
-
 /* Right side: Download buttons with casino styling */
 .footer-right {
   display: flex;
   gap: 1rem;
-}
-
-.footer-right a {
-  border: 2px solid var(--color-chip-border);
-  border-radius: 10px;
-  padding: 0.4rem 0.8rem;
-  background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
-  box-shadow: 
-    0 3px 6px rgba(0, 0, 0, 0.4),
-    0 0 12px var(--color-chip-shadow);
-  transition: all 0.3s ease;
 }
 
 .footer-right a img {
@@ -80,10 +76,14 @@
   transition: transform 0.3s ease;
 }
 
+.github-link:hover img {
+  transform: scale(1.1);
+}
+
 .footer-right a:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
     0 0 25px var(--color-chip-shadow);
   border-color: var(--color-secondary);
 }
@@ -96,7 +96,12 @@
 .footer-divider {
   width: 90%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-chip-border), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-chip-border),
+    transparent
+  );
   box-shadow: 0 0 10px var(--color-chip-shadow);
   margin: 1rem auto;
 }
@@ -127,7 +132,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .footer-content,
   .footer-bottom {
     flex-direction: column;

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap");
-@import "open-props/open-props.min.css"; /* For the minified version */
+@import url("open-props/open-props.min.css"); /* For the minified version */
 
 /* 1. CSS Reset */
 *,
@@ -21,7 +21,7 @@
   --color-text: #ffffff; /* pure white for maximum contrast on felt */
   --color-text-secondary: #d4af37; /* soft gold text */
   --color-chip-border: #ffd700; /* gold chip border */
-  --color-chip-shadow: rgba(255, 215, 0, 0.4); /* gold glow */
+  --color-chip-shadow: rgb(255 215 0 / 40%); /* gold glow */
 
   /* Font Sizes */
   --font-size-small: 1rem; /* Equivalent to 14px */
@@ -33,18 +33,19 @@
   --font-primary: "Roboto", sans-serif;
   --font-title: "Rowdies", sans-serif;
 
-  /*Container Styles*/
+  /* Container Styles */
   --container-width: 78vw;
 }
 
 main {
   display: grid;
-  gap: var(--size-fl);
+  gap: var(--size-fluid-6);
+  margin: 4rem 0 0;
 }
 
 /* 4. Body Styling */
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
   color: var(--color-text); /* Assuming you've set a --color-text variable */
   background-color: transparent; /* Let green felt background show through */
   font-size: var(--font-size-base); /* Assuming you've set base font size */
@@ -57,11 +58,13 @@ h1 {
   font-weight: 600;
   line-height: 1.1;
 }
+
 h2 {
   font-size: var(--font-size-large);
   font-weight: 600;
   line-height: 1.1;
 }
+
 h3 {
   font-size: var(--font-size-base);
   font-weight: 600;
@@ -105,34 +108,36 @@ a:hover {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 40%),
     0 0 20px var(--color-chip-shadow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    inset 0 1px 0 rgb(255 255 255 / 10%);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
 .casino-button::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 0;
   height: 0;
   border-radius: 50%;
-  background: rgba(255, 215, 0, 0.2);
+  background: rgb(255 215 0 / 20%);
   transform: translate(-50%, -50%);
-  transition: width 0.5s, height 0.5s;
+  transition:
+    width 0.5s,
+    height 0.5s;
 }
 
 .casino-button:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
     0 0 30px var(--color-chip-shadow),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgb(255 255 255 / 20%);
   border-color: var(--color-secondary);
 }
 
@@ -143,22 +148,16 @@ a:hover {
 
 .casino-button:active {
   transform: translateY(0);
-  box-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 40%),
     0 0 15px var(--color-chip-shadow);
 }
 
-/*Increase font size on smaller screens */
-@media (max-width: 768px) {
+/* Increase font size on smaller screens */
+@media (width <= 768px) {
   html {
     font-size: 120%;
   }
-}
-
-main {
-  display: grid;
-  gap: var(--size-fluid-6);
-  margin: 4rem 0 0 0;
 }
 
 html {

@@ -32,9 +32,9 @@
   font-size: 6rem;
   margin: 0;
   padding-bottom: var(--size-fluid-3);
-  text-shadow: 
+  text-shadow:
     0 0 20px var(--color-chip-shadow),
-    2px 2px 4px rgba(0, 0, 0, 0.8);
+    2px 2px 4px rgb(0 0 0 / 80%);
 }
 
 .hero-title span {
@@ -56,9 +56,9 @@
   border: 2px solid var(--color-chip-border);
   border-radius: 12px;
   padding: 0.5rem 1rem;
-  background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.4),
+  background: linear-gradient(145deg, rgb(0 0 0 / 30%), rgb(0 0 0 / 10%));
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 40%),
     0 0 15px var(--color-chip-shadow);
   transition: all 0.3s ease;
   display: inline-block;
@@ -73,14 +73,10 @@
 
 .contact-link:hover {
   transform: translateY(-3px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
     0 0 30px var(--color-chip-shadow);
   border-color: var(--color-secondary);
-}
-
-.contact-link:hover img {
-  transform: scale(1.05);
 }
 
 /* Right Column: Profile Image Styling */
@@ -95,14 +91,20 @@
   max-width: 100%;
 }
 
+.contact-link:hover img {
+  transform: scale(1.05);
+}
+
 /* Responsive Adjustments */
-@media (max-width: 992px) {
+@media (width <= 992px) {
   .hero-title {
     font-size: 5rem;
   }
+
   .hero-role {
     font-size: var(--font-size-base);
   }
+
   .hero-subtitle {
     font-size: var(--font-size-small);
   }
@@ -112,24 +114,28 @@
   }
 }
 
-@media (max-width: 856px) {
+@media (width <= 856px) {
   .hero-content-wrapper {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
   .hero-left {
     width: 100%;
   }
+
   .hero-title {
     font-size: 3rem;
   }
+
   .contact-button {
     display: flex;
     align-items: center;
     justify-content: center; /* Ensures centering on smaller screens */
     width: 100%; /* Ensures the button is centered horizontally */
   }
+
   .contact-link img {
     max-width: 200px;
   }

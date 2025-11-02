@@ -14,9 +14,11 @@ To make every PR shippable, enable the following required checks on the `dev` br
 Enable these checks to be required before merging:
 
 - ? **CI** (from `.github/workflows/ci.yml`)
+
   - Ensures: typecheck, lint, format, build, unit tests, E2E tests all pass
 
 - ? **Lighthouse CI** (from `.github/workflows/lighthouse.yml`)
+
   - Ensures: Performance, accessibility, SEO, and best practices meet thresholds
 
 - ?? **Preview Deployment Comment** (from `.github/workflows/preview-comment.yml`)
@@ -34,6 +36,7 @@ Enable these checks to be required before merging:
 When a PR is created:
 
 1. **CI workflow** runs and checks:
+
    - TypeScript type checking
    - ESLint code linting
    - Prettier format checking
@@ -42,6 +45,7 @@ When a PR is created:
    - E2E smoke tests (Playwright)
 
 2. **Preview Deployment** workflow:
+
    - Posts preview URL information (if Vercel/Netlify is configured)
    - Updates comment when PR is updated
 

@@ -65,9 +65,9 @@
   border: 2px solid var(--color-chip-border);
   border-radius: 12px;
   padding: 0.5rem 1rem;
-  background: linear-gradient(145deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
-  box-shadow: 
-    0 4px 6px rgba(0, 0, 0, 0.4),
+  background: linear-gradient(145deg, rgb(0 0 0 / 30%), rgb(0 0 0 / 10%));
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 40%),
     0 0 15px var(--color-chip-shadow);
   transition: all 0.3s ease;
   display: inline-block;
@@ -83,8 +83,8 @@
 
 .engagement-button:hover {
   transform: translateY(-3px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
     0 0 30px var(--color-chip-shadow);
   border-color: var(--color-secondary);
 }
@@ -94,7 +94,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .subheading-text {
     font-size: var(--font-size-small);
   }
@@ -104,7 +104,7 @@
   }
 }
 
-@media (max-width: 812px) {
+@media (width <= 812px) {
   .about-content-wrapper {
     flex-direction: column;
     align-items: center;

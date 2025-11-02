@@ -11,6 +11,7 @@ html,
 body {
   height: 100%;
   margin: 0;
+
   /* Poker table felt - light in center, dark on edges */
   background: radial-gradient(
     ellipse 100% 80% at center,
@@ -19,11 +20,13 @@ body {
     var(--felt-dark) 70%,
     var(--felt-darkest) 100%
   );
+
   /* Rich VIP table burgundy */
   filter: saturate(1.15) brightness(1);
 }
 
 /* Noise overlay to break up banding and simulate fibers - disabled until texture is available */
+
 /*
 body::before {
   content: "";
@@ -40,6 +43,7 @@ body::before {
 */
 
 /* Respect reduced motion (some folks get motion sickness even from subtle drift) - disabled since texture is disabled */
+
 /*
 @media (prefers-reduced-motion: reduce) {
   body::before {
@@ -47,4 +51,3 @@ body::before {
   }
 }
 */
-

@@ -16,16 +16,19 @@ This document outlines the steps to set up automatic preview deployments for pul
 6. Vercel will automatically create preview deployments for each PR
 
 ### Required Secrets
+
 - No additional secrets required for basic setup
 - Vercel GitHub App integration handles authentication automatically
 
 ### Required Secrets
+
 - No additional secrets required for basic setup
 - Netlify GitHub App integration handles authentication automatically
 
 ## GitHub Actions Integration
 
 The `preview-comment.yml` workflow will automatically detect and post preview URLs from:
+
 - Vercel (via GitHub App integration)
 
 If you need to manually specify a preview URL, you can set it as an environment variable in your workflow or add it to the PR description.
@@ -43,11 +46,13 @@ The Lighthouse CI workflow will run automatically on PRs and post results as com
 ## Troubleshooting
 
 ### Preview URLs not appearing
+
 - Verify GitHub App integration is enabled for Vercel/Netlify
 - Check that preview deployments are enabled in your hosting provider settings
 - Ensure the `preview-comment.yml` workflow has permission to write comments
 
 ### Lighthouse CI not running
+
 - Check that `PREVIEW_URL` environment variable is set
 - Verify Lighthouse CI dependencies are installed (`@lhci/cli`)
 - Review workflow logs for specific error messages

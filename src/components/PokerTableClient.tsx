@@ -149,7 +149,6 @@ const getCardImagePath = (card: Card | undefined): string => {
   return `/images/playing-cards/${suitName} ${rankNumber}.png`;
 };
 
-
 const PokerTableClient = () => {
   const [gameState, setGameState] = useState<GameState>({
     players: [],
@@ -303,7 +302,7 @@ const PokerTableClient = () => {
         `New hand begins. ${dealerName} has the dealer button.`,
         `${sbName} posts small blind ($${SMALL_BLIND})`,
         `${bbName} posts big blind ($${BIG_BLIND})`,
-        "Dealer shuffles and begins dealing..."
+        "Dealer shuffles and begins dealing...",
       ],
       winnerId: null,
       dealerPosition: dealerPos,
@@ -323,11 +322,11 @@ const PokerTableClient = () => {
           players: prev.players.map((p, idx) =>
             idx === playerIndex
               ? {
-                ...p,
-                hand: [allPlayerCards[playerIndex][0]],
-                cardsDealt: 1,
-              }
-              : p
+                  ...p,
+                  hand: [allPlayerCards[playerIndex][0]],
+                  cardsDealt: 1,
+                }
+              : p,
           ),
         }));
       }, cardDelay);
@@ -343,11 +342,14 @@ const PokerTableClient = () => {
           players: prev.players.map((p, idx) =>
             idx === playerIndex
               ? {
-                ...p,
-                hand: [allPlayerCards[playerIndex][0], allPlayerCards[playerIndex][1]],
-                cardsDealt: 2,
-              }
-              : p
+                  ...p,
+                  hand: [
+                    allPlayerCards[playerIndex][0],
+                    allPlayerCards[playerIndex][1],
+                  ],
+                  cardsDealt: 2,
+                }
+              : p,
           ),
         }));
       }, cardDelay);
@@ -476,27 +478,54 @@ const PokerTableClient = () => {
           <div className="center-area">
             <div className="pot-indicator">
               <span className="pot-label">POT</span>
-              <span className="pot-amount">${gameState.pot.toLocaleString()}</span>
+              <span className="pot-amount">
+                ${gameState.pot.toLocaleString()}
+              </span>
             </div>
             <div className="community-cards">
               {Array.from({ length: 5 }).map((_, index: number) => {
                 const card = gameState.community[index];
                 const shouldReveal =
-                  (index < 3 && ["Flop", "Flop Betting", "Turn", "Turn Betting", "River", "River Betting", "Showdown"].includes(gameState.currentStage)) ||
-                  (index === 3 && ["Turn", "Turn Betting", "River", "River Betting", "Showdown"].includes(gameState.currentStage)) ||
-                  (index === 4 && ["River", "River Betting", "Showdown"].includes(gameState.currentStage));
+                  (index < 3 &&
+                    [
+                      "Flop",
+                      "Flop Betting",
+                      "Turn",
+                      "Turn Betting",
+                      "River",
+                      "River Betting",
+                      "Showdown",
+                    ].includes(gameState.currentStage)) ||
+                  (index === 3 &&
+                    [
+                      "Turn",
+                      "Turn Betting",
+                      "River",
+                      "River Betting",
+                      "Showdown",
+                    ].includes(gameState.currentStage)) ||
+                  (index === 4 &&
+                    ["River", "River Betting", "Showdown"].includes(
+                      gameState.currentStage,
+                    ));
 
                 return (
                   <div
                     className={`card ${card && shouldReveal ? "revealed" : ""}`}
                     key={`community-${index}`}
                     style={{
-                      animationDelay: card ? `${index * 0.15}s` : "0s"
+                      animationDelay: card ? `${index * 0.15}s` : "0s",
                     }}
                   >
                     <img
-                      src={getCardImagePath(card && shouldReveal ? card : undefined)}
-                      alt={card && shouldReveal ? formatCard(card) : "Face down card"}
+                      src={getCardImagePath(
+                        card && shouldReveal ? card : undefined,
+                      )}
+                      alt={
+                        card && shouldReveal
+                          ? formatCard(card)
+                          : "Face down card"
+                      }
                       className="card-image"
                     />
                   </div>
@@ -511,8 +540,10 @@ const PokerTableClient = () => {
 
             const playerIndex = index;
             const isDealer = playerIndex === gameState.dealerPosition;
-            const isSmallBlind = playerIndex === (gameState.dealerPosition + 1) % PLAYER_COUNT;
-            const isBigBlind = playerIndex === (gameState.dealerPosition + 2) % PLAYER_COUNT;
+            const isSmallBlind =
+              playerIndex === (gameState.dealerPosition + 1) % PLAYER_COUNT;
+            const isBigBlind =
+              playerIndex === (gameState.dealerPosition + 2) % PLAYER_COUNT;
 
             return (
               <div
@@ -522,83 +553,102 @@ const PokerTableClient = () => {
                 <div className="player-card">
                   {/* Position badges above player name */}
                   {(isDealer || isSmallBlind || isBigBlind) && (
-                    <div style={{
-                      display: "flex",
-                      gap: "4px",
-                      marginBottom: "4px",
-                      justifyContent: "center"
-                    }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "4px",
+                        marginBottom: "4px",
+                        justifyContent: "center",
+                      }}
+                    >
                       {isDealer && (
-                        <span style={{
-                          padding: "2px 6px",
-                          fontSize: "9px",
-                          fontWeight: "700",
-                          background: "linear-gradient(135deg, #ffd700, #ffb700)",
-                          color: "#000",
-                          borderRadius: "4px",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.5px",
-                          boxShadow: "0 2px 4px rgba(255,215,0,0.4)"
-                        }}>
+                        <span
+                          style={{
+                            padding: "2px 6px",
+                            fontSize: "9px",
+                            fontWeight: "700",
+                            background:
+                              "linear-gradient(135deg, #ffd700, #ffb700)",
+                            color: "#000",
+                            borderRadius: "4px",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                            boxShadow: "0 2px 4px rgba(255,215,0,0.4)",
+                          }}
+                        >
                           D
                         </span>
                       )}
                       {isSmallBlind && (
-                        <span style={{
-                          padding: "2px 6px",
-                          fontSize: "9px",
-                          fontWeight: "700",
-                          background: "linear-gradient(135deg, #4a90e2, #357abd)",
-                          color: "#fff",
-                          borderRadius: "4px",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.5px",
-                          boxShadow: "0 2px 4px rgba(74,144,226,0.4)"
-                        }}>
+                        <span
+                          style={{
+                            padding: "2px 6px",
+                            fontSize: "9px",
+                            fontWeight: "700",
+                            background:
+                              "linear-gradient(135deg, #4a90e2, #357abd)",
+                            color: "#fff",
+                            borderRadius: "4px",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                            boxShadow: "0 2px 4px rgba(74,144,226,0.4)",
+                          }}
+                        >
                           SB
                         </span>
                       )}
                       {isBigBlind && (
-                        <span style={{
-                          padding: "2px 6px",
-                          fontSize: "9px",
-                          fontWeight: "700",
-                          background: "linear-gradient(135deg, #e74c3c, #c0392b)",
-                          color: "#fff",
-                          borderRadius: "4px",
-                          textTransform: "uppercase",
-                          letterSpacing: "0.5px",
-                          boxShadow: "0 2px 4px rgba(231,76,60,0.4)"
-                        }}>
+                        <span
+                          style={{
+                            padding: "2px 6px",
+                            fontSize: "9px",
+                            fontWeight: "700",
+                            background:
+                              "linear-gradient(135deg, #e74c3c, #c0392b)",
+                            color: "#fff",
+                            borderRadius: "4px",
+                            textTransform: "uppercase",
+                            letterSpacing: "0.5px",
+                            boxShadow: "0 2px 4px rgba(231,76,60,0.4)",
+                          }}
+                        >
                           BB
                         </span>
                       )}
                     </div>
                   )}
-                  <div className="player-name">
-                    {label}
-                  </div>
+                  <div className="player-name">{label}</div>
                   <div className="player-cards">
                     {/* Show placeholders for 2 cards */}
                     {[0, 1].map((cardIndex) => {
                       const card = player.hand[cardIndex];
-                      const showCard = gameState.currentStage === "Showdown" || player.isWinner;
-                      const isDealing = gameState.currentStage === "Dealing" && card;
-                      const cardClass = isDealing ? "card card-dealing" : showCard && card ? "card revealed" : "card";
+                      const showCard =
+                        gameState.currentStage === "Showdown" ||
+                        player.isWinner;
+                      const isDealing =
+                        gameState.currentStage === "Dealing" && card;
+                      const cardClass = isDealing
+                        ? "card card-dealing"
+                        : showCard && card
+                          ? "card revealed"
+                          : "card";
 
                       return (
                         <div
                           key={`${player.id}-card-${cardIndex}`}
                           className={cardClass}
                           style={{
-                            animationDelay: showCard && card ? `${cardIndex * 0.1}s` : "0s",
+                            animationDelay:
+                              showCard && card ? `${cardIndex * 0.1}s` : "0s",
                             opacity: !card ? 0 : 1,
-                            transition: "opacity 0.2s ease"
+                            transition: "opacity 0.2s ease",
                           }}
                         >
                           {card && (
                             <img
-                              src={getCardImagePath(showCard ? card : undefined)}
+                              src={getCardImagePath(
+                                showCard ? card : undefined,
+                              )}
                               alt={showCard ? formatCard(card) : "Hidden card"}
                               className="card-image"
                             />
@@ -609,7 +659,10 @@ const PokerTableClient = () => {
                   </div>
                   {player.bets.length > 0 && (
                     <div className="player-bet">
-                      ${(player.bets[player.bets.length - 1]?.amount || 0).toLocaleString()}
+                      $
+                      {(
+                        player.bets[player.bets.length - 1]?.amount || 0
+                      ).toLocaleString()}
                     </div>
                   )}
                 </div>
