@@ -38,14 +38,14 @@ jobs:
         run: npm run lighthouse:ci
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
-          PREVIEW_URL: ${{ github.event.inputs.preview_url || github.event.pull_request?.head?.repo?.html_url && 'https://preview-url-needed' || 'http://localhost:4321' }}
+          PREVIEW_URL: ${{ github.event.inputs.preview_url || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.html_url && 'https://preview-url-needed') || 'http://localhost:4321' }}
         continue-on-error: true
 
       - name: Run Accessibility audit
         id: a11y
         run: npm run a11y
         env:
-          PREVIEW_URL: ${{ github.event.inputs.preview_url || github.event.pull_request?.head?.repo?.html_url && 'https://preview-url-needed' || 'http://localhost:4321' }}
+          PREVIEW_URL: ${{ github.event.inputs.preview_url || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.html_url && 'https://preview-url-needed') || 'http://localhost:4321' }}
         continue-on-error: true
 
       - name: Post Lighthouse results to PR

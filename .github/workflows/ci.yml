@@ -58,7 +58,7 @@ jobs:
         run: npm run test:e2e
         continue-on-error: false
         env:
-          BASE_URL: ${{ github.event.pull_request?.head?.repo?.clone_url && 'http://localhost:4321' || 'http://localhost:4321' }}
+          BASE_URL: ${{ (github.event_name == 'pull_request' && github.event.pull_request.head.repo.clone_url && 'http://localhost:4321') || 'http://localhost:4321' }}
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
