@@ -1,0 +1,265 @@
+/**
+ * Base Styles & Reset
+ * 
+ * Provides CSS reset, base element styles, focus management,
+ * reduced motion support, and texture application.
+ * 
+ * This file should be imported after tokens.css and theme.css.
+ */
+
+/* ==========================================================================
+   CSS RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* Smooth scrolling (respects prefers-reduced-motion) */
+  scroll-behavior: smooth;
+  
+  /* Better font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-primary, "Roboto", sans-serif);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary, #ffffff);
+  background-color: transparent; /* Felt background shows through */
+  min-height: 100vh;
+  /* Prevent layout shift from scrollbar */
+  overflow-y: scroll;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY BASE STYLES
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display, "Rowdies", sans-serif);
+  font-weight: var(--font-weight-bold, 700);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+h1 {
+  font-size: var(--font-size-4xl, 2.25rem);
+}
+
+h2 {
+  font-size: var(--font-size-3xl, 1.875rem);
+}
+
+h3 {
+  font-size: var(--font-size-2xl, 1.5rem);
+}
+
+h4 {
+  font-size: var(--font-size-xl, 1.25rem);
+}
+
+h5 {
+  font-size: var(--font-size-lg, 1.125rem);
+}
+
+h6 {
+  font-size: var(--font-size-base, 1rem);
+}
+
+p {
+  margin-bottom: var(--space-4, 1rem);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   LINK STYLES
+   ========================================================================== */
+
+a {
+  color: var(--color-primary, var(--color-gold-300));
+  text-decoration: none;
+  transition: color var(--transition-base, var(--dur-200) var(--ease-in-out));
+}
+
+a:hover {
+  color: var(--color-primary-light, var(--color-gold-200));
+  text-shadow: var(--shadow-gold-sm);
+}
+
+a:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Link hover policy: Only show hover effects on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  a:hover {
+    color: var(--color-primary-light);
+    text-shadow: var(--shadow-gold-sm);
+  }
+}
+
+/* ==========================================================================
+   FOCUS MANAGEMENT
+   ========================================================================== */
+
+/* Hide default focus outline for mouse users, but keep for keyboard */
+:focus {
+  outline: none;
+}
+
+/* Visible focus ring for keyboard navigation */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* Enhanced focus for interactive elements */
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--shadow-gold-sm);
+}
+
+/* ==========================================================================
+   REDUCED MOTION SUPPORT
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==========================================================================
+   TEXTURE APPLICATION
+   ========================================================================== */
+
+/**
+ * Felt texture overlay
+ * Applies a subtle texture to simulate felt material.
+ * The texture should be a small, repeating image (<100KB).
+ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--texture-felt-opacity, 0.15);
+  background-image: var(--texture-felt-url, url("/textures/felt-texture.svg"));
+  background-size: var(--texture-felt-size, 256px) var(--texture-felt-size, 256px);
+  background-repeat: repeat;
+  mix-blend-mode: var(--texture-felt-blend, multiply);
+  image-rendering: pixelated;
+  z-index: var(--z-index-base);
+  
+  /* Respect reduced motion */
+  animation: none;
+}
+
+/* Disable texture if file is not available or for performance */
+body[data-texture="disabled"]::before {
+  display: none;
+}
+
+/* ==========================================================================
+   UTILITY CLASSES
+   ========================================================================== */
+
+/* Text utilities */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Spacing utilities */
+.mb-1 { margin-bottom: var(--space-4); }
+.mb-2 { margin-bottom: var(--space-6); }
+.mb-3 { margin-bottom: var(--space-8); }
+.mt-1 { margin-top: var(--space-4); }
+.mt-2 { margin-top: var(--space-6); }
+.mt-3 { margin-top: var(--space-8); }
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-charcoal-900);
+  color: var(--color-text-primary);
+  padding: var(--space-4);
+  text-decoration: none;
+  z-index: var(--z-index-tooltip);
+  border: 2px solid var(--color-primary);
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ==========================================================================
+   SELECTION STYLES
+   ========================================================================== */
+
+::selection {
+  background-color: var(--color-gold-300);
+  color: var(--color-text-on-gold);
+}
+
+::-moz-selection {
+  background-color: var(--color-gold-300);
+  color: var(--color-text-on-gold);
+}

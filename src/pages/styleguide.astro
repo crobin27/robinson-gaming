@@ -1,0 +1,506 @@
+---
+/**
+ * Design System Styleguide
+ * 
+ * Showcases all design tokens and UI components.
+ */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/ui/Button.astro";
+import Card from "../components/ui/Card.astro";
+import Badge from "../components/ui/Badge.astro";
+import Icon from "../components/ui/Icon.astro";
+import Callout from "../components/ui/Callout.astro";
+import Chip from "../components/ui/Chip.astro";
+import Modal from "../components/ui/Modal.astro";
+import PlayingCard from "../components/ui/PlayingCard.astro";
+import DealerButton from "../components/ui/DealerButton.astro";
+
+// Import design system styles
+import "../styles/tokens.css";
+import "../styles/theme.css";
+import "../styles/base.css";
+---
+
+<BaseLayout title="Design System Styleguide" description="Casino theme design system showcase">
+  <div class="styleguide">
+    <header class="styleguide__header">
+      <h1>Casino Theme Design System</h1>
+      <p class="styleguide__subtitle">A comprehensive design system for the casino/poker-themed portfolio</p>
+    </header>
+
+    <nav class="styleguide__nav">
+      <a href="#colors">Colors</a>
+      <a href="#typography">Typography</a>
+      <a href="#spacing">Spacing</a>
+      <a href="#shadows">Shadows</a>
+      <a href="#components">Components</a>
+    </nav>
+
+    <main class="styleguide__content">
+      <!-- Colors Section -->
+      <section id="colors" class="styleguide__section">
+        <h2>Color Palette</h2>
+        
+        <div class="styleguide__subsection">
+          <h3>Gold Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch" style="background: var(--color-gold-50); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 50</span>
+              <span class="color-swatch__value">--color-gold-50</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-100); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 100</span>
+              <span class="color-swatch__value">--color-gold-100</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-200); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 200</span>
+              <span class="color-swatch__value">--color-gold-200</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-300); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 300 (Primary)</span>
+              <span class="color-swatch__value">--color-gold-300</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-400); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 400</span>
+              <span class="color-swatch__value">--color-gold-400</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-500); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 500</span>
+              <span class="color-swatch__value">--color-gold-500</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-600); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 600</span>
+              <span class="color-swatch__value">--color-gold-600</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-gold-700); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Gold 700</span>
+              <span class="color-swatch__value">--color-gold-700</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Semantic Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch" style="background: var(--color-success);">
+              <span class="color-swatch__label">Success</span>
+              <span class="color-swatch__value">--color-success</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-warning); color: var(--color-text-on-gold);">
+              <span class="color-swatch__label">Warning</span>
+              <span class="color-swatch__value">--color-warning</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-error);">
+              <span class="color-swatch__label">Error</span>
+              <span class="color-swatch__value">--color-error</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-info);">
+              <span class="color-swatch__label">Info</span>
+              <span class="color-swatch__value">--color-info</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Neutral Colors</h3>
+          <div class="color-grid">
+            <div class="color-swatch" style="background: var(--color-charcoal-900);">
+              <span class="color-swatch__label">Charcoal 900</span>
+              <span class="color-swatch__value">--color-charcoal-900</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-charcoal-800);">
+              <span class="color-swatch__label">Charcoal 800</span>
+              <span class="color-swatch__value">--color-charcoal-800</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-charcoal-700);">
+              <span class="color-swatch__label">Charcoal 700</span>
+              <span class="color-swatch__value">--color-charcoal-700</span>
+            </div>
+            <div class="color-swatch" style="background: var(--color-charcoal-600);">
+              <span class="color-swatch__label">Charcoal 600</span>
+              <span class="color-swatch__value">--color-charcoal-600</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typography Section -->
+      <section id="typography" class="styleguide__section">
+        <h2>Typography</h2>
+        
+        <div class="styleguide__subsection">
+          <h3>Headings</h3>
+          <h1>Heading 1</h1>
+          <h2>Heading 2</h2>
+          <h3>Heading 3</h3>
+          <h4>Heading 4</h4>
+          <h5>Heading 5</h5>
+          <h6>Heading 6</h6>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Body Text</h3>
+          <p>This is body text using the primary font family (Roboto). It provides excellent readability for content.</p>
+          <p class="text-sm">Small text: --font-size-sm (0.875rem)</p>
+          <p class="text-base">Base text: --font-size-base (1rem)</p>
+          <p class="text-lg">Large text: --font-size-lg (1.125rem)</p>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Font Weights</h3>
+          <p style="font-weight: var(--font-weight-light);">Light (300)</p>
+          <p style="font-weight: var(--font-weight-normal);">Normal (400)</p>
+          <p style="font-weight: var(--font-weight-medium);">Medium (500)</p>
+          <p style="font-weight: var(--font-weight-semibold);">Semibold (600)</p>
+          <p style="font-weight: var(--font-weight-bold);">Bold (700)</p>
+        </div>
+      </section>
+
+      <!-- Spacing Section -->
+      <section id="spacing" class="styleguide__section">
+        <h2>Spacing Scale</h2>
+        <div class="spacing-demo">
+          <div class="spacing-item" style="width: var(--space-1);">1 (4px)</div>
+          <div class="spacing-item" style="width: var(--space-2);">2 (8px)</div>
+          <div class="spacing-item" style="width: var(--space-4);">4 (16px)</div>
+          <div class="spacing-item" style="width: var(--space-6);">6 (24px)</div>
+          <div class="spacing-item" style="width: var(--space-8);">8 (32px)</div>
+          <div class="spacing-item" style="width: var(--space-12);">12 (48px)</div>
+        </div>
+      </section>
+
+      <!-- Shadows Section -->
+      <section id="shadows" class="styleguide__section">
+        <h2>Shadows</h2>
+        <div class="shadow-grid">
+          <div class="shadow-demo" style="box-shadow: var(--shadow-sm);">Small</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-base);">Base</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-md);">Medium</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-lg);">Large</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-xl);">Extra Large</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-chip);">Chip</div>
+          <div class="shadow-demo" style="box-shadow: var(--shadow-gold-md);">Gold Glow</div>
+        </div>
+      </section>
+
+      <!-- Components Section -->
+      <section id="components" class="styleguide__section">
+        <h2>UI Components</h2>
+
+        <div class="styleguide__subsection">
+          <h3>Button</h3>
+          <div class="component-demo">
+            <Button variant="primary">Primary</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="primary" size="sm">Small</Button>
+            <Button variant="primary" size="md">Medium</Button>
+            <Button variant="primary" size="lg">Large</Button>
+            <Button variant="primary" disabled>Disabled</Button>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Card</h3>
+          <div class="component-demo">
+            <Card variant="default" padding="md">
+              <h4>Default Card</h4>
+              <p>This is a default card with medium padding.</p>
+            </Card>
+            <Card variant="elevated" padding="lg">
+              <h4>Elevated Card</h4>
+              <p>This card has more shadow and larger padding.</p>
+            </Card>
+            <Card variant="outline" padding="sm">
+              <h4>Outline Card</h4>
+              <p>This card has a gold outline border.</p>
+            </Card>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Badge</h3>
+          <div class="component-demo">
+            <Badge>Default</Badge>
+            <Badge variant="gold">Gold</Badge>
+            <Badge variant="success">Success</Badge>
+            <Badge variant="warning">Warning</Badge>
+            <Badge variant="error">Error</Badge>
+            <Badge variant="info">Info</Badge>
+            <Badge size="sm">Small</Badge>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Callout</h3>
+          <div class="component-demo">
+            <Callout variant="info" title="Information">
+              This is an informational callout with a title.
+            </Callout>
+            <Callout variant="success" title="Success">
+              Operation completed successfully!
+            </Callout>
+            <Callout variant="warning" title="Warning">
+              Please be careful with this action.
+            </Callout>
+            <Callout variant="error" title="Error">
+              Something went wrong. Please try again.
+            </Callout>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Chip</h3>
+          <div class="component-demo">
+            <Chip value="$100" color="gold" size="lg" />
+            <Chip value="25" color="red" size="md" />
+            <Chip value="10" color="blue" size="md" />
+            <Chip value="5" color="green" size="sm" />
+            <Chip color="black" size="md">50</Chip>
+            <Chip color="white" size="md">1</Chip>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Playing Card</h3>
+          <div class="component-demo">
+            <PlayingCard suit="hearts" rank="A" size="lg" />
+            <PlayingCard suit="diamonds" rank="K" size="lg" />
+            <PlayingCard suit="clubs" rank="Q" size="lg" />
+            <PlayingCard suit="spades" rank="J" size="lg" />
+            <PlayingCard face="back" backDesign="blue" size="lg" />
+            <PlayingCard face="back" backDesign="red" size="lg" />
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Dealer Button</h3>
+          <div class="component-demo">
+            <DealerButton size="sm" />
+            <DealerButton size="md" />
+            <DealerButton size="lg" animated />
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Modal</h3>
+          <div class="component-demo">
+            <Button
+              variant="primary"
+              id="open-modal-btn"
+            >
+              Open Modal
+            </Button>
+            <Modal id="example" title="Example Modal">
+              <p>This is a modal dialog with casino styling.</p>
+              <p>Press ESC or click outside to close.</p>
+              <div style="margin-top: var(--space-4);">
+                <Button variant="primary">Action Button</Button>
+              </div>
+            </Modal>
+          </div>
+        </div>
+
+        <div class="styleguide__subsection">
+          <h3>Icon</h3>
+          <div class="component-demo">
+            <Icon size="xs" ariaLabel="Small icon">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </Icon>
+            <Icon size="sm" ariaLabel="Small icon">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </Icon>
+            <Icon size="md" ariaLabel="Medium icon">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </Icon>
+            <Icon size="lg" color="primary" ariaLabel="Large icon">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </Icon>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  @import "../styles/tokens.css";
+  @import "../styles/theme.css";
+
+  .styleguide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .styleguide__header {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  .styleguide__header h1 {
+    font-size: var(--font-size-5xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .styleguide__subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .styleguide__nav {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+    padding: var(--space-4);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-default);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .styleguide__nav a {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-base);
+    transition: background var(--transition-base);
+  }
+
+  .styleguide__nav a:hover {
+    background: rgba(255, 215, 0, 0.1);
+  }
+
+  .styleguide__section {
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .styleguide__section:last-child {
+    border-bottom: none;
+  }
+
+  .styleguide__section h2 {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-4);
+    border-bottom: 2px solid var(--color-gold-300);
+  }
+
+  .styleguide__subsection {
+    margin-bottom: var(--space-8);
+  }
+
+  .styleguide__subsection h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Color Grid */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .color-swatch {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-default);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-height: 100px;
+    justify-content: flex-end;
+  }
+
+  .color-swatch__label {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .color-swatch__value {
+    font-size: var(--font-size-xs);
+    font-family: monospace;
+    opacity: 0.8;
+  }
+
+  /* Spacing Demo */
+  .spacing-demo {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .spacing-item {
+    background: var(--color-gold-300);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-on-gold);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-base);
+  }
+
+  /* Shadow Demo */
+  .shadow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .shadow-demo {
+    padding: var(--space-6);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    font-weight: var(--font-weight-semibold);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Component Demo */
+  .component-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-6);
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border-default);
+  }
+
+  .text-sm {
+    font-size: var(--font-size-sm);
+  }
+
+  .text-base {
+    font-size: var(--font-size-base);
+  }
+
+  .text-lg {
+    font-size: var(--font-size-lg);
+  }
+</style>
+
+<script>
+  // Modal opener for styleguide
+  document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.getElementById('open-modal-btn');
+    if (openBtn) {
+      openBtn.addEventListener('click', () => {
+        const openFunc = (window as any).openModal_modal-example;
+        if (openFunc) {
+          openFunc();
+        }
+      });
+    }
+  });
+</script>

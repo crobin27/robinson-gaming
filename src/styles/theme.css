@@ -1,0 +1,111 @@
+/**
+ * Theme Configuration
+ * 
+ * Applies design tokens to :root and supports dark theme via data-theme="dark"
+ * All tokens from tokens.css are mapped to semantic variable names here.
+ */
+
+:root {
+  /* Import all tokens */
+  /* Note: In practice, tokens.css should be imported before this file */
+  
+  /* ==========================================================================
+     COLOR MAPPINGS
+     ========================================================================== */
+  
+  /* Primary Colors */
+  --color-primary: var(--color-gold-300);
+  --color-primary-dark: var(--color-gold-600);
+  --color-primary-light: var(--color-gold-200);
+  
+  /* Background Colors */
+  --color-bg-base: var(--color-felt-green-light);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-surface-hover: var(--color-bg-surface-elevated);
+  
+  /* Text Colors */
+  --color-text: var(--color-text-primary);
+  --color-text-muted: var(--color-text-secondary);
+  --color-text-subtle: var(--color-text-tertiary);
+  
+  /* Border Colors */
+  --color-border: var(--color-border-default);
+  --color-border-focus: var(--color-border-focus);
+  
+  /* Accent Colors */
+  --color-accent: var(--color-gold-300);
+  --color-accent-dark: var(--color-gold-600);
+  
+  /* ==========================================================================
+     SPACING (using tokens)
+     ========================================================================== */
+  
+  --spacing-xs: var(--space-2);
+  --spacing-sm: var(--space-4);
+  --spacing-md: var(--space-6);
+  --spacing-lg: var(--space-8);
+  --spacing-xl: var(--space-12);
+  
+  /* ==========================================================================
+     TYPOGRAPHY (using tokens)
+     ========================================================================== */
+  
+  --font-body: var(--font-primary);
+  --font-heading: var(--font-display);
+  
+  --text-xs: var(--font-size-xs);
+  --text-sm: var(--font-size-sm);
+  --text-base: var(--font-size-base);
+  --text-lg: var(--font-size-lg);
+  --text-xl: var(--font-size-xl);
+  --text-2xl: var(--font-size-2xl);
+  --text-3xl: var(--font-size-3xl);
+  
+  /* ==========================================================================
+     OTHER TOKENS
+     ========================================================================== */
+  
+  --radius-default: var(--radius-lg);
+  --radius-button: var(--radius-full);
+  --radius-card: var(--radius-xl);
+  
+  --shadow-default: var(--shadow-md);
+  --shadow-elevated: var(--shadow-lg);
+  
+  --transition-default: var(--transition-base);
+}
+
+/**
+ * Dark Theme Override
+ * 
+ * When data-theme="dark" is set on html/body, these values take precedence.
+ * Currently, the base theme is already dark-friendly, but this provides
+ * additional customization options.
+ */
+[data-theme="dark"] {
+  /* Dark theme can override specific tokens if needed */
+  --color-bg-surface: rgba(20, 20, 20, 0.95);
+  --color-bg-surface-elevated: rgba(30, 30, 30, 0.98);
+  
+  /* Enhanced contrast in dark mode */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #f5f5f5;
+}
+
+/**
+ * High Contrast Mode Support
+ * 
+ * Meets WCAG AA standards and provides enhanced contrast for accessibility.
+ */
+@media (prefers-contrast: high) {
+  :root {
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-border-default: rgba(255, 215, 0, 0.6);
+    --focus-ring-width: 4px;
+    --shadow-chip: 
+      0 4px 8px rgba(0, 0, 0, 0.6),
+      0 0 24px rgba(255, 215, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+}

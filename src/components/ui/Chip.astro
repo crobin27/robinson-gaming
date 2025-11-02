@@ -1,0 +1,172 @@
+---
+/**
+ * Chip Component
+ * 
+ * Poker chip-style component with casino aesthetics.
+ * Perfect for values, bets, or decorative elements.
+ */
+
+interface Props {
+  value?: string | number;
+  color?: "red" | "blue" | "green" | "black" | "gold" | "white";
+  size?: "sm" | "md" | "lg";
+  class?: string;
+}
+
+const {
+  value,
+  color = "gold",
+  size = "md",
+  class: className = "",
+} = Astro.props;
+
+const colors = {
+  red: "chip--red",
+  blue: "chip--blue",
+  green: "chip--green",
+  black: "chip--black",
+  gold: "chip--gold",
+  white: "chip--white",
+};
+
+const sizes = {
+  sm: "chip--sm",
+  md: "chip--md",
+  lg: "chip--lg",
+};
+
+const chipClasses = [
+  "chip",
+  colors[color],
+  sizes[size],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={chipClasses} role="img" aria-label={value ? `Chip value: ${value}` : "Poker chip"}>
+  <div class="chip__inner">
+    {value && <span class="chip__value">{value}</span>}
+    <slot />
+  </div>
+</div>
+
+<style>
+  @import "../../styles/tokens.css";
+
+  .chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    box-shadow: var(--shadow-chip);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .chip__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .chip__value {
+    font-weight: var(--font-weight-bold);
+    font-size: 0.75em;
+    line-height: 1;
+    color: var(--color-text-on-gold);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Sizes */
+  .chip--sm {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: var(--font-size-xs);
+  }
+
+  .chip--md {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: var(--font-size-sm);
+  }
+
+  .chip--lg {
+    width: 5rem;
+    height: 5rem;
+    font-size: var(--font-size-base);
+  }
+
+  /* Colors */
+  .chip--red {
+    background: radial-gradient(circle at 30% 30%, #ff4444, #cc0000);
+    border: 3px solid #ff6666;
+  }
+
+  .chip--blue {
+    background: radial-gradient(circle at 30% 30%, #4444ff, #0000cc);
+    border: 3px solid #6666ff;
+  }
+
+  .chip--green {
+    background: radial-gradient(circle at 30% 30%, #44ff44, #00cc00);
+    border: 3px solid #66ff66;
+  }
+
+  .chip--black {
+    background: radial-gradient(circle at 30% 30%, #666666, #000000);
+    border: 3px solid #888888;
+  }
+
+  .chip--gold {
+    background: radial-gradient(circle at 30% 30%, var(--color-gold-300), var(--color-gold-600));
+    border: 3px solid var(--color-gold-400);
+    box-shadow: var(--shadow-chip), var(--shadow-gold-sm);
+  }
+
+  .chip--white {
+    background: radial-gradient(circle at 30% 30%, #ffffff, #cccccc);
+    border: 3px solid #eeeeee;
+  }
+
+  /* Chip edge decoration */
+  .chip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+      from 0deg,
+      transparent 0deg 10deg,
+      rgba(255, 255, 255, 0.1) 10deg 20deg
+    );
+    opacity: 0.3;
+  }
+
+  /* Hover effect */
+  @media (hover: hover) and (pointer: fine) {
+    .chip:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: var(--shadow-chip-hover);
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .chip {
+      transition: none;
+    }
+
+    .chip:hover {
+      transform: none;
+    }
+  }
+</style>

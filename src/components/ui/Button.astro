@@ -1,0 +1,183 @@
+---
+/**
+ * Button Component
+ * 
+ * A casino-themed button with poker chip aesthetic.
+ * Supports multiple variants, sizes, and full keyboard/ARIA support.
+ */
+
+interface Props {
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  variant = "primary",
+  size = "md",
+  disabled = false,
+  type = "button",
+  ariaLabel,
+  class: className = "",
+} = Astro.props;
+
+const variants = {
+  primary: "button--primary",
+  secondary: "button--secondary",
+  outline: "button--outline",
+  ghost: "button--ghost",
+};
+
+const sizes = {
+  sm: "button--sm",
+  md: "button--md",
+  lg: "button--lg",
+};
+
+const buttonClasses = [
+  "button",
+  variants[variant],
+  sizes[size],
+  disabled && "button--disabled",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<button
+  type={type}
+  class={buttonClasses}
+  disabled={disabled}
+  aria-label={ariaLabel}
+  aria-disabled={disabled}
+>
+  <slot />
+</button>
+
+<style>
+  @import "../../styles/tokens.css";
+
+  .button {
+    /* Reset */
+    appearance: none;
+    border: none;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+    
+    /* Base styles */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    border-radius: var(--radius-full);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    transition: all var(--transition-base);
+    
+    /* Focus styles */
+    position: relative;
+  }
+
+  /* Variants */
+  .button--primary {
+    background: var(--color-bg-chip);
+    border: 3px solid var(--color-gold-300);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-chip);
+  }
+
+  .button--primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-chip-hover);
+    border-color: var(--color-gold-400);
+  }
+
+  .button--primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--shadow-chip);
+  }
+
+  .button--secondary {
+    background: var(--color-gold-300);
+    border: 3px solid var(--color-gold-300);
+    color: var(--color-text-on-gold);
+    box-shadow: var(--shadow-gold-md);
+  }
+
+  .button--secondary:hover:not(:disabled) {
+    background: var(--color-gold-400);
+    border-color: var(--color-gold-400);
+    box-shadow: var(--shadow-gold-lg);
+  }
+
+  .button--outline {
+    background: transparent;
+    border: 3px solid var(--color-gold-300);
+    color: var(--color-text-primary);
+  }
+
+  .button--outline:hover:not(:disabled) {
+    background: rgba(255, 215, 0, 0.1);
+    box-shadow: var(--shadow-gold-sm);
+  }
+
+  .button--ghost {
+    background: transparent;
+    border: 3px solid transparent;
+    color: var(--color-text-primary);
+  }
+
+  .button--ghost:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-gold-300);
+  }
+
+  /* Sizes */
+  .button--sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .button--md {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-base);
+  }
+
+  .button--lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-size-lg);
+  }
+
+  /* Disabled state */
+  .button--disabled,
+  .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Focus visible */
+  .button:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+    box-shadow: var(--shadow-gold-md);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .button {
+      transition: none;
+    }
+    
+    .button:hover:not(:disabled) {
+      transform: none;
+    }
+  }
+</style>

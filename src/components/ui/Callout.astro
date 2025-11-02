@@ -1,0 +1,96 @@
+---
+/**
+ * Callout Component
+ * 
+ * Attention-grabbing callout box for important information.
+ */
+
+interface Props {
+  variant?: "info" | "success" | "warning" | "error";
+  title?: string;
+  class?: string;
+}
+
+const {
+  variant = "info",
+  title,
+  class: className = "",
+} = Astro.props;
+
+const variants = {
+  info: "callout--info",
+  success: "callout--success",
+  warning: "callout--warning",
+  error: "callout--error",
+};
+
+const calloutClasses = [
+  "callout",
+  variants[variant],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={calloutClasses} role="region" aria-labelledby={title ? `callout-title-${variant}` : undefined}>
+  {title && (
+    <h3 class="callout__title" id={`callout-title-${variant}`}>
+      {title}
+    </h3>
+  )}
+  <div class="callout__content">
+    <slot />
+  </div>
+</div>
+
+<style>
+  @import "../../styles/tokens.css";
+
+  .callout {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid;
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .callout--info {
+    border-left-color: var(--color-info);
+    background: rgba(33, 150, 243, 0.1);
+  }
+
+  .callout--success {
+    border-left-color: var(--color-success);
+    background: rgba(76, 175, 80, 0.1);
+  }
+
+  .callout--warning {
+    border-left-color: var(--color-warning);
+    background: rgba(255, 152, 0, 0.1);
+  }
+
+  .callout--error {
+    border-left-color: var(--color-error);
+    background: rgba(220, 38, 38, 0.1);
+  }
+
+  .callout__title {
+    margin: 0 0 var(--space-2) 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+  }
+
+  .callout__content {
+    color: var(--color-text-primary);
+  }
+
+  .callout__content :global(p) {
+    margin: 0;
+  }
+
+  .callout__content :global(p + p) {
+    margin-top: var(--space-2);
+  }
+</style>

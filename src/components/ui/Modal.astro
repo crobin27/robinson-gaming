@@ -1,0 +1,253 @@
+---
+/**
+ * Modal Component
+ * 
+ * Accessible modal dialog with casino styling.
+ * Requires a client-side script to handle open/close behavior.
+ */
+
+interface Props {
+  id: string;
+  title: string;
+  closeLabel?: string;
+  class?: string;
+}
+
+const {
+  id,
+  title,
+  closeLabel = "Close modal",
+  class: className = "",
+} = Astro.props;
+
+const modalId = `modal-${id}`;
+const titleId = `modal-title-${id}`;
+---
+
+<div
+  class={`modal ${className}`}
+  id={modalId}
+  data-modal-id={modalId}
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={titleId}
+  aria-hidden="true"
+>
+  <div class="modal__backdrop" data-modal-close={modalId} aria-label="Close modal"></div>
+  <div class="modal__container">
+    <div class="modal__content">
+      <header class="modal__header">
+        <h2 class="modal__title" id={titleId}>
+          {title}
+        </h2>
+        <button
+          class="modal__close"
+          type="button"
+          aria-label={closeLabel}
+          data-modal-close={modalId}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+      <div class="modal__body">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  /**
+   * Modal behavior script
+   * Handles opening, closing, focus trapping, and ESC key
+   */
+  function initModal(modalId: string) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const closeButtons = modal.querySelectorAll('[data-modal-close]');
+    const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])') as HTMLElement;
+    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    function openModal() {
+      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add('modal--open');
+      document.body.style.overflow = 'hidden';
+      
+      // Focus first focusable element
+      setTimeout(() => {
+        firstFocusable?.focus();
+      }, 100);
+    }
+
+    function closeModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove('modal--open');
+      document.body.style.overflow = '';
+    }
+
+    // Close handlers
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', closeModal);
+    });
+
+    // ESC key
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+      
+      // Trap focus
+      if (e.key === 'Tab') {
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable?.focus();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable?.focus();
+          }
+        }
+      }
+    });
+
+    // Expose open function globally (can be improved with a modal manager)
+    (window as any)[`openModal_${modalId}`] = openModal;
+  }
+
+  // Initialize on load - modalId will be set via data attribute
+  document.addEventListener('DOMContentLoaded', () => {
+    const modals = document.querySelectorAll('[data-modal-id]');
+    modals.forEach((modal) => {
+      const id = (modal as HTMLElement).dataset.modalId;
+      if (id) initModal(id);
+    });
+  });
+</script>
+
+<style>
+  @import "../../styles/tokens.css";
+
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-index-modal-backdrop);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base), visibility var(--transition-base);
+  }
+
+  .modal--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+
+  .modal__container {
+    position: relative;
+    z-index: var(--z-index-modal);
+    width: 100%;
+    max-width: 32rem;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+
+  .modal__content {
+    background: var(--color-bg-surface-elevated);
+    border-radius: var(--radius-xl);
+    border: 2px solid var(--color-gold-300);
+    box-shadow: var(--shadow-xl), var(--shadow-gold-lg);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform var(--transition-base);
+  }
+
+  .modal--open .modal__content {
+    transform: scale(1);
+  }
+
+  .modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-6);
+    border-bottom: 1px solid var(--color-border-default);
+  }
+
+  .modal__title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--color-text-primary);
+  }
+
+  .modal__close {
+    background: transparent;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: var(--space-2);
+    border-radius: var(--radius-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-base);
+    line-height: 0;
+  }
+
+  .modal__close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .modal__close:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color);
+    outline-offset: var(--focus-ring-offset);
+  }
+
+  .modal__body {
+    padding: var(--space-6);
+    overflow-y: auto;
+    color: var(--color-text-primary);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .modal,
+    .modal__content {
+      transition: none;
+    }
+
+    .modal--open .modal__content {
+      transform: none;
+    }
+  }
+</style>

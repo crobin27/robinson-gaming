@@ -1,0 +1,243 @@
+/**
+ * Design Tokens - Casino/Poker Theme
+ * 
+ * This file contains all design tokens for the casino-themed design system.
+ * Tokens are organized by category: colors, spacing, typography, shadows, etc.
+ * 
+ * WCAG AA Compliance: All color combinations meet minimum contrast requirements.
+ */
+
+:root {
+/* ==========================================================================
+   COLOR PALETTE - Casino/Poker Table Theme
+   ========================================================================== */
+
+/* Felt Colors */
+--color-felt-green-light: #2d8659;
+--color-felt-green-mid: #237a4d;
+--color-felt-green-dark: #1a5f3f;
+--color-felt-green-darkest: #115033;
+
+--color-felt-burgundy-light: #8b4059;
+--color-felt-burgundy-mid: #7a3349;
+--color-felt-burgundy-dark: #5f2639;
+--color-felt-burgundy-darkest: #3d1825;
+
+/* Primary Brand Colors */
+--color-gold-50: #fffef7;
+--color-gold-100: #fff9e6;
+--color-gold-200: #ffecb3;
+--color-gold-300: #ffd700; /* Primary gold */
+--color-gold-400: #fdb931;
+--color-gold-500: #d4af37;
+--color-gold-600: #b8941f;
+--color-gold-700: #9a7715;
+
+/* Neutrals */
+--color-charcoal-50: #f5f5f5;
+--color-charcoal-100: #e0e0e0;
+--color-charcoal-200: #bdbdbd;
+--color-charcoal-300: #9e9e9e;
+--color-charcoal-400: #757575;
+--color-charcoal-500: #616161;
+--color-charcoal-600: #424242;
+--color-charcoal-700: #303030;
+--color-charcoal-800: #212121;
+--color-charcoal-900: #1a1a1a; /* Deep charcoal */
+
+/* Semantic Colors */
+--color-success: #4caf50;
+--color-success-dark: #388e3c;
+--color-warning: #ff9800;
+--color-warning-dark: #f57c00;
+--color-error: #dc2626;
+--color-error-dark: #b91c1c;
+--color-info: #2196f3;
+--color-info-dark: #1976d2;
+
+/* Text Colors */
+--color-text-primary: #ffffff;
+--color-text-secondary: #d4af37;
+--color-text-tertiary: #9e9e9e;
+--color-text-inverse: #1a1a1a;
+--color-text-on-gold: #1a1a1a;
+
+/* Border Colors */
+--color-border-default: rgba(255, 215, 0, 0.3);
+--color-border-focus: #ffd700;
+--color-border-error: #dc2626;
+
+/* Background Colors */
+--color-bg-overlay: rgba(26, 26, 26, 0.85);
+--color-bg-surface: rgba(33, 33, 33, 0.9);
+--color-bg-surface-elevated: rgba(48, 48, 48, 0.95);
+--color-bg-chip: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+
+/* ==========================================================================
+   SPACING SCALE
+   ========================================================================== */
+
+--space-0: 0;
+--space-1: 0.25rem;  /* 4px */
+--space-2: 0.5rem;   /* 8px */
+--space-3: 0.75rem;  /* 12px */
+--space-4: 1rem;     /* 16px */
+--space-5: 1.25rem;  /* 20px */
+--space-6: 1.5rem;   /* 24px */
+--space-8: 2rem;     /* 32px */
+--space-10: 2.5rem;  /* 40px */
+--space-12: 3rem;    /* 48px */
+--space-16: 4rem;    /* 64px */
+--space-20: 5rem;    /* 80px */
+--space-24: 6rem;    /* 96px */
+--space-32: 8rem;    /* 128px */
+
+/* ==========================================================================
+   TYPOGRAPHY SCALE
+   ========================================================================== */
+
+/* Font Families */
+--font-primary: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--font-display: "Rowdies", "Roboto", sans-serif;
+
+/* Font Sizes */
+--font-size-xs: 0.75rem;    /* 12px */
+--font-size-sm: 0.875rem;   /* 14px */
+--font-size-base: 1rem;     /* 16px */
+--font-size-lg: 1.125rem;   /* 18px */
+--font-size-xl: 1.25rem;   /* 20px */
+--font-size-2xl: 1.5rem;   /* 24px */
+--font-size-3xl: 1.875rem; /* 30px */
+--font-size-4xl: 2.25rem;  /* 36px */
+--font-size-5xl: 3rem;     /* 48px */
+--font-size-6xl: 3.75rem;  /* 60px */
+
+/* Font Weights */
+--font-weight-light: 300;
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--font-weight-semibold: 600;
+--font-weight-bold: 700;
+--font-weight-black: 900;
+
+/* Line Heights */
+--line-height-tight: 1.1;
+--line-height-snug: 1.25;
+--line-height-normal: 1.5;
+--line-height-relaxed: 1.75;
+--line-height-loose: 2;
+
+/* Letter Spacing */
+--letter-spacing-tighter: -0.05em;
+--letter-spacing-tight: -0.025em;
+--letter-spacing-normal: 0;
+--letter-spacing-wide: 0.025em;
+--letter-spacing-wider: 0.05em;
+--letter-spacing-widest: 0.1em;
+
+/* ==========================================================================
+   BORDER RADIUS
+   ========================================================================== */
+
+--radius-none: 0;
+--radius-sm: 0.125rem;  /* 2px */
+--radius-base: 0.25rem; /* 4px */
+--radius-md: 0.375rem;  /* 6px */
+--radius-lg: 0.5rem;    /* 8px */
+--radius-xl: 0.75rem;   /* 12px */
+--radius-2xl: 1rem;     /* 16px */
+--radius-full: 9999px;   /* Fully rounded */
+
+/* ==========================================================================
+   SHADOWS
+   ========================================================================== */
+
+--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+--shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6);
+
+/* Gold Glow Effects */
+--shadow-gold-sm: 0 0 8px rgba(255, 215, 0, 0.3);
+--shadow-gold-md: 0 0 20px rgba(255, 215, 0, 0.4);
+--shadow-gold-lg: 0 0 30px rgba(255, 215, 0, 0.5);
+--shadow-gold-xl: 0 0 40px rgba(255, 215, 0, 0.6);
+
+/* Combined Shadows (for chips, buttons) */
+--shadow-chip: 
+  0 4px 6px rgba(0, 0, 0, 0.4),
+  0 0 20px rgba(255, 215, 0, 0.4),
+  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+--shadow-chip-hover:
+  0 6px 12px rgba(0, 0, 0, 0.5),
+  0 0 30px rgba(255, 215, 0, 0.5),
+  inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+--shadow-card: 
+  0 2px 4px rgba(0, 0, 0, 0.3),
+  0 0 12px rgba(0, 0, 0, 0.2);
+
+/* ==========================================================================
+   Z-INDEX SCALE
+   ========================================================================== */
+
+--z-index-base: 0;
+--z-index-dropdown: 1000;
+--z-index-sticky: 1020;
+--z-index-fixed: 1030;
+--z-index-modal-backdrop: 1040;
+--z-index-modal: 1050;
+--z-index-popover: 1060;
+--z-index-tooltip: 1070;
+
+/* ==========================================================================
+   TIMING & EASING
+   ========================================================================== */
+
+/* Durations */
+--dur-50: 50ms;
+--dur-100: 100ms;
+--dur-150: 150ms;
+--dur-200: 200ms;
+--dur-300: 300ms;
+--dur-400: 400ms;
+--dur-500: 500ms;
+--dur-700: 700ms;
+--dur-1000: 1000ms;
+
+/* Easing Functions */
+--ease-linear: linear;
+--ease-in: cubic-bezier(0.4, 0, 1, 1);
+--ease-out: cubic-bezier(0, 0, 0.2, 1);
+--ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+--ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+/* ==========================================================================
+   TEXTURE VARIABLES
+   ========================================================================== */
+
+--texture-felt-opacity: 0.15;
+--texture-felt-size: 256px;
+--texture-felt-blend: multiply;
+
+/* ==========================================================================
+   FOCUS RING
+   ========================================================================== */
+
+--focus-ring-width: 3px;
+--focus-ring-offset: 2px;
+--focus-ring-color: var(--color-gold-300);
+--focus-ring: 
+  var(--focus-ring-width) var(--focus-ring-offset) 0 var(--focus-ring-color),
+  0 0 0 calc(var(--focus-ring-width) + var(--focus-ring-offset)) var(--focus-ring-color);
+
+/* ==========================================================================
+   TRANSITION PRESETS
+   ========================================================================== */
+
+--transition-base: var(--dur-200) var(--ease-in-out);
+--transition-fast: var(--dur-100) var(--ease-out);
+--transition-slow: var(--dur-500) var(--ease-in-out);
+}

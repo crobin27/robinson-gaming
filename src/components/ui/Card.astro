@@ -1,0 +1,97 @@
+---
+/**
+ * Card Component
+ * 
+ * A casino-themed card container with subtle shadows and felt-inspired styling.
+ */
+
+interface Props {
+  variant?: "default" | "elevated" | "outline";
+  padding?: "sm" | "md" | "lg" | "none";
+  class?: string;
+}
+
+const {
+  variant = "default",
+  padding = "md",
+  class: className = "",
+} = Astro.props;
+
+const variants = {
+  default: "card--default",
+  elevated: "card--elevated",
+  outline: "card--outline",
+};
+
+const paddings = {
+  none: "card--padding-none",
+  sm: "card--padding-sm",
+  md: "card--padding-md",
+  lg: "card--padding-lg",
+};
+
+const cardClasses = [
+  "card",
+  variants[variant],
+  paddings[padding],
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={cardClasses}>
+  <slot />
+</div>
+
+<style>
+  @import "../../styles/tokens.css";
+
+  .card {
+    background: var(--color-bg-surface);
+    border-radius: var(--radius-card);
+    position: relative;
+    transition: all var(--transition-base);
+  }
+
+  .card--default {
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border-default);
+  }
+
+  .card--elevated {
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-default);
+    background: var(--color-bg-surface-elevated);
+  }
+
+  .card--outline {
+    border: 2px solid var(--color-gold-300);
+    box-shadow: none;
+    background: transparent;
+  }
+
+  /* Padding variants */
+  .card--padding-none {
+    padding: 0;
+  }
+
+  .card--padding-sm {
+    padding: var(--space-4);
+  }
+
+  .card--padding-md {
+    padding: var(--space-6);
+  }
+
+  .card--padding-lg {
+    padding: var(--space-8);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: none;
+    }
+  }
+</style>
