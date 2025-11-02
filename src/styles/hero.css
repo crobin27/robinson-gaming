@@ -6,40 +6,44 @@
   overflow: hidden;
 }
 
-/* Wrapper for Left and Right Columns */
+/* Wrapper for Content */
 .hero-content-wrapper {
   display: flex;
-  align-items: stretch;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   margin: 0 auto;
   padding: 0;
-  gap: var(--size-fluid-4);
   max-width: var(--container-width);
   animation: fadeInUp 1s ease-out forwards;
   opacity: 0; /* Hidden initially for fade-in effect */
 }
 
-/* Left Column Styling */
-.hero-left {
+/* Center Content Styling */
+.hero-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 50%;
+  align-items: center;
+  text-align: center;
+  width: 100%;
   animation: fadeInDown 1s ease-out forwards;
   opacity: 0; /* Hidden initially for fade-in effect */
   animation-delay: 0.3s;
 }
 
-/* Title Styling */
+/* Title Styling - Casino Gold */
 .hero-title {
   font-size: 7rem;
   font-family: var(--font-title);
-  color: var(--color-secondary);
+  color: var(--color-primary);
   margin: 0;
   padding-bottom: var(--size-fluid-2);
   line-height: 0.9;
   overflow: visible;
   white-space: normal; /* Allow line breaks */
+  text-shadow:
+    0 0 20px var(--color-chip-shadow),
+    2px 2px 4px rgb(0 0 0 / 80%); /* Gold glow with depth */
 }
 
 /* Typing Effect */
@@ -68,10 +72,21 @@
   display: flex;
   gap: var(--size-fluid-3);
   margin-top: var(--size-fluid-3);
-  align-items: left;
-  justify-content: left;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   max-width: 100%;
+}
+
+.download-button {
+  border: 2px solid var(--color-chip-border);
+  border-radius: 12px;
+  padding: 0.5rem;
+  background: linear-gradient(145deg, rgb(0 0 0 / 30%), rgb(0 0 0 / 10%));
+  box-shadow:
+    0 4px 6px rgb(0 0 0 / 40%),
+    0 0 15px var(--color-chip-shadow);
+  transition: all 0.3s ease;
 }
 
 .download-button img {
@@ -79,21 +94,20 @@
   height: auto;
   width: auto;
   max-height: 4rem;
+  display: block;
   transition: transform 0.3s ease;
 }
 
-.download-button:hover img {
-  transform: scale(1.1); /* Make button larger on hover */
+.download-button:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 6px 12px rgb(0 0 0 / 50%),
+    0 0 30px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
-/* Right Column: Image Styling */
-.hero-right {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  animation: fadeInUp 1.5s ease-out forwards;
-  opacity: 0;
+.download-button:hover img {
+  transform: scale(1.05);
 }
 
 /* Keyframes for Fade In and Typing */
@@ -102,6 +116,7 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -113,6 +128,7 @@
     transform: translateY(-20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -120,7 +136,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .hero-title {
     font-size: 5rem;
   }
@@ -138,30 +154,12 @@
   }
 }
 
-@media (max-width: 756px) {
-  .hero-content-wrapper {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .hero-left {
-    width: 100%;
-  }
-
+@media (width <= 756px) {
   .hero-title {
     font-size: 3.75rem;
-    text-align: center;
   }
 
   .download-buttons {
     margin-top: var(--size-fluid-2);
-    justify-content: center;
-  }
-
-  .hero-right {
-    width: 80%;
-    margin-top: var(--size-fluid-2);
-    justify-content: center;
   }
 }

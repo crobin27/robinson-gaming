@@ -1,4 +1,4 @@
-@import "open-props/open-props.min.css"; /* For the minified version */
+@import url("open-props/open-props.min.css"); /* For the minified version */
 
 .container {
   width: 100%; /* Allows the container to take full width up to the max-width */
@@ -6,10 +6,18 @@
     --container-width,
     70vw
   ); /* 70% of the viewport width on larger screens */
+
   margin: 0 auto; /* Centers the container horizontally */
 }
 
-@media (max-width: 768px) {
+/* Adjust for left sidebar on desktop */
+@media (width >= 769px) {
+  .container {
+    padding-left: 2rem; /* Add left padding to prevent content from touching sidebar edge */
+  }
+}
+
+@media (width <= 768px) {
   .container {
     max-width: 90%; /* Shrinks to 90% of the screen width on smaller screens */
   }
@@ -27,7 +35,7 @@
   gap: 2rem; /* Space between columns */
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .grid-3 {
     grid-template-columns: 1fr; /* Stacks columns on smaller screens */
   }

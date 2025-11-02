@@ -8,24 +8,29 @@
   margin: 0;
   padding: 0;
 }
-/* Background Image */
+
+/* Background - Inherits felt background from global styles */
 .projects-background {
-  background-image: url("/images/projects/background-image.webp");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: inherit; /* Use the global felt background */
   padding: 4rem 0;
   display: flex;
   justify-content: center;
   width: 100%;
+
   /* Remove the fixed height */
   height: auto; /* Let the height adjust based on content */
 }
 
-/* Section Title */
+/* Section Title - Casino Gold */
 .projects-title {
   text-align: center;
   margin-bottom: 2rem;
+  color: var(--color-primary);
+  text-shadow:
+    0 0 20px var(--color-chip-shadow),
+    2px 2px 4px rgb(0 0 0 / 80%);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 /* Project Placards Grid */
@@ -36,7 +41,7 @@
   justify-content: center;
 }
 
-/* Individual Project Card */
+/* Individual Project Card - Casino Display Style */
 .project-card {
   position: relative;
   max-width: 360px;
@@ -47,7 +52,21 @@
   transform: translateY(30px); /* Start slightly lower for slide-up effect */
   transition:
     opacity 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 3px solid var(--color-chip-border);
+  box-shadow:
+    0 4px 8px rgb(0 0 0 / 50%),
+    0 0 20px var(--color-chip-shadow);
+  background: linear-gradient(145deg, rgb(0 0 0 / 40%), rgb(0 0 0 / 20%));
+}
+
+.project-card:hover {
+  box-shadow:
+    0 8px 16px rgb(0 0 0 / 60%),
+    0 0 40px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
+  transform: translateY(28px) scale(1.02);
 }
 
 /* Project Image */
@@ -63,12 +82,28 @@
   bottom: 65%;
   left: 25%;
   transform: translateX(-50%);
+  border: 2px solid var(--color-chip-border);
+  border-radius: 8px;
+  padding: 0.25rem 0.5rem;
+  background: linear-gradient(145deg, rgb(0 0 0 / 60%), rgb(0 0 0 / 40%));
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 50%),
+    0 0 10px var(--color-chip-shadow);
+  transition: all 0.3s ease;
 }
 
 .learn-more-button {
   max-width: 125px;
   height: auto;
+  display: block;
   transition: transform 0.3s ease;
+}
+
+.learn-more-link:hover {
+  box-shadow:
+    0 4px 8px rgb(0 0 0 / 60%),
+    0 0 20px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
 .learn-more-link:hover .learn-more-button {
@@ -81,6 +116,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -92,7 +128,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 992px) {
+@media (width <= 992px) {
   .projects-title {
     font-size: 2.5rem;
   }
@@ -102,12 +138,13 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .project-placards {
     display: grid;
     grid-template-columns: 1fr; /* Stacks each project card */
     gap: 1rem; /* Adjusts gap for smaller screens */
   }
+
   .projects-title {
     font-size: 2rem;
   }

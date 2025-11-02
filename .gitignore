@@ -25,3 +25,20 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 *.dng
+
+# Test artifacts
+.lighthouseci/
+.a11y-results/
+.a11y-results.json
+lighthouserc.json
+a11y-test.spec.ts
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Vitest
+.vitest/

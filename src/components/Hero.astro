@@ -27,8 +27,7 @@ import "/src/styles/global.css";
   <meta property="og:type" content="website" />
   <section class="hero">
     <div class="container hero-content-wrapper">
-      <!-- Left Column: Title, Description, and Download Buttons -->
-      <div class="hero-left">
+      <div class="hero-center">
         <h1 class="hero-title">
           <span id="typing-robinson"></span>
           <br />
@@ -58,14 +57,6 @@ import "/src/styles/global.css";
           </a>
         </div>
       </div>
-
-      <!-- Profile Image with Descriptive Alt Text -->
-      <div class="hero-right">
-        <img
-          src="/images/hero/hero-profile.webp"
-          alt="Cole Robinson on a mountain showcasing Robinson Gaming projects"
-        />
-      </div>
     </div>
 
     <script>
@@ -73,18 +64,21 @@ import "/src/styles/global.css";
         const robinsonElement = document.getElementById("typing-robinson");
         const gamingElement = document.getElementById("typing-gaming");
 
-        const typeWord = (element, text, delay) => {
+        const typeWord = (element: HTMLElement | null, text: string) => {
+          if (!element) return;
+
           element.innerHTML = ""; // Clear initial text
           let index = 0;
 
           function type() {
+            if (!element) return;
             if (index < text.length) {
               element.innerHTML += text.charAt(index);
               index++;
               setTimeout(type, 65); // Adjust speed here
             } else if (element === robinsonElement) {
               // Start typing "Gaming" after "Robinson" completes
-              setTimeout(() => typeWord(gamingElement, "Gaming", 0), 100);
+              setTimeout(() => typeWord(gamingElement, "Gaming"), 100);
             }
           }
 
@@ -92,7 +86,7 @@ import "/src/styles/global.css";
         };
 
         // Start typing "Robinson" and then "Gaming"
-        typeWord(robinsonElement, "Robinson", 0);
+        typeWord(robinsonElement, "Robinson");
       });
     </script>
   </section>

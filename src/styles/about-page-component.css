@@ -3,16 +3,14 @@
 /* Overall Section Styling */
 .about-page {
   padding: 4rem 2rem;
-  background-image: url("/images/about/about-background.webp"); /* Path to your background image */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: inherit; /* Use the global felt background */
   color: white;
   font-family: var(--font-primary);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 /* Title Styling */
 .about-title {
   text-align: left;
@@ -73,7 +71,7 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .about-title {
     text-align: center;
   }
@@ -86,7 +84,7 @@
 
   .about-image img {
     max-width: 100%;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     align-items: center;
   }
 

@@ -1,8 +1,8 @@
 /* Base Styling */
 .photography-page {
   padding: 2rem 0;
-  background-color: #f8f9fa;
-  color: #333;
+  background: inherit; /* Use the global felt background */
+  color: var(--color-text);
   font-family: var(--font-primary);
 }
 
@@ -17,13 +17,18 @@
     transform 0.6s ease;
 }
 
-/* Specific styling for the photography title */
+/* Specific styling for the photography title - Casino Gold */
 .photography-title {
   font-size: 3rem;
-  font-family: var(--font-title, sans-serif); /* Ensures title font */
-  color: var(--color-secondary); /* Secondary color */
+  font-family: var(--font-title, sans-serif);
+  color: var(--color-primary);
   text-align: center;
   margin-bottom: 1rem;
+  text-shadow:
+    0 0 20px var(--color-chip-shadow),
+    2px 2px 4px rgb(0 0 0 / 80%);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .photography-title.visible,
@@ -37,7 +42,7 @@
 .photography-subtitle {
   text-align: center;
   margin-bottom: 2rem;
-  color: #555;
+  color: var(--color-text-secondary);
 }
 
 .section-heading {
@@ -52,7 +57,6 @@
 
 .landscape-grid {
   padding-top: 1rem;
-
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -61,7 +65,7 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* Photo Card Styling */
+/* Photo Card Styling - Casino Frame */
 .photo-card {
   position: relative;
   overflow: hidden;
@@ -71,7 +75,19 @@
   transform: translateY(20px) scale(0.95);
   transition:
     opacity 0.6s ease,
-    transform 0.6s ease;
+    transform 0.6s ease,
+    box-shadow 0.3s ease;
+  border: 2px solid var(--color-chip-border);
+  box-shadow:
+    0 4px 8px rgb(0 0 0 / 50%),
+    0 0 15px var(--color-chip-shadow);
+}
+
+.photo-card:hover {
+  box-shadow:
+    0 8px 16px rgb(0 0 0 / 60%),
+    0 0 30px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
 }
 
 .photo-card.visible {
@@ -107,8 +123,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  background: rgb(0 0 0 / 60%);
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,27 +140,46 @@
 .photo-location {
   font-size: 0.9rem;
   margin-bottom: 1rem;
-  color: #ccc;
+  color: #cccccc;
 }
 
-/* Download Buttons */
+/* Download Buttons - Casino Style */
 .download-buttons {
   display: flex;
   gap: 0.5rem;
 }
 
+.download-button {
+  border: 2px solid var(--color-chip-border);
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  background: linear-gradient(145deg, rgb(0 0 0 / 80%), rgb(0 0 0 / 60%));
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 60%),
+    0 0 10px var(--color-chip-shadow);
+  transition: all 0.3s ease;
+}
+
 .download-button img {
   width: auto;
   height: 32px;
+  display: block;
   transition: transform 0.3s ease;
 }
 
+.download-button:hover {
+  box-shadow:
+    0 4px 8px rgb(0 0 0 / 70%),
+    0 0 20px var(--color-chip-shadow);
+  border-color: var(--color-secondary);
+}
+
 .download-button:hover img {
-  transform: scale(1.1); /* Slightly enlarge on hover */
+  transform: scale(1.1);
 }
 
 /* Responsive Adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .landscape-grid {
     grid-template-columns: 1fr;
   }
