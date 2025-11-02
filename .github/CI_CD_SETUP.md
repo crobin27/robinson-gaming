@@ -7,11 +7,13 @@ This document summarizes the complete CI/CD and Developer Experience setup imple
 ### GitHub Actions Workflows
 
 1. **`.github/workflows/ci.yml`**
-   - Runs on all PRs to `dev` and `main`
+
+   - Runs on all PRs to `dev` and `prod`
    - Checks: TypeScript, ESLint, Stylelint, Prettier, Build, Unit Tests (Vitest), E2E Tests (Playwright)
    - Uploads build artifacts
 
 2. **`.github/workflows/preview-comment.yml`**
+
    - Posts preview deployment URLs to PRs
    - Supports Vercel and Netlify integrations
    - Updates comment when PR is synchronized
@@ -40,6 +42,7 @@ This document summarizes the complete CI/CD and Developer Experience setup imple
 ### Scripts
 
 1. **`scripts/lighthouse.mjs`**
+
    - Runs Lighthouse CI against preview URLs
    - Configures performance budgets (80+ performance, 90+ for a11y/SEO/best practices)
 
@@ -70,6 +73,7 @@ This document summarizes the complete CI/CD and Developer Experience setup imple
 ## ?? Package.json Updates
 
 ### New Scripts
+
 - `typecheck` - TypeScript type checking
 - `lint` - ESLint for JS/TS/Astro files
 - `lint:css` - Stylelint for CSS files
@@ -84,6 +88,7 @@ This document summarizes the complete CI/CD and Developer Experience setup imple
 - `a11y` - Run accessibility audit
 
 ### New Dependencies
+
 - `@playwright/test` - E2E testing
 - `@axe-core/playwright` - Accessibility testing
 - `@lhci/cli` - Lighthouse CI
@@ -94,6 +99,7 @@ This document summarizes the complete CI/CD and Developer Experience setup imple
 ## ?? Next Steps
 
 ### 1. Install Dependencies
+
 ```bash
 npm install
 ```
@@ -101,6 +107,7 @@ npm install
 ### 2. Set Up Preview Deployments
 
 **Vercel:**
+
 1. Connect GitHub repo at vercel.com
 2. Enable PR previews
 3. Preview URLs will appear automatically
@@ -126,6 +133,7 @@ See `.github/DEPLOYMENT_SETUP.md` for detailed instructions.
 ### 5. Test the Setup
 
 Create a test PR from `feature/pit-boss-theme` (or any feature branch) to verify:
+
 - ? CI workflow runs successfully
 - ? Preview deployment comment appears
 - ? Lighthouse CI runs and posts results
@@ -134,6 +142,7 @@ Create a test PR from `feature/pit-boss-theme` (or any feature branch) to verify
 ## ?? Performance Budgets
 
 Lighthouse CI enforces:
+
 - **Performance:** 80+
 - **Accessibility:** 90+
 - **Best Practices:** 90+
@@ -166,7 +175,7 @@ Adjust in `scripts/lighthouse.mjs` if needed.
 ? Required checks enabled on dev (documented in `.github/DEPLOYMENT_SETUP.md`)  
 ? PR template with comprehensive checklist  
 ? Issue templates for bug/feature/chore  
-? All scripts functional and documented  
+? All scripts functional and documented
 
 ---
 
