@@ -1,19 +1,15 @@
 ---
-// Import Navbar and Footer
-import "/src/styles/global.css";
-import "../styles/layout.css";
+import "../styles/global.css";
 
-// Casino Felt Background - Choose one:
-import "../styles/green_felt.css"; // Classic poker table green (current)
-// import "../styles/blue_felt.css";     // Royal blue high-stakes tables
-// import "../styles/red_felt.css";      // Crimson high-roller tables
-// import "../styles/burgundy_felt.css"; // Burgundy VIP room tables
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
 
-import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
-
-// Accept title, description, and optional social image as props
-const { title, description } = Astro.props;
+const { title, description, ogImage = "/images/og.png" } = Astro.props;
+const canonicalUrl = `https://www.robinsongaming.com${Astro.url.pathname}`;
+const ogImageUrl = `https://www.robinsongaming.com${ogImage}`;
 ---
 
 <html lang="en">
@@ -21,55 +17,50 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Page Title and Description -->
+    <!-- Dark mode init: runs before paint to avoid flash. Defaults to dark. -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        if (stored === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Canonical URL -->
-    <link
-      rel="canonical"
-      href={`https://www.robinsongaming.com${Astro.url.pathname}`}
-    />
-
-    <!-- Open Graph Tags for Social Media Sharing -->
-    <meta property="og:type" content="website" />
+    <!-- Theme color for browser chrome -->
     <meta
-      property="og:url"
-      content={`https://www.robinsongaming.com${Astro.url.pathname}`}
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#1a1a1a"
     />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#ffffff"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta
-      property="og:image"
-      content={`https://www.robinsongaming.com/images/social-share-default.png`}
-    />
+    <meta property="og:image" content={ogImageUrl} />
 
-    <!-- Twitter Card Tags -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:url"
-      content={`https://www.robinsongaming.com${Astro.url.pathname}`}
-    />
+    <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content={`https://www.robinsongaming.com/images/social-share-default.png`}
-    />
-
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="/src/styles/global.css" />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
-  <body>
-    <div class="wrapper">
-      <Navbar />
-      <div class="content-wrapper">
-        <main>
-          <slot />
-        </main>
-        <Footer />
-      </div>
-    </div>
+  <body class="min-h-screen bg-background text-foreground antialiased">
+    <slot />
   </body>
 </html>

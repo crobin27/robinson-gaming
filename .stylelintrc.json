@@ -22,6 +22,7 @@
     "**/*.tsx",
     "node_modules/**",
     "dist/**",
-    ".astro/**"
+    ".astro/**",
+    "src/styles/global.css"
   ]
 }

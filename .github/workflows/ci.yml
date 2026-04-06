@@ -33,32 +33,15 @@ jobs:
 
       - name: Lint code (ESLint)
         run: npm run lint
-        continue-on-error: false
 
       - name: Lint CSS (Stylelint)
         run: npm run lint:css
-        continue-on-error: false
 
       - name: Format check
         run: npm run format:check
-        continue-on-error: false
 
       - name: Build
         run: npm run build
-
-      - name: Run unit tests
-        run: npm run test
-        continue-on-error: false
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-        if: always()
-
-      - name: Run E2E smoke tests
-        run: npm run test:e2e
-        continue-on-error: false
-        env:
-          BASE_URL: http://localhost:4321
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

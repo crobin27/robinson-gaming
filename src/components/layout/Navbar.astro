@@ -1,0 +1,44 @@
+---
+import { NavbarClient } from "./NavbarClient";
+
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#resume", label: "Resume" },
+  { href: "#photography", label: "Photography" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md"
+>
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+    <!-- Logo -->
+    <a
+      href="/"
+      class="text-base font-semibold tracking-tight transition-opacity hover:opacity-80"
+    >
+      Robinson <span class="text-primary">Gaming</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="hidden items-center gap-6 md:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Theme toggle + mobile menu (React island) -->
+    <div class="relative flex items-center">
+      <NavbarClient client:load />
+    </div>
+  </div>
+</header>

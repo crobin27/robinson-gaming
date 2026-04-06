@@ -1,0 +1,73 @@
+---
+// Hero section — full-viewport landing with radial gradient background.
+// Uses plain <a> tags styled as buttons to stay fully static (no React hydration needed).
+---
+
+<section
+  class="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center px-6 text-center"
+>
+  <!-- Subtle radial gradient background using primary color -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,oklch(var(--primary-raw,0.5_0.134_242.749)/0.12),transparent)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Eyebrow -->
+  <p
+    class="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+  >
+    Mobile Games &middot; Web Apps &middot; IoT
+  </p>
+
+  <!-- Headline -->
+  <h1 class="max-w-3xl text-5xl font-bold tracking-tight md:text-7xl">
+    Building games people actually <span class="text-primary">play.</span>
+  </h1>
+
+  <!-- Subheading -->
+  <p class="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
+    Cole Robinson &mdash; indie game developer and software engineer. I build
+    games, web apps, and the occasional IoT experiment.
+  </p>
+
+  <!-- CTAs -->
+  <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+    <a
+      href="#about"
+      class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80"
+    >
+      About Me
+    </a>
+    <a
+      href="#contact"
+      class="inline-flex h-9 items-center justify-center rounded-md border border-border bg-transparent px-5 text-sm font-medium transition-colors hover:bg-muted"
+    >
+      Get in Touch
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 flex flex-col items-center gap-1">
+    <a
+      href="#about"
+      aria-label="Scroll to about section"
+      class="text-muted-foreground/50 transition-colors hover:text-muted-foreground"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="animate-bounce"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </a>
+  </div>
+</section>
