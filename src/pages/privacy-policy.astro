@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy — Robinson Gaming"
+  description="Privacy policy for Robinson Gaming mobile apps and games."
+>
+  <Navbar />
+
+  <main class="mx-auto max-w-3xl px-6 py-16 md:py-24">
+    <h1 class="mb-2 text-4xl font-bold tracking-tight">Privacy Policy</h1>
+    <p class="mb-12 text-sm text-muted-foreground">
+      Last updated: {
+        new Date().toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })
+      }
+    </p>
+
+    <div
+      class="space-y-10 text-muted-foreground [&_h2]:mb-3 [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground [&_p]:leading-relaxed"
+    >
+      <section>
+        <h2>Overview</h2>
+        <p>
+          Robinson Gaming ("we", "us", or "our") operates mobile games and
+          applications available on the iOS App Store and Google Play Store.
+          This Privacy Policy describes how we collect, use, and share
+          information in connection with your use of our apps and this website
+          (robinsongaming.com).
+        </p>
+      </section>
+
+      <section>
+        <h2>Information We Collect</h2>
+        <p>
+          Our apps do not directly collect personal information such as your
+          name, email address, or phone number. However, our third-party
+          advertising and analytics partners may collect certain data
+          automatically when you use our apps, including:
+        </p>
+        <ul class="mt-3 list-inside list-disc space-y-1">
+          <li>Device identifiers (Advertising ID / IDFA)</li>
+          <li>IP address and general location (country/region)</li>
+          <li>App usage data and interactions</li>
+          <li>Device type, operating system, and app version</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Third-Party Services</h2>
+        <p>
+          Our apps use the following third-party SDKs for advertising and
+          analytics. Each provider has its own privacy policy governing its data
+          practices:
+        </p>
+        <ul class="mt-3 list-inside list-disc space-y-2">
+          <li>
+            <strong class="text-foreground">Google AdMob</strong> — mobile advertising
+            platform. See{" "}
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary underline underline-offset-4 hover:text-primary/80"
+            >
+              Google's Privacy Policy
+            </a>.
+          </li>
+          <li>
+            <strong class="text-foreground">Unity Ads</strong> — mobile game advertising.
+            See{" "}
+            <a
+              href="https://unity.com/legal/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary underline underline-offset-4 hover:text-primary/80"
+            >
+              Unity's Privacy Policy
+            </a>.
+          </li>
+          <li>
+            <strong class="text-foreground">ironSource (Playon)</strong> — mobile
+            advertising mediation. See{" "}
+            <a
+              href="https://www.is.com/privacy-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary underline underline-offset-4 hover:text-primary/80"
+            >
+              ironSource's Privacy Policy
+            </a>.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Children's Privacy (COPPA)</h2>
+        <p>
+          Our apps are not directed to children under the age of 13. We do not
+          knowingly collect personal information from children under 13. If you
+          are a parent or guardian and believe your child has provided us with
+          personal information, please contact us so we can take appropriate
+          action.
+        </p>
+      </section>
+
+      <section>
+        <h2>Data Retention</h2>
+        <p>
+          We do not directly store personal data. Data collected by third-party
+          SDKs is retained according to each provider's own data retention
+          policies.
+        </p>
+      </section>
+
+      <section>
+        <h2>Your Rights</h2>
+        <p>
+          Depending on your jurisdiction, you may have rights to access,
+          correct, or delete your personal data. To exercise these rights with
+          respect to data collected by our advertising partners, please contact
+          those providers directly using the links above.
+        </p>
+        <p class="mt-3">
+          To opt out of interest-based advertising, you can use your device
+          settings to reset or limit your Advertising ID, or visit{" "}
+          <a
+            href="https://www.youradchoices.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-primary underline underline-offset-4 hover:text-primary/80"
+          >
+            YourAdChoices
+          </a>.
+        </p>
+      </section>
+
+      <section>
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. Changes will be
+          posted on this page with an updated revision date. We encourage you to
+          review this policy periodically.
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact Us</h2>
+        <p>
+          If you have any questions about this Privacy Policy, please contact us
+          at{" "}
+          <a
+            href="mailto:hello@robinsongaming.com"
+            class="text-primary underline underline-offset-4 hover:text-primary/80"
+          >
+            hello@robinsongaming.com
+          </a>.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

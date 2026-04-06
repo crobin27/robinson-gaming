@@ -1,9 +1,25 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import SkillsSection from "../components/sections/SkillsSection.astro";
+import ResumeSection from "../components/sections/ResumeSection.astro";
+import PhotographySection from "../components/sections/PhotographySection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
 ---
 
-<BaseLayout title="Robinson Gaming" description="Coming soon.">
-  <main>
-    <h1>Robinson Gaming</h1>
-  </main>
+<BaseLayout
+  title="Robinson Gaming — Cole Robinson"
+  description="Indie mobile game developer and software engineer. Building games, web apps, and IoT experiments."
+>
+  <Navbar />
+  <HeroSection />
+  <AboutSection />
+  <SkillsSection />
+  <ResumeSection />
+  <PhotographySection />
+  <ContactSection />
+  <Footer />
 </BaseLayout>
