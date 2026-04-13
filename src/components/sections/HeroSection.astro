@@ -6,33 +6,49 @@
 <section
   class="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center px-6 text-center"
 >
-  <!-- Subtle radial gradient background using primary color -->
+  <!-- Aurora animated background blobs -->
   <div
-    class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,oklch(var(--primary-raw,0.5_0.134_242.749)/0.12),transparent)]"
+    class="aurora-container pointer-events-none absolute inset-0 -z-10 overflow-hidden"
     aria-hidden="true"
   >
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
   </div>
 
   <!-- Eyebrow -->
   <p
-    class="mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+    class="hero-enter mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+    style="animation-delay: 0.1s"
   >
-    Mobile Games &middot; Web Apps &middot; IoT
+    Web Apps &middot; Automation &middot; IT Infrastructure &middot; Software
+    Development
   </p>
 
   <!-- Headline -->
-  <h1 class="max-w-3xl text-5xl font-bold tracking-tight md:text-7xl">
-    Building games people actually <span class="text-primary">play.</span>
+  <h1
+    class="hero-enter max-w-3xl text-5xl font-bold tracking-tight md:text-7xl"
+    style="animation-delay: 0.25s"
+  >
+    Building software that solves real <span class="text-primary"
+      >problems.</span
+    >
   </h1>
 
   <!-- Subheading -->
-  <p class="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-    Cole Robinson &mdash; indie game developer and software engineer. I build
-    games, web apps, and the occasional IoT experiment.
+  <p
+    class="hero-enter mt-6 max-w-xl text-base text-muted-foreground md:text-lg"
+    style="animation-delay: 0.4s"
+  >
+    Cole Robinson &mdash; software engineer and cloud infrastructure architect.
+    I build web apps, automate systems, and design AWS infrastructure.
   </p>
 
   <!-- CTAs -->
-  <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+  <div
+    class="hero-enter mt-10 flex flex-wrap items-center justify-center gap-3"
+    style="animation-delay: 0.55s"
+  >
     <a
       href="#about"
       class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80"

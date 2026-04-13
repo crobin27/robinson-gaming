@@ -4,17 +4,19 @@ import { Badge } from "@/components/ui/badge";
 
 const skillGroups = [
   {
-    label: "Game Development",
+    label: "Cloud & DevOps",
     skills: [
-      "Unity",
-      "C#",
-      "iOS",
-      "Android",
-      "AdMob",
-      "ironSource",
-      "Unity Ads",
-      "App Store Connect",
-      "Google Play Console",
+      "AWS",
+      "EC2",
+      "S3",
+      "Lambda",
+      "IAM",
+      "VPC",
+      "CloudFormation",
+      "Terraform",
+      "Docker",
+      "CI/CD",
+      "Linux",
     ],
   },
   {
@@ -24,6 +26,7 @@ const skillGroups = [
       "Astro",
       "TypeScript",
       "Node.js",
+      "Python",
       "Git",
       "REST APIs",
       "Tailwind CSS",
@@ -31,21 +34,23 @@ const skillGroups = [
   },
   {
     label: "Other",
-    skills: ["Raspberry Pi", "Python", "MQTT", "Embedded C", "Photography"],
+    skills: ["Raspberry Pi", "MQTT", "Embedded C", "Photography"],
   },
 ];
 ---
 
 <section id="skills" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
-  <SectionHeading
-    title="Tech Stack"
-    subtitle="What I reach for when building games, apps, and experiments."
-  />
+  <div data-reveal>
+    <SectionHeading
+      title="Tech Stack"
+      subtitle="What I reach for when building systems, apps, and infrastructure."
+    />
+  </div>
 
   <div class="grid gap-10 md:grid-cols-3">
     {
-      skillGroups.map((group) => (
-        <div>
+      skillGroups.map((group, i) => (
+        <div data-reveal data-reveal-delay={String(i + 1)}>
           <p class="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
             {group.label}
           </p>

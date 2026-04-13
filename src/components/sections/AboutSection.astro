@@ -1,50 +1,30 @@
 ---
 import SectionHeading from "@/components/shared/SectionHeading.astro";
-
-const stats = [
-  { value: "4+", label: "Apps Published" },
-  { value: "iOS & Android", label: "Platforms" },
-  { value: "10K+", label: "Downloads" },
-  { value: "AdMob · Unity · ironSource", label: "Ad Networks" },
-];
 ---
 
 <section id="about" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
-  <div class="grid gap-16 md:grid-cols-2 md:gap-24">
-    <!-- Bio -->
-    <div>
+  <div class="max-w-2xl">
+    <div data-reveal>
       <SectionHeading title="About Me" />
-      <div class="space-y-4 text-muted-foreground">
-        <p>
-          I'm an indie mobile game developer focused on casual and hyper-casual
-          games for iOS and Android. I handle the full stack: design,
-          development in Unity, App Store and Play Store submission, and
-          monetization via Google AdMob, Unity Ads, and ironSource.
-        </p>
-        <p>
-          Beyond games, I build web applications and IoT projects. Software
-          engineering is the thread connecting all of it — whether I'm writing
-          C# in Unity, TypeScript in a web app, or Python on a Raspberry Pi.
-        </p>
-        <p>
-          When I'm not at the keyboard, I'm usually behind a camera or exploring
-          somewhere new.
-        </p>
-      </div>
     </div>
-
-    <!-- Stats -->
-    <div>
-      <div class="grid grid-cols-2 gap-4">
-        {
-          stats.map((stat) => (
-            <div class="rounded-lg border border-border bg-card p-5">
-              <p class="text-2xl font-bold text-primary">{stat.value}</p>
-              <p class="mt-1 text-xs text-muted-foreground">{stat.label}</p>
-            </div>
-          ))
-        }
-      </div>
+    <div class="space-y-4 text-muted-foreground">
+      <p data-reveal data-reveal-delay="1">
+        I'm a software engineer focused on cloud infrastructure, DevOps, and
+        full-stack web development. I design and build systems on AWS —
+        architecting VPCs, managing IAM, deploying containerized workloads, and
+        wiring up CI/CD pipelines that ship reliably.
+      </p>
+      <p data-reveal data-reveal-delay="2">
+        On the software side I work across the stack: TypeScript and React on
+        the frontend, Node.js and Python on the backend, and Infrastructure as
+        Code with CloudFormation and Terraform to keep everything reproducible.
+        I'm drawn to the intersection of clean architecture and operational
+        reliability.
+      </p>
+      <p data-reveal data-reveal-delay="3">
+        Outside of work you'll find me tinkering with Raspberry Pi projects,
+        behind a camera, or exploring somewhere new.
+      </p>
     </div>
   </div>
 </section>

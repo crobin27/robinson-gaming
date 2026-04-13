@@ -7,12 +7,18 @@ import SectionHeading from "@/components/shared/SectionHeading.astro";
 
 <section id="contact" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
   <div class="flex flex-col items-center text-center">
-    <SectionHeading
-      title="Let's build something."
-      subtitle="Open to collabs on mobile games, web projects, and IoT experiments."
-    />
+    <div data-reveal>
+      <SectionHeading
+        title="Let's build something."
+        subtitle="Open to collabs on web projects, cloud infrastructure, and IoT experiments."
+      />
+    </div>
 
-    <div class="flex flex-wrap justify-center gap-3">
+    <div
+      data-reveal
+      data-reveal-delay="1"
+      class="flex flex-wrap justify-center gap-3"
+    >
       <!-- GitHub -->
       <a
         href="https://github.com/crobin27"
@@ -39,9 +45,11 @@ import SectionHeading from "@/components/shared/SectionHeading.astro";
         GitHub
       </a>
 
-      <!-- LinkedIn — TODO: replace href="#" with real LinkedIn URL -->
+      <!-- LinkedIn -->
       <a
-        href="#"
+        href="https://www.linkedin.com/feed/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-transparent px-5 text-sm font-medium transition-colors hover:bg-muted"
       >
         <svg
@@ -65,9 +73,9 @@ import SectionHeading from "@/components/shared/SectionHeading.astro";
         LinkedIn
       </a>
 
-      <!-- Email — TODO: replace with real email -->
+      <!-- Email -->
       <a
-        href="mailto:hello@robinsongaming.com"
+        href="mailto:cole@robinsongaming.com"
         class="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-border bg-transparent px-5 text-sm font-medium transition-colors hover:bg-muted"
       >
         <svg
