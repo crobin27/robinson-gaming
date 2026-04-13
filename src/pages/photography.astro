@@ -1,0 +1,599 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { Badge } from "../components/ui/badge";
+import {
+  photos,
+  categoryLabels,
+  getActiveCategories,
+  type Photo,
+} from "../data/photos";
+import { cldThumb, cldLightbox, cldLqip, cldDownload } from "../lib/cloudinary";
+
+const activeCategories = getActiveCategories(photos);
+
+type LightboxPhoto = Photo & {
+  src: string;
+  download: string;
+};
+
+const lightboxData: LightboxPhoto[] = photos.map((p) => ({
+  ...p,
+  src: cldLightbox(p.publicId),
+  download: cldDownload(p.publicId, p.id),
+}));
+---
+
+<BaseLayout
+  title="Photography — Cole Robinson"
+  description="A selection of photos I've taken — landscapes, portraits, and whatever catches the light."
+>
+  <Navbar />
+
+  <main class="mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24">
+    <!-- Header -->
+    <header class="mb-12 max-w-2xl" data-reveal>
+      <p
+        class="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+      >
+        Photography
+      </p>
+      <h1 class="text-4xl font-bold tracking-tight md:text-6xl">
+        Moments, <span class="text-primary">framed.</span>
+      </h1>
+      <p class="mt-6 text-base text-muted-foreground md:text-lg">
+        A running collection of shots I've taken — landscapes from weekend
+        trips, street scenes, and anything else that caught the light right.
+        Click any photo to see it larger or download the full-resolution
+        version.
+      </p>
+    </header>
+
+    {
+      photos.length === 0 ? (
+        <div
+          class="rounded-2xl border border-dashed border-border bg-muted/30 px-8 py-20 text-center"
+          data-reveal
+        >
+          <p class="text-sm text-muted-foreground">
+            The gallery is empty right now — photos are being uploaded.
+          </p>
+        </div>
+      ) : (
+        <>
+          {/* Category filters */}
+          {activeCategories.length > 1 && (
+            <div
+              class="mb-8 flex flex-wrap gap-2"
+              data-reveal
+              id="photo-filters"
+            >
+              <button type="button" data-filter="all" aria-pressed="true">
+                <Badge
+                  variant="default"
+                  className="h-7 cursor-pointer px-3 text-xs"
+                >
+                  All
+                </Badge>
+              </button>
+              {activeCategories.map((cat) => (
+                <button type="button" data-filter={cat} aria-pressed="false">
+                  <Badge
+                    variant="outline"
+                    className="h-7 cursor-pointer px-3 text-xs"
+                  >
+                    {categoryLabels[cat]}
+                  </Badge>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Justified-rows gallery */}
+          <div class="photo-gallery" data-reveal>
+            {photos.map((photo, idx) => {
+              const ar = photo.width / photo.height;
+              return (
+                <figure
+                  class="photo-item group"
+                  style={`--ar: ${ar.toFixed(4)};`}
+                  data-category={photo.category}
+                  data-index={idx}
+                >
+                  <button
+                    type="button"
+                    class="photo-btn"
+                    data-lightbox-open={idx}
+                    aria-label={`Open ${photo.title ?? "photo"} in lightbox`}
+                  >
+                    <img
+                      src={cldThumb(photo.publicId)}
+                      style={`background-image: url(${cldLqip(photo.publicId)})`}
+                      loading={idx < 6 ? "eager" : "lazy"}
+                      decoding="async"
+                      alt={photo.title ?? "Photograph by Cole Robinson"}
+                      width={photo.width}
+                      height={photo.height}
+                    />
+                    {photo.title && (
+                      <figcaption class="photo-caption">
+                        <span class="text-sm font-medium">{photo.title}</span>
+                        {photo.location && (
+                          <span class="text-[11px] text-white/70">
+                            {photo.location}
+                          </span>
+                        )}
+                      </figcaption>
+                    )}
+                  </button>
+                </figure>
+              );
+            })}
+            {/* spacer keeps the last row from stretching */}
+            <i class="photo-spacer" aria-hidden="true" />
+            <i class="photo-spacer" aria-hidden="true" />
+            <i class="photo-spacer" aria-hidden="true" />
+          </div>
+        </>
+      )
+    }
+  </main>
+
+  <!-- Lightbox -->
+  <dialog id="lightbox" class="lightbox" aria-label="Photo viewer">
+    <div class="lightbox-inner">
+      <button
+        type="button"
+        class="lightbox-close"
+        data-lightbox-close
+        aria-label="Close"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="lightbox-nav lightbox-prev"
+        data-lightbox-prev
+        aria-label="Previous photo"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="lightbox-nav lightbox-next"
+        data-lightbox-next
+        aria-label="Next photo"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
+
+      <div class="lightbox-stage">
+        <img id="lightbox-img" alt="" />
+      </div>
+
+      <div class="lightbox-meta">
+        <div class="lightbox-meta-text">
+          <h2 id="lightbox-title" class="text-lg font-semibold"></h2>
+          <p id="lightbox-sub" class="text-sm text-white/60"></p>
+        </div>
+        <a
+          id="lightbox-download"
+          href="#"
+          download
+          class="lightbox-download-btn"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" x2="12" y1="15" y2="3"></line>
+          </svg>
+          Download full resolution
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ─── Justified rows gallery ──────────────────────────────── */
+  .photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .photo-item {
+    --row-h: 22rem;
+    flex-grow: var(--ar);
+    flex-basis: calc(var(--ar) * var(--row-h));
+    flex-shrink: 1;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: color-mix(in oklab, var(--muted) 60%, transparent);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  @media (max-width: 768px) {
+    .photo-item {
+      --row-h: 14rem;
+    }
+  }
+
+  .photo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .photo-btn {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    position: relative;
+  }
+
+  .photo-item img {
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--ar);
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+  }
+
+  .photo-item:hover img {
+    transform: scale(1.03);
+  }
+
+  .photo-caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 14px 16px 12px;
+    color: #fff;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.75),
+      rgba(0, 0, 0, 0) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    text-align: left;
+    pointer-events: none;
+  }
+
+  .photo-item:hover .photo-caption,
+  .photo-btn:focus-visible .photo-caption {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* trailing spacer keeps last row from stretching full-width */
+  .photo-spacer {
+    flex-grow: 9999999;
+    flex-basis: 0;
+    height: 0;
+  }
+
+  /* filter button reset */
+  #photo-filters button {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  /* ─── Lightbox ───────────────────────────────────────────── */
+  .lightbox {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    color: #fff;
+  }
+  .lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+  }
+  .lightbox-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .lightbox-stage {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 72px 12px;
+    min-height: 0;
+  }
+  @media (max-width: 640px) {
+    .lightbox-stage {
+      padding: 56px 12px 8px;
+    }
+  }
+  .lightbox-stage img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.8);
+  }
+  .lightbox-meta {
+    flex: 0 0 auto;
+    padding: 14px 24px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .lightbox-meta-text h2 {
+    margin: 0;
+  }
+  .lightbox-meta-text p {
+    margin: 2px 0 0;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 2;
+  }
+  .lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 2;
+  }
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.16);
+  }
+  .lightbox-prev {
+    left: 14px;
+  }
+  .lightbox-next {
+    right: 14px;
+  }
+  @media (max-width: 640px) {
+    .lightbox-nav {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .lightbox-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .lightbox-download-btn:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+</style>
+
+<script is:inline define:vars={{ photoData: lightboxData }}>
+  (function () {
+    const photos = photoData;
+    if (!photos.length) return;
+
+    const dialog = document.getElementById("lightbox");
+    const img = document.getElementById("lightbox-img");
+    const titleEl = document.getElementById("lightbox-title");
+    const subEl = document.getElementById("lightbox-sub");
+    const downloadEl = document.getElementById("lightbox-download");
+
+    let current = 0;
+
+    function render(i) {
+      current = (i + photos.length) % photos.length;
+      const p = photos[current];
+      img.src = p.src;
+      img.alt = p.title || "Photograph";
+      titleEl.textContent = p.title || "";
+      const subBits = [p.location, p.takenAt, p.camera, p.lens].filter(Boolean);
+      subEl.textContent = subBits.join(" · ");
+      downloadEl.href = p.download;
+      downloadEl.setAttribute("download", (p.title || p.id) + ".jpg");
+    }
+
+    function open(i) {
+      render(i);
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("[data-lightbox-open]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const i = parseInt(btn.getAttribute("data-lightbox-open") || "0", 10);
+        open(i);
+      });
+    });
+
+    document
+      .querySelector("[data-lightbox-close]")
+      ?.addEventListener("click", close);
+    document
+      .querySelector("[data-lightbox-prev]")
+      ?.addEventListener("click", () => render(current - 1));
+    document
+      .querySelector("[data-lightbox-next]")
+      ?.addEventListener("click", () => render(current + 1));
+
+    // click outside image to close
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) close();
+    });
+
+    // keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (!dialog.hasAttribute("open")) return;
+      if (e.key === "ArrowLeft") render(current - 1);
+      else if (e.key === "ArrowRight") render(current + 1);
+      else if (e.key === "Escape") close();
+    });
+
+    // close restores body scroll
+    dialog.addEventListener("close", () => {
+      document.body.style.overflow = "";
+    });
+
+    // category filter
+    const filterBar = document.getElementById("photo-filters");
+    if (filterBar) {
+      const buttons = filterBar.querySelectorAll("button[data-filter]");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const filter = btn.getAttribute("data-filter");
+          buttons.forEach((b) => {
+            const active = b === btn;
+            b.setAttribute("aria-pressed", String(active));
+            const badge = b.querySelector('[data-slot="badge"]');
+            if (badge) {
+              badge.setAttribute(
+                "data-variant",
+                active ? "default" : "outline",
+              );
+              if (active) {
+                badge.classList.remove(
+                  "border-border",
+                  "bg-input/20",
+                  "text-foreground",
+                  "dark:bg-input/30",
+                );
+                badge.classList.add("bg-primary", "text-primary-foreground");
+              } else {
+                badge.classList.add(
+                  "border-border",
+                  "bg-input/20",
+                  "text-foreground",
+                  "dark:bg-input/30",
+                );
+                badge.classList.remove("bg-primary", "text-primary-foreground");
+              }
+            }
+          });
+          document.querySelectorAll(".photo-item").forEach((item) => {
+            const cat = item.getAttribute("data-category");
+            const show = filter === "all" || cat === filter;
+            item.style.display = show ? "" : "none";
+          });
+        });
+      });
+    }
+  })();
+</script>

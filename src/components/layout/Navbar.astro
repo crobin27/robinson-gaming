@@ -1,12 +1,15 @@
 ---
 import { NavbarClient } from "./NavbarClient";
 
+const isHome = Astro.url.pathname === "/";
+const homeHref = (hash: string) => (isHome ? hash : `/${hash}`);
+
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#resume", label: "Resume" },
-  { href: "#photography", label: "Photography" },
-  { href: "#contact", label: "Contact" },
+  { href: homeHref("#about"), label: "About" },
+  { href: homeHref("#skills"), label: "Skills" },
+  { href: homeHref("#resume"), label: "Resume" },
+  { href: "/photography", label: "Photography" },
+  { href: homeHref("#contact"), label: "Contact" },
 ];
 ---
 
