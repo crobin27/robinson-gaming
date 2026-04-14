@@ -69,13 +69,3 @@ export const techRow2: TechItem[] = [
   { name: "Cursor", src: si("cursor") },
   { name: "Vercel", src: logos("vercel-icon") },
 ];
-
-/**
- * Pseudo-random but deterministic delay (0-cycleSeconds) for a given index.
- * Used to stagger the color-pop animation so it feels random instead of uniform.
- */
-export function popDelay(index: number, cycleSeconds: number): number {
-  const hash = ((index + 1) * 2654435761) >>> 0;
-  const fraction = (hash % 10_000) / 10_000;
-  return Math.round(fraction * cycleSeconds * 100) / 100;
-}
