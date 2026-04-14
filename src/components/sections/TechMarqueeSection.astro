@@ -2,20 +2,29 @@
 import SectionHeading from "@/components/shared/SectionHeading.astro";
 import { techRow1, techRow2, type TechItem } from "@/data/tech";
 
-// Per-row duration is derived from item count to keep both rows at the same
-// visual scroll speed regardless of how many icons each carries.
-const ITEM_WIDTH_PX = 120; // icon slot + gap
+// Fixed item width + gap let us compute an exact pixel shift for a
+// pixel-perfect seamless loop. The previous -50% - gap/2 math was
+// correct on paper but browsers sometimes rounded it and produced a
+// visible jump at the loop boundary.
+const ITEM_WIDTH_PX = 72; // 4.5rem
+const GAP_PX = 56; // 3.5rem
 const SPEED_PX_PER_SEC = 18;
 
+function shiftPx(count: number): number {
+  // One full copy of the row (items + their trailing gaps) = exactly
+  // the distance the track should translate each loop.
+  return count * (ITEM_WIDTH_PX + GAP_PX);
+}
+
 function rowDuration(count: number): number {
-  return (
-    Math.round(((count * ITEM_WIDTH_PX) / 2 / SPEED_PX_PER_SEC) * 100) / 100
-  );
+  return Math.round((shiftPx(count) / SPEED_PX_PER_SEC) * 100) / 100;
 }
 
 const row1 = [...techRow1, ...techRow1];
 const row2 = [...techRow2, ...techRow2];
 
+const row1Shift = shiftPx(techRow1.length);
+const row2Shift = shiftPx(techRow2.length);
 const row1Duration = rowDuration(techRow1.length);
 const row2Duration = rowDuration(techRow2.length);
 ---
@@ -32,14 +41,17 @@ const row2Duration = rowDuration(techRow2.length);
     <div class="marquee-row">
       <div
         class="marquee-track"
-        style={`animation-duration: ${row1Duration}s;`}
+        style={`animation-duration: ${row1Duration}s; --shift: ${row1Shift}px;`}
       >
         {
           row1.map((tech: TechItem) => {
             return tech.src === null ? (
-              <div class="marquee-item" aria-label={tech.name}>
+              <div
+                class="marquee-item"
+                title={tech.name}
+                aria-label={tech.name}
+              >
                 <div class="missing-tile">{tech.name}</div>
-                <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
               <div
@@ -49,6 +61,7 @@ const row2Duration = rowDuration(techRow2.length);
                     ? `--size-boost: ${tech.sizeBoost};`
                     : undefined
                 }
+                title={tech.name}
                 aria-label={tech.name}
               >
                 <img
@@ -59,7 +72,6 @@ const row2Duration = rowDuration(techRow2.length);
                   width="48"
                   height="48"
                 />
-                <span class="marquee-label">{tech.name}</span>
               </div>
             );
           })
@@ -70,14 +82,17 @@ const row2Duration = rowDuration(techRow2.length);
     <div class="marquee-row">
       <div
         class="marquee-track marquee-track-reverse"
-        style={`animation-duration: ${row2Duration}s;`}
+        style={`animation-duration: ${row2Duration}s; --shift: ${row2Shift}px;`}
       >
         {
           row2.map((tech: TechItem) => {
             return tech.src === null ? (
-              <div class="marquee-item" aria-label={tech.name}>
+              <div
+                class="marquee-item"
+                title={tech.name}
+                aria-label={tech.name}
+              >
                 <div class="missing-tile">{tech.name}</div>
-                <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
               <div
@@ -87,6 +102,7 @@ const row2Duration = rowDuration(techRow2.length);
                     ? `--size-boost: ${tech.sizeBoost};`
                     : undefined
                 }
+                title={tech.name}
                 aria-label={tech.name}
               >
                 <img
@@ -97,7 +113,6 @@ const row2Duration = rowDuration(techRow2.length);
                   width="48"
                   height="48"
                 />
-                <span class="marquee-label">{tech.name}</span>
               </div>
             );
           })
@@ -148,27 +163,23 @@ const row2Duration = rowDuration(techRow2.length);
     animation-direction: reverse;
   }
 
-  .marquee-wrapper:hover .marquee-track {
-    animation-play-state: paused;
-  }
+  /* Hover pause intentionally removed — icons should keep scrolling. */
 
   @keyframes marquee-scroll {
     from {
       transform: translateX(0);
     }
     to {
-      transform: translateX(calc(-50% - var(--marquee-gap) / 2));
+      transform: translateX(calc(-1 * var(--shift)));
     }
   }
 
   .marquee-item {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 4.5rem;
-    flex-shrink: 0;
+    justify-content: center;
+    flex: 0 0 4.5rem;
     cursor: default;
   }
 
@@ -190,26 +201,8 @@ const row2Duration = rowDuration(techRow2.length);
     transform: translateY(-4px) scale(calc(var(--size-boost, 1) * 1.1));
   }
 
-  .marquee-label {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    color: var(--muted-foreground);
-    opacity: 0;
-    transform: translateY(-4px);
-    transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
-    white-space: nowrap;
-  }
-
-  .marquee-item:hover .marquee-label {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Missing-icon placeholder — bright, obviously different so missing entries
-     are easy to spot and replace. */
+  /* Missing-icon placeholder — bright, obviously different so missing
+     entries are easy to spot and replace. */
   .missing-tile {
     width: 3rem;
     height: 3rem;
