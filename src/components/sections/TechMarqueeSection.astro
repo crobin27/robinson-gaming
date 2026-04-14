@@ -14,7 +14,7 @@ const row2 = [...techRowInfra, ...techRowInfra];
     />
   </div>
 
-  <div data-reveal data-reveal-delay="1" class="marquee-wrapper space-y-8">
+  <div data-reveal data-reveal-delay="1" class="marquee-wrapper space-y-2">
     <div class="marquee-row">
       <div class="marquee-track">
         {
@@ -79,7 +79,9 @@ const row2 = [...techRowInfra, ...techRowInfra];
   }
 
   .marquee-row {
-    overflow: hidden;
+    overflow-x: clip;
+    overflow-y: visible;
+    padding-block: 1.25rem;
   }
 
   .marquee-track {
