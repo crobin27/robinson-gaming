@@ -2,6 +2,15 @@ import * as React from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import type { Milestone } from "@/data/timeline";
 
+function renderTitle(title: string): React.ReactNode[] {
+  return title.split(/(\*[^*]+\*)/g).map((part, i) => {
+    if (part.startsWith("*") && part.endsWith("*") && part.length > 2) {
+      return <em key={i}>{part.slice(1, -1)}</em>;
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
+  });
+}
+
 interface TimelineProps {
   milestones: Milestone[];
 }
@@ -118,7 +127,9 @@ function MilestoneCard({
           </>
         )}
       </div>
-      <h3 className="text-lg font-semibold leading-tight">{milestone.title}</h3>
+      <h3 className="text-lg font-semibold leading-tight">
+        {renderTitle(milestone.title)}
+      </h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
         {milestone.description}
       </p>

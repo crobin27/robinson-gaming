@@ -28,7 +28,7 @@ export const milestones: Milestone[] = [
     year: "2019",
     title: "Off to Cal Poly SLO for engineering",
     description:
-      "Graduated high school and headed north to Cal Poly San Luis Obispo on an engineering track. Student-athlete by day, engineering student at every hour in between.",
+      "Graduated high school and headed north to Cal Poly San Luis Obispo on an engineering track — ready to trade beach afternoons for long nights in the engineering building.",
     tag: "University",
   },
   {
@@ -50,9 +50,9 @@ export const milestones: Milestone[] = [
   {
     id: "m06-grad",
     year: "2023",
-    title: "BS Computer Engineering, cum laude",
+    title: "BS Computer Engineering, *cum laude*",
     description:
-      "Graduated Cal Poly SLO cum laude with a Computer Engineering degree — a hands-on blend of software engineering, embedded systems, computer architecture, and network engineering. Most of it taught through long in-person labs and projects I still think about.",
+      "Graduated Cal Poly SLO cum laude with a Computer Engineering degree — a hands-on blend of software engineering, embedded systems, computer architecture, and network engineering. Most of it taught through long in-person labs and real-world projects whose lessons I still lean on today.",
     tag: "Graduated",
   },
   {
@@ -93,6 +93,14 @@ export const milestones: Milestone[] = [
     title: "Promoted to IT Manager",
     description:
       "Stepped into an IT Manager role leading a small team and the automation stack that keeps the business moving. Current focus: expanding from internal-only tools toward client-facing products that handle real concurrency and bigger stakes.",
+    tag: "Promoted",
+  },
+  {
+    id: "m12-present",
+    year: "Present",
+    title: "Still shipping, now with AI in the loop",
+    description:
+      "Happily planted in the construction tech space, layering modern AI APIs on top of the full-stack work to turn raw project and company data into the kind of analysis people actually make decisions on. Always staying one step ahead of the tech.",
     tag: "Currently",
   },
 ];
