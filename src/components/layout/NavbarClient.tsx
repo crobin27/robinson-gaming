@@ -6,15 +6,24 @@ import { Menu01Icon, Cancel01Icon } from "@hugeicons/core-free-icons";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#resume", label: "Resume" },
-  { href: "#photography", label: "Photography" },
-  { href: "#contact", label: "Contact" },
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface NavbarClientProps {
+  navLinks?: NavLink[];
+}
+
+const defaultLinks: NavLink[] = [
+  { href: "/#about", label: "About" },
+  { href: "/#skills", label: "Stack" },
+  { href: "/#journey", label: "Journey" },
+  { href: "/photography", label: "Photography" },
+  { href: "/#contact", label: "Contact" },
 ];
 
-export function NavbarClient() {
+export function NavbarClient({ navLinks = defaultLinks }: NavbarClientProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeMenu() {

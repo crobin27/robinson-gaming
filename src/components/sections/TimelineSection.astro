@@ -1,0 +1,16 @@
+---
+import SectionHeading from "@/components/shared/SectionHeading.astro";
+import { Timeline } from "@/components/timeline/Timeline";
+import { milestones } from "@/data/timeline";
+---
+
+<section id="journey" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
+  <div data-reveal class="mb-16 text-center md:mb-24">
+    <SectionHeading
+      title="The journey so far"
+      subtitle="How I got from my first console.log to designing cloud systems for a living."
+    />
+  </div>
+
+  <Timeline client:load milestones={milestones} />
+</section>

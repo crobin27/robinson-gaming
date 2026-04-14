@@ -6,8 +6,8 @@ const homeHref = (hash: string) => (isHome ? hash : `/${hash}`);
 
 const navLinks = [
   { href: homeHref("#about"), label: "About" },
-  { href: homeHref("#skills"), label: "Skills" },
-  { href: homeHref("#resume"), label: "Resume" },
+  { href: homeHref("#skills"), label: "Stack" },
+  { href: homeHref("#journey"), label: "Journey" },
   { href: "/photography", label: "Photography" },
   { href: homeHref("#contact"), label: "Contact" },
 ];
@@ -41,7 +41,7 @@ const navLinks = [
 
     <!-- Theme toggle + mobile menu (React island) -->
     <div class="relative flex items-center">
-      <NavbarClient client:load />
+      <NavbarClient client:load navLinks={navLinks} />
     </div>
   </div>
 </header>
