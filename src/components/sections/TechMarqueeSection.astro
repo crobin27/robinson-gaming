@@ -1,9 +1,30 @@
 ---
 import SectionHeading from "@/components/shared/SectionHeading.astro";
-import { techRowSoftware, techRowInfra } from "@/data/tech";
+import { techRow1, techRow2, popDelay, type TechItem } from "@/data/tech";
 
-const row1 = [...techRowSoftware, ...techRowSoftware];
-const row2 = [...techRowInfra, ...techRowInfra];
+// Per-row duration is derived from item count to keep both rows at the same
+// visual scroll speed regardless of how many icons each carries.
+const ITEM_WIDTH_PX = 120; // icon slot + gap
+const SPEED_PX_PER_SEC = 38;
+const POP_CYCLE_SECONDS = 7;
+
+function rowDuration(count: number): number {
+  return (
+    Math.round(((count * ITEM_WIDTH_PX) / 2 / SPEED_PX_PER_SEC) * 100) / 100
+  );
+}
+
+const row1 = [...techRow1, ...techRow1];
+const row2 = [...techRow2, ...techRow2];
+
+const row1Duration = rowDuration(techRow1.length);
+const row2Duration = rowDuration(techRow2.length);
+
+// Flatten into one shared index space so each icon gets a unique pop delay
+// even though we render two copies for the seamless loop.
+function delayFor(globalIndex: number): number {
+  return popDelay(globalIndex, POP_CYCLE_SECONDS);
+}
 ---
 
 <section id="skills" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
@@ -16,41 +37,65 @@ const row2 = [...techRowInfra, ...techRowInfra];
 
   <div data-reveal data-reveal-delay="1" class="marquee-wrapper space-y-2">
     <div class="marquee-row">
-      <div class="marquee-track">
+      <div
+        class="marquee-track"
+        style={`animation-duration: ${row1Duration}s;`}
+      >
         {
-          row1.map((tech) => (
-            <div class="marquee-item" aria-label={tech.name}>
-              <img
-                src={tech.icon}
-                alt={tech.name}
-                loading="lazy"
-                decoding="async"
-                width="48"
-                height="48"
-              />
-              <span class="marquee-label">{tech.name}</span>
-            </div>
-          ))
+          row1.map((tech: TechItem, i: number) => {
+            const delay = delayFor(i);
+            return tech.src === null ? (
+              <div class="marquee-item" aria-label={tech.name}>
+                <div class="missing-tile">{tech.name}</div>
+                <span class="marquee-label">{tech.name}</span>
+              </div>
+            ) : (
+              <div class="marquee-item" aria-label={tech.name}>
+                <img
+                  src={tech.src}
+                  alt={tech.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="48"
+                  height="48"
+                  style={`animation-delay: ${delay}s;`}
+                />
+                <span class="marquee-label">{tech.name}</span>
+              </div>
+            );
+          })
         }
       </div>
     </div>
 
     <div class="marquee-row">
-      <div class="marquee-track marquee-track-reverse">
+      <div
+        class="marquee-track marquee-track-reverse"
+        style={`animation-duration: ${row2Duration}s;`}
+      >
         {
-          row2.map((tech) => (
-            <div class="marquee-item" aria-label={tech.name}>
-              <img
-                src={tech.icon}
-                alt={tech.name}
-                loading="lazy"
-                decoding="async"
-                width="48"
-                height="48"
-              />
-              <span class="marquee-label">{tech.name}</span>
-            </div>
-          ))
+          row2.map((tech: TechItem, i: number) => {
+            const delay = delayFor(i + techRow1.length * 2);
+            return tech.src === null ? (
+              <div class="marquee-item" aria-label={tech.name}>
+                <div class="missing-tile">{tech.name}</div>
+                <span class="marquee-label">{tech.name}</span>
+              </div>
+            ) : (
+              <div class="marquee-item" aria-label={tech.name}>
+                <img
+                  src={tech.src}
+                  alt={tech.name}
+                  loading="lazy"
+                  decoding="async"
+                  width="48"
+                  height="48"
+                  style={`animation-delay: ${delay}s;`}
+                />
+                <span class="marquee-label">{tech.name}</span>
+              </div>
+            );
+          })
         }
       </div>
     </div>
@@ -60,20 +105,20 @@ const row2 = [...techRowInfra, ...techRowInfra];
 <style>
   .marquee-wrapper {
     --marquee-gap: 3.5rem;
-    --marquee-duration: 45s;
+    --pop-cycle: 7s;
     position: relative;
     mask-image: linear-gradient(
       to right,
       transparent 0,
-      #000 8%,
-      #000 92%,
+      #000 6%,
+      #000 94%,
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0,
-      #000 8%,
-      #000 92%,
+      #000 6%,
+      #000 94%,
       transparent 100%
     );
   }
@@ -89,7 +134,9 @@ const row2 = [...techRowInfra, ...techRowInfra];
     align-items: center;
     gap: var(--marquee-gap);
     width: max-content;
-    animation: marquee-scroll var(--marquee-duration) linear infinite;
+    animation-name: marquee-scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     will-change: transform;
   }
 
@@ -126,14 +173,34 @@ const row2 = [...techRowInfra, ...techRowInfra];
     height: 3rem;
     object-fit: contain;
     filter: grayscale(1) brightness(1.9) opacity(0.55);
+    transform: scale(1);
+    animation-name: pop-color;
+    animation-duration: var(--pop-cycle);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
     transition:
-      filter 0.4s ease,
-      transform 0.4s ease;
+      filter 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  @keyframes pop-color {
+    0%,
+    86%,
+    100% {
+      filter: grayscale(1) brightness(1.9) opacity(0.55);
+      transform: scale(1);
+    }
+    90%,
+    94% {
+      filter: grayscale(0) brightness(1) opacity(1);
+      transform: scale(1.08);
+    }
   }
 
   .marquee-item:hover img {
+    animation: none;
     filter: grayscale(0) brightness(1) opacity(1);
-    transform: translateY(-4px) scale(1.08);
+    transform: translateY(-4px) scale(1.1);
   }
 
   .marquee-label {
@@ -154,9 +221,42 @@ const row2 = [...techRowInfra, ...techRowInfra];
     transform: translateY(0);
   }
 
+  /* Missing-icon placeholder — bright, obviously different so missing entries
+     are easy to spot and replace. */
+  .missing-tile {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border: 1.5px dashed var(--primary);
+    border-radius: 0.5rem;
+    color: var(--primary);
+    font-size: 0.55rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    background: color-mix(in oklab, var(--primary) 8%, transparent);
+  }
+
+  .marquee-item:hover .missing-tile {
+    transform: translateY(-4px) scale(1.08);
+    background: color-mix(in oklab, var(--primary) 18%, transparent);
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;
+    }
+    .marquee-item img {
+      animation: none;
+      filter: grayscale(0) brightness(1) opacity(0.85);
     }
   }
 </style>
