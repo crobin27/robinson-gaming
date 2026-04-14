@@ -44,3 +44,7 @@ export function cldDownload(publicId: string, filename?: string): string {
   const attach = filename ? `fl_attachment:${filename}` : "fl_attachment";
   return cldUrl(publicId, `${attach},q_90,f_jpg`);
 }
+
+export function cldFullRes(publicId: string): string {
+  return cldUrl(publicId, "q_auto,f_auto");
+}

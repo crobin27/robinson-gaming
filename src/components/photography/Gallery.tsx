@@ -4,7 +4,12 @@ import "react-photo-album/rows.css";
 import Lightbox from "yet-another-react-lightbox";
 import Download from "yet-another-react-lightbox/plugins/download";
 import "yet-another-react-lightbox/styles.css";
-import { cldDownload, cldForVariant, type CropVariant } from "@/lib/cloudinary";
+import {
+  cldDownload,
+  cldForVariant,
+  cldFullRes,
+  type CropVariant,
+} from "@/lib/cloudinary";
 import type { Photo } from "@/data/photos";
 
 interface GalleryProps {
@@ -47,6 +52,7 @@ interface AlbumPhoto {
   srcSet: { src: string; width: number; height: number }[];
   download: string;
   downloadFilename: string;
+  openUrl: string;
 }
 
 function buildAlbum(photos: Photo[]): AlbumPhoto[] {
@@ -69,6 +75,7 @@ function buildAlbum(photos: Photo[]): AlbumPhoto[] {
       srcSet,
       download: cldDownload(photo.publicId, filename),
       downloadFilename: `${filename}.jpg`,
+      openUrl: cldFullRes(photo.publicId),
     };
   });
 }
@@ -116,7 +123,30 @@ export function Gallery({ photos }: GalleryProps) {
             { viewport: "(max-width: 1200px)", size: "calc(100vw - 48px)" },
           ],
         }}
+        render={{
+          wrapper: (props) => {
+            const { className, ...rest } =
+              props as React.HTMLAttributes<HTMLDivElement>;
+            return (
+              <div
+                {...rest}
+                className={`${className ?? ""} group photo-hover-wrapper`}
+              />
+            );
+          },
+          extras: (_, { photo }) => {
+            const albumPhoto = photo as AlbumPhoto;
+            return (
+              <PhotoHoverActions
+                downloadUrl={albumPhoto.download}
+                downloadFilename={albumPhoto.downloadFilename}
+                openUrl={albumPhoto.openUrl}
+              />
+            );
+          },
+        }}
       />
+      <style>{photoHoverStyles}</style>
       <Lightbox
         open={index >= 0}
         index={index < 0 ? 0 : index}
@@ -134,3 +164,120 @@ export function Gallery({ photos }: GalleryProps) {
     </>
   );
 }
+
+interface PhotoHoverActionsProps {
+  downloadUrl: string;
+  downloadFilename: string;
+  openUrl: string;
+}
+
+function PhotoHoverActions({
+  downloadUrl,
+  downloadFilename,
+  openUrl,
+}: PhotoHoverActionsProps) {
+  const stop = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div className="photo-hover-overlay">
+      <a
+        href={downloadUrl}
+        download={downloadFilename}
+        onClick={stop}
+        onMouseDown={stop}
+        aria-label="Download full resolution"
+        className="photo-hover-btn"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" x2="12" y1="15" y2="3" />
+        </svg>
+      </a>
+      <a
+        href={openUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={stop}
+        onMouseDown={stop}
+        aria-label="Open full size in new tab"
+        className="photo-hover-btn"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M15 3h6v6" />
+          <path d="M10 14 21 3" />
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+        </svg>
+      </a>
+    </div>
+  );
+}
+
+const photoHoverStyles = `
+  .photo-hover-wrapper {
+    position: relative;
+  }
+  .photo-hover-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .photo-hover-wrapper:hover .photo-hover-overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .photo-hover-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    pointer-events: auto;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+  }
+  .photo-hover-btn:hover {
+    background: rgba(0, 0, 0, 0.85);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
+  }
+  @media (hover: none) {
+    .photo-hover-overlay {
+      display: none;
+    }
+  }
+`;
