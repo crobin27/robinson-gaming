@@ -1,0 +1,160 @@
+---
+import SectionHeading from "@/components/shared/SectionHeading.astro";
+import { techRowSoftware, techRowInfra } from "@/data/tech";
+
+const row1 = [...techRowSoftware, ...techRowSoftware];
+const row2 = [...techRowInfra, ...techRowInfra];
+---
+
+<section id="skills" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
+  <div data-reveal class="mb-12 text-center md:text-left">
+    <SectionHeading
+      title="Tech I build with"
+      subtitle="The tools, languages, and platforms I reach for when shipping software and running infrastructure."
+    />
+  </div>
+
+  <div data-reveal data-reveal-delay="1" class="marquee-wrapper space-y-8">
+    <div class="marquee-row">
+      <div class="marquee-track">
+        {
+          row1.map((tech) => (
+            <div class="marquee-item" aria-label={tech.name}>
+              <img
+                src={tech.icon}
+                alt={tech.name}
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+              />
+              <span class="marquee-label">{tech.name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="marquee-row">
+      <div class="marquee-track marquee-track-reverse">
+        {
+          row2.map((tech) => (
+            <div class="marquee-item" aria-label={tech.name}>
+              <img
+                src={tech.icon}
+                alt={tech.name}
+                loading="lazy"
+                decoding="async"
+                width="48"
+                height="48"
+              />
+              <span class="marquee-label">{tech.name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .marquee-wrapper {
+    --marquee-gap: 3.5rem;
+    --marquee-duration: 45s;
+    position: relative;
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 8%,
+      #000 92%,
+      transparent 100%
+    );
+  }
+
+  .marquee-row {
+    overflow: hidden;
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: var(--marquee-gap);
+    width: max-content;
+    animation: marquee-scroll var(--marquee-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-track-reverse {
+    animation-direction: reverse;
+  }
+
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - var(--marquee-gap) / 2));
+    }
+  }
+
+  .marquee-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 4.5rem;
+    flex-shrink: 0;
+    cursor: default;
+  }
+
+  .marquee-item img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    filter: grayscale(1) brightness(1.9) opacity(0.55);
+    transition:
+      filter 0.4s ease,
+      transform 0.4s ease;
+  }
+
+  .marquee-item:hover img {
+    filter: grayscale(0) brightness(1) opacity(1);
+    transform: translateY(-4px) scale(1.08);
+  }
+
+  .marquee-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--muted-foreground);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .marquee-item:hover .marquee-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+</style>
