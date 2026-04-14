@@ -10,7 +10,8 @@ const iconify = (set: string, slug: string) =>
 const logos = (slug: string) => iconify("logos", slug);
 const si = (slug: string) => iconify("simple-icons", slug);
 
-// Row 1 — 26 icons, mixed across languages, frameworks, AWS, tooling.
+// Row 1 — 30 icons, mixed across languages, frameworks, AWS, tooling,
+// the Microsoft stack I run at work, and the hardware I tinker with.
 export const techRow1: TechItem[] = [
   { name: "TypeScript", src: logos("typescript") },
   { name: "Python", src: logos("python") },
@@ -22,13 +23,15 @@ export const techRow1: TechItem[] = [
   { name: "Tailwind CSS", src: logos("tailwindcss") },
   { name: "Nest.js", src: logos("nestjs") },
   { name: "FastAPI", src: logos("fastapi") },
-  { name: "Swagger", src: logos("swagger") },
   { name: "Prisma", src: logos("prisma") },
   { name: "Supabase", src: logos("supabase") },
   { name: "Postgres", src: logos("postgresql") },
+  { name: "SQL Server", src: si("microsoftsqlserver") },
+  { name: "Linux", src: si("linux") },
   { name: "Jest", src: logos("jest") },
   { name: "Playwright", src: logos("playwright") },
   { name: "OpenAI", src: logos("openai-icon") },
+  { name: "Google Maps", src: logos("google-maps") },
   { name: "EC2", src: logos("aws-ec2") },
   { name: "Lambda", src: logos("aws-lambda") },
   { name: "RDS", src: logos("aws-rds") },
@@ -36,11 +39,13 @@ export const techRow1: TechItem[] = [
   { name: "Terraform", src: logos("terraform-icon") },
   { name: "ESP32", src: null },
   { name: "FPGA", src: null },
+  { name: "Procore", src: null },
   { name: "VS Code", src: logos("visual-studio-code") },
   { name: "GitHub", src: logos("github-icon") },
+  { name: "Swagger", src: logos("swagger") },
 ];
 
-// Row 2 — 26 icons, mixed the same way.
+// Row 2 — 30 icons.
 export const techRow2: TechItem[] = [
   { name: "JavaScript", src: logos("javascript") },
   { name: "Go", src: logos("go") },
@@ -58,6 +63,9 @@ export const techRow2: TechItem[] = [
   { name: "Clerk", src: si("clerk") },
   { name: "pytest", src: si("pytest") },
   { name: "Claude", src: logos("claude") },
+  { name: "Microsoft Graph", src: null },
+  { name: "Excel", src: si("microsoftexcel") },
+  { name: "Windows", src: logos("microsoft-windows-icon") },
   { name: "AWS", src: logos("aws") },
   { name: "S3", src: logos("aws-s3") },
   { name: "Fargate", src: logos("aws-fargate") },
@@ -65,6 +73,7 @@ export const techRow2: TechItem[] = [
   { name: "Docker", src: logos("docker-icon") },
   { name: "Cloudflare", src: logos("cloudflare") },
   { name: "STM32", src: null },
+  { name: "Raken", src: null },
   { name: "Figma", src: logos("figma") },
   { name: "Cursor", src: si("cursor") },
   { name: "Vercel", src: logos("vercel-icon") },
