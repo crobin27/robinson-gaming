@@ -42,7 +42,15 @@ const row2Duration = rowDuration(techRow2.length);
                 <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
-              <div class="marquee-item" aria-label={tech.name}>
+              <div
+                class:list={["marquee-item", { "tint-dark": tech.tintDark }]}
+                style={
+                  tech.sizeBoost
+                    ? `--size-boost: ${tech.sizeBoost};`
+                    : undefined
+                }
+                aria-label={tech.name}
+              >
                 <img
                   src={tech.src}
                   alt={tech.name}
@@ -72,7 +80,15 @@ const row2Duration = rowDuration(techRow2.length);
                 <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
-              <div class="marquee-item" aria-label={tech.name}>
+              <div
+                class:list={["marquee-item", { "tint-dark": tech.tintDark }]}
+                style={
+                  tech.sizeBoost
+                    ? `--size-boost: ${tech.sizeBoost};`
+                    : undefined
+                }
+                aria-label={tech.name}
+              >
                 <img
                   src={tech.src}
                   alt={tech.name}
@@ -98,15 +114,15 @@ const row2Duration = rowDuration(techRow2.length);
     mask-image: linear-gradient(
       to right,
       transparent 0,
-      #000 6%,
-      #000 94%,
+      #000 4%,
+      #000 96%,
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0,
-      #000 6%,
-      #000 94%,
+      #000 4%,
+      #000 96%,
       transparent 100%
     );
   }
@@ -162,15 +178,16 @@ const row2Duration = rowDuration(techRow2.length);
     object-fit: contain;
     filter: none;
     opacity: 0.92;
-    transform: scale(1);
+    transform: scale(var(--size-boost, 1));
     transition:
       opacity 0.25s ease,
-      transform 0.25s ease;
+      transform 0.25s ease,
+      filter 0.25s ease;
   }
 
   .marquee-item:hover img {
     opacity: 1;
-    transform: translateY(-4px) scale(1.1);
+    transform: translateY(-4px) scale(calc(var(--size-boost, 1) * 1.1));
   }
 
   .marquee-label {

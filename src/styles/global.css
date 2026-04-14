@@ -130,6 +130,11 @@
   }
 }
 
+/* ─── Tech marquee: tint dark logos white in dark mode ────────── */
+.dark .marquee-item.tint-dark img {
+  filter: brightness(0) invert(1);
+}
+
 /* ─── Aurora hero background ─────────────────────────────────── */
 .aurora-blob {
   position: absolute;
