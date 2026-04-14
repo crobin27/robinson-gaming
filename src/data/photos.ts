@@ -16,6 +16,7 @@ export interface Photo {
   camera?: string;
   lens?: string;
   category: PhotoCategory;
+  featured?: boolean;
 }
 
 export const photos: Photo[] = [
@@ -26,6 +27,7 @@ export const photos: Photo[] = [
     height: 3944,
     takenAt: "2025-03-17",
     category: "landscape",
+    featured: true,
   },
   {
     id: "photo-002",
@@ -42,6 +44,7 @@ export const photos: Photo[] = [
     height: 4284,
     takenAt: "2025-08-15",
     category: "landscape",
+    featured: true,
   },
   {
     id: "photo-004",
@@ -58,6 +61,7 @@ export const photos: Photo[] = [
     height: 3000,
     takenAt: "2025-08-15",
     category: "landscape",
+    featured: true,
   },
   {
     id: "photo-006",
@@ -74,6 +78,7 @@ export const photos: Photo[] = [
     height: 3060,
     takenAt: "2025-09-01",
     category: "landscape",
+    featured: true,
   },
 ];
 
