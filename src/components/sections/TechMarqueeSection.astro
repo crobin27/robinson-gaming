@@ -46,12 +46,9 @@ const row2Duration = rowDuration(techRow2.length);
         {
           row1.map((tech: TechItem) => {
             return tech.src === null ? (
-              <div
-                class="marquee-item"
-                title={tech.name}
-                aria-label={tech.name}
-              >
+              <div class="marquee-item" aria-label={tech.name}>
                 <div class="missing-tile">{tech.name}</div>
+                <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
               <div
@@ -61,7 +58,6 @@ const row2Duration = rowDuration(techRow2.length);
                     ? `--size-boost: ${tech.sizeBoost};`
                     : undefined
                 }
-                title={tech.name}
                 aria-label={tech.name}
               >
                 <img
@@ -72,6 +68,7 @@ const row2Duration = rowDuration(techRow2.length);
                   width="48"
                   height="48"
                 />
+                <span class="marquee-label">{tech.name}</span>
               </div>
             );
           })
@@ -87,12 +84,9 @@ const row2Duration = rowDuration(techRow2.length);
         {
           row2.map((tech: TechItem) => {
             return tech.src === null ? (
-              <div
-                class="marquee-item"
-                title={tech.name}
-                aria-label={tech.name}
-              >
+              <div class="marquee-item" aria-label={tech.name}>
                 <div class="missing-tile">{tech.name}</div>
+                <span class="marquee-label">{tech.name}</span>
               </div>
             ) : (
               <div
@@ -102,7 +96,6 @@ const row2Duration = rowDuration(techRow2.length);
                     ? `--size-boost: ${tech.sizeBoost};`
                     : undefined
                 }
-                title={tech.name}
                 aria-label={tech.name}
               >
                 <img
@@ -113,6 +106,7 @@ const row2Duration = rowDuration(techRow2.length);
                   width="48"
                   height="48"
                 />
+                <span class="marquee-label">{tech.name}</span>
               </div>
             );
           })
@@ -199,6 +193,39 @@ const row2Duration = rowDuration(techRow2.length);
   .marquee-item:hover img {
     opacity: 1;
     transform: translateY(-4px) scale(calc(var(--size-boost, 1) * 1.1));
+  }
+
+  /* Hover tooltip — absolutely positioned so it doesn't disturb the
+     fixed-width flex layout that makes the seamless loop work. */
+  .marquee-label {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    translate: -50% -2px;
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: color-mix(
+      in oklab,
+      var(--background) 80%,
+      var(--foreground) 20%
+    );
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.2s ease,
+      translate 0.2s ease;
+    z-index: 5;
+  }
+
+  .marquee-item:hover .marquee-label {
+    opacity: 1;
+    translate: -50% 0;
   }
 
   /* Missing-icon placeholder — bright, obviously different so missing

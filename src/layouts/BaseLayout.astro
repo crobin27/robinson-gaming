@@ -18,15 +18,21 @@ const ogImageUrl = `https://www.robinsongaming.com${ogImage}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Dark mode init: runs before paint to avoid flash. Defaults to dark. -->
+    <!-- Dark mode init: runs before paint to avoid flash. Defaults to dark.
+         Re-runs on astro:after-swap so the .dark class survives Astro
+         View Transitions (otherwise the swapped <html> wipes the class). -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem("theme");
-        if (stored === "light") {
-          document.documentElement.classList.remove("dark");
-        } else {
-          document.documentElement.classList.add("dark");
+        function applyTheme() {
+          var stored = localStorage.getItem("theme");
+          if (stored === "light") {
+            document.documentElement.classList.remove("dark");
+          } else {
+            document.documentElement.classList.add("dark");
+          }
         }
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
       })();
     </script>
 
