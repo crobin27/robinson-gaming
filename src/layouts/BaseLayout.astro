@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -31,8 +32,10 @@ const ogImageUrl = `https://www.robinsongaming.com${ogImage}`;
 
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/images/favicon.png" type="image/png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonicalUrl} />
+
+    <ClientRouter />
 
     <!-- Theme color for browser chrome -->
     <meta

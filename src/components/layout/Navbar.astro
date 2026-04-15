@@ -36,7 +36,9 @@ const navLinks = [
         navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            data-nav-link
+            data-active="false"
+            class="nav-link text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
           >
             {link.label}
           </a>
@@ -50,3 +52,83 @@ const navLinks = [
     </div>
   </div>
 </header>
+
+<script is:inline>
+  // Active section highlighter — observes homepage sections via
+  // IntersectionObserver and toggles data-active on the matching nav links.
+  // Works alongside Astro View Transitions by re-initialising on
+  // astro:page-load.
+  (function () {
+    var currentObserver = null;
+
+    function initSectionHighlighter() {
+      if (currentObserver) {
+        currentObserver.disconnect();
+        currentObserver = null;
+      }
+
+      var navLinks = document.querySelectorAll("[data-nav-link]");
+      if (!navLinks.length) return;
+
+      var linkBySectionId = new Map();
+      navLinks.forEach(function (link) {
+        var href = link.getAttribute("href") || "";
+        var hashIndex = href.indexOf("#");
+        if (hashIndex < 0) return;
+        var id = href.slice(hashIndex + 1);
+        if (!id) return;
+        var existing = linkBySectionId.get(id) || [];
+        existing.push(link);
+        linkBySectionId.set(id, existing);
+      });
+
+      var sections = [];
+      linkBySectionId.forEach(function (_, id) {
+        var el = document.getElementById(id);
+        if (el) sections.push(el);
+      });
+      if (!sections.length) return;
+
+      var activeId = null;
+      function setActive(id) {
+        if (id === activeId) return;
+        activeId = id;
+        navLinks.forEach(function (link) {
+          link.setAttribute("data-active", "false");
+        });
+        if (!id) return;
+        var matches = linkBySectionId.get(id) || [];
+        matches.forEach(function (link) {
+          link.setAttribute("data-active", "true");
+        });
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var visible = entries
+            .filter(function (e) {
+              return e.isIntersecting;
+            })
+            .sort(function (a, b) {
+              return a.boundingClientRect.top - b.boundingClientRect.top;
+            });
+          if (visible.length > 0) {
+            setActive(visible[0].target.id);
+          }
+        },
+        {
+          rootMargin: "-30% 0px -55% 0px",
+          threshold: 0,
+        },
+      );
+
+      sections.forEach(function (s) {
+        observer.observe(s);
+      });
+      currentObserver = observer;
+    }
+
+    initSectionHighlighter();
+    document.addEventListener("astro:page-load", initSectionHighlighter);
+  })();
+</script>

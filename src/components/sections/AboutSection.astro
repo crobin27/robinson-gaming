@@ -26,17 +26,32 @@ const outsideWork = [
 
 const iconifyLogos = (slug: string) =>
   `https://api.iconify.design/logos:${slug}.svg`;
-const iconifySi = (slug: string) =>
-  `https://api.iconify.design/simple-icons:${slug}.svg`;
+const iconifySkill = (slug: string) =>
+  `https://api.iconify.design/skill-icons:${slug}.svg`;
 
-const stackIcons = [
-  { name: "AWS", src: iconifyLogos("aws") },
+interface StackIcon {
+  name: string;
+  src: string;
+  /** Optional alternate src for dark mode (skill-icons style theme variants). */
+  srcDark?: string;
+}
+
+const stackIcons: StackIcon[] = [
+  {
+    name: "AWS",
+    src: iconifySkill("aws-light"),
+    srcDark: iconifySkill("aws-dark"),
+  },
   { name: "TypeScript", src: iconifyLogos("typescript") },
   { name: "Postgres", src: iconifyLogos("postgresql") },
   { name: "Windows", src: iconifyLogos("microsoft-windows-icon") },
-  { name: "Linux", src: iconifySi("linux") },
+  { name: "Linux", src: iconifyLogos("tux") },
   { name: "Docker", src: iconifyLogos("docker-icon") },
-  { name: "GitHub", src: iconifyLogos("github-icon") },
+  {
+    name: "GitHub",
+    src: iconifySkill("github-light"),
+    srcDark: iconifySkill("github-dark"),
+  },
   { name: "Python", src: iconifyLogos("python") },
 ];
 ---
@@ -226,12 +241,31 @@ const stackIcons = [
         {
           stackIcons.map((icon) => (
             <div class="stack-icon" title={icon.name}>
-              <img
-                src={icon.src}
-                alt={icon.name}
-                loading="lazy"
-                decoding="async"
-              />
+              {icon.srcDark ? (
+                <>
+                  <img
+                    src={icon.src}
+                    alt={icon.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="block dark:hidden"
+                  />
+                  <img
+                    src={icon.srcDark}
+                    alt={icon.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="hidden dark:block"
+                  />
+                </>
+              ) : (
+                <img
+                  src={icon.src}
+                  alt={icon.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
             </div>
           ))
         }

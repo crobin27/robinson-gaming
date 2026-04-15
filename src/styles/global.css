@@ -135,6 +135,11 @@
   filter: brightness(0) invert(1);
 }
 
+/* ─── Nav: active section link ────────────────────────────────── */
+.nav-link[data-active="true"] {
+  color: var(--primary);
+}
+
 /* ─── Aurora hero background ─────────────────────────────────── */
 .aurora-blob {
   position: absolute;
