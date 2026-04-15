@@ -44,6 +44,7 @@
     "yet-another-react-lightbox": "^3.31.0"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/react": "^18.3.7",
     "@types/react-dom": "^18.3.2",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
