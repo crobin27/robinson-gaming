@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useSyncExternalStore } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Sun02Icon, Moon02Icon } from "@hugeicons/core-free-icons";
 import { Button } from "@/components/ui/button";
@@ -11,15 +11,29 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-export function ThemeToggle() {
-  // Lazy initializer reads localStorage once on mount (client-only island).
-  // Defaults to dark — matches the BaseLayout inline script behavior.
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === "undefined") return true;
-    return localStorage.getItem("theme") !== "light";
-  });
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
 
-  function toggle() {
+function getThemeSnapshot(): boolean {
+  return localStorage.getItem("theme") !== "light";
+}
+
+function getServerSnapshot(): boolean {
+  return true;
+}
+
+export function ThemeToggle() {
+  const isDarkFromStorage = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getServerSnapshot,
+  );
+
+  const [isDark, setIsDark] = useState(isDarkFromStorage);
+
+  const toggle = useCallback(() => {
     const next = !isDark;
     setIsDark(next);
     localStorage.setItem("theme", next ? "dark" : "light");
@@ -28,7 +42,7 @@ export function ThemeToggle() {
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }
+  }, [isDark]);
 
   return (
     <TooltipProvider>
