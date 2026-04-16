@@ -60,14 +60,37 @@ const row2Duration = rowDuration(techRow2.length);
                 }
                 aria-label={tech.name}
               >
-                <img
-                  src={tech.src}
-                  alt={tech.name}
-                  loading="lazy"
-                  decoding="async"
-                  width="48"
-                  height="48"
-                />
+                {tech.srcDark ? (
+                  <>
+                    <img
+                      src={tech.src}
+                      alt={tech.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="48"
+                      height="48"
+                      class="block dark:hidden"
+                    />
+                    <img
+                      src={tech.srcDark}
+                      alt={tech.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="48"
+                      height="48"
+                      class="hidden dark:block"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={tech.src}
+                    alt={tech.name}
+                    loading="lazy"
+                    decoding="async"
+                    width="48"
+                    height="48"
+                  />
+                )}
                 <span class="marquee-label">{tech.name}</span>
               </div>
             );
@@ -98,14 +121,37 @@ const row2Duration = rowDuration(techRow2.length);
                 }
                 aria-label={tech.name}
               >
-                <img
-                  src={tech.src}
-                  alt={tech.name}
-                  loading="lazy"
-                  decoding="async"
-                  width="48"
-                  height="48"
-                />
+                {tech.srcDark ? (
+                  <>
+                    <img
+                      src={tech.src}
+                      alt={tech.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="48"
+                      height="48"
+                      class="block dark:hidden"
+                    />
+                    <img
+                      src={tech.srcDark}
+                      alt={tech.name}
+                      loading="lazy"
+                      decoding="async"
+                      width="48"
+                      height="48"
+                      class="hidden dark:block"
+                    />
+                  </>
+                ) : (
+                  <img
+                    src={tech.src}
+                    alt={tech.name}
+                    loading="lazy"
+                    decoding="async"
+                    width="48"
+                    height="48"
+                  />
+                )}
                 <span class="marquee-label">{tech.name}</span>
               </div>
             );
@@ -139,7 +185,11 @@ const row2Duration = rowDuration(techRow2.length);
   .marquee-row {
     overflow-x: clip;
     overflow-y: visible;
-    padding-block: 1.25rem;
+    padding-block: 1.5rem;
+  }
+
+  .marquee-row:last-child {
+    padding-bottom: 2.5rem;
   }
 
   .marquee-track {
@@ -220,7 +270,7 @@ const row2Duration = rowDuration(techRow2.length);
     transition:
       opacity 0.2s ease,
       translate 0.2s ease;
-    z-index: 5;
+    z-index: 20;
   }
 
   .marquee-item:hover .marquee-label {

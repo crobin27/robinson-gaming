@@ -2,6 +2,8 @@ export interface TechItem {
   name: string;
   /** Full icon URL or null to render a "missing" placeholder. */
   src: string | null;
+  /** Alternate icon URL used in dark mode (skill-icons themed variant). */
+  srcDark?: string;
   /** Visual scale multiplier for icons that render too small in their viewBox. */
   sizeBoost?: number;
   /** Apply a white tint filter in dark mode for black/dark logos. */
@@ -24,11 +26,19 @@ export const techRow1: TechItem[] = [
   { name: "pnpm", src: logos("pnpm") },
   { name: "ESLint", src: logos("eslint") },
   { name: "Next.js", src: logos("nextjs-icon"), tintDark: true },
-  { name: "Tailwind CSS", src: logos("tailwindcss"), tintDark: true },
+  {
+    name: "Tailwind CSS",
+    src: iconify("skill-icons", "tailwindcss-light"),
+    srcDark: iconify("skill-icons", "tailwindcss-dark"),
+  },
   { name: "Nest.js", src: logos("nestjs") },
   { name: "FastAPI", src: logos("fastapi") },
-  { name: "Prisma", src: logos("prisma") },
-  { name: "Supabase", src: logos("supabase") },
+  { name: "Prisma", src: logos("prisma"), tintDark: true },
+  {
+    name: "Supabase",
+    src: iconify("skill-icons", "supabase-light"),
+    srcDark: iconify("skill-icons", "supabase-dark"),
+  },
   { name: "Postgres", src: logos("postgresql") },
   { name: "SQL Server", src: si("microsoftsqlserver") },
   { name: "Linux", src: si("linux") },
