@@ -55,7 +55,11 @@ export const techRow1: TechItem[] = [
   { name: "ESP32", src: null },
   { name: "FPGA", src: null },
   { name: "VS Code", src: logos("visual-studio-code") },
-  { name: "GitHub", src: logos("github-icon"), tintDark: true },
+  {
+    name: "GitHub",
+    src: iconify("skill-icons", "github-light"),
+    srcDark: iconify("skill-icons", "github-dark"),
+  },
   { name: "Swagger", src: logos("swagger") },
 ];
 
@@ -67,10 +71,18 @@ export const techRow2: TechItem[] = [
   { name: "Bash", src: logos("bash-icon") },
   { name: "Vite", src: logos("vitejs") },
   { name: "React", src: logos("react") },
-  { name: "Astro", src: logos("astro"), sizeBoost: 1.25, tintDark: true },
+  { name: "Astro", src: iconify("skill-icons", "astro"), sizeBoost: 1.25 },
   { name: "shadcn/ui", src: si("shadcnui"), tintDark: true },
-  { name: "Express", src: logos("express"), tintDark: true },
-  { name: "Flask", src: logos("flask"), tintDark: true },
+  {
+    name: "Express",
+    src: iconify("skill-icons", "expressjs-light"),
+    srcDark: iconify("skill-icons", "expressjs-dark"),
+  },
+  {
+    name: "Flask",
+    src: iconify("skill-icons", "flask-light"),
+    srcDark: iconify("skill-icons", "flask-dark"),
+  },
   { name: "Postman", src: logos("postman"), sizeBoost: 1.3 },
   { name: "Zod", src: logos("zod") },
   { name: "Firebase", src: logos("firebase"), sizeBoost: 1.3 },
