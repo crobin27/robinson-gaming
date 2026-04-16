@@ -33,7 +33,11 @@ export const techRow1: TechItem[] = [
   },
   { name: "Nest.js", src: logos("nestjs") },
   { name: "FastAPI", src: logos("fastapi") },
-  { name: "Prisma", src: logos("prisma"), tintDark: true },
+  {
+    name: "Prisma",
+    src: si("prisma") + "?color=%232D3748",
+    srcDark: si("prisma") + "?color=%23ffffff",
+  },
   {
     name: "Supabase",
     src: iconify("skill-icons", "supabase-light"),
@@ -110,9 +114,22 @@ export const techRow2: TechItem[] = [
   { name: "Fargate", src: logos("aws-fargate") },
   { name: "IAM", src: logos("aws-iam") },
   { name: "Docker", src: logos("docker-icon") },
-  { name: "Cloudflare", src: logos("cloudflare"), sizeBoost: 1.3 },
+  {
+    name: "Cloudflare",
+    src: iconify("skill-icons", "cloudflare-light"),
+    srcDark: iconify("skill-icons", "cloudflare-dark"),
+    sizeBoost: 1.3,
+  },
   { name: "STM32", src: null },
   { name: "Figma", src: logos("figma") },
-  { name: "Cursor", src: si("cursor"), tintDark: true },
-  { name: "Vercel", src: logos("vercel-icon"), tintDark: true },
+  {
+    name: "Cursor",
+    src: si("cursor") + "?color=%23000000",
+    srcDark: si("cursor") + "?color=%23ffffff",
+  },
+  {
+    name: "Vercel",
+    src: iconify("skill-icons", "vercel-light"),
+    srcDark: iconify("skill-icons", "vercel-dark"),
+  },
 ];
