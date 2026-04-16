@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useSyncExternalStore } from "react";
+import { useSyncExternalStore, useCallback } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Sun02Icon, Moon02Icon } from "@hugeicons/core-free-icons";
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-function subscribeToTheme(callback: () => void) {
+const THEME_EVENT = "theme-toggle";
+
+function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
+  window.addEventListener(THEME_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(THEME_EVENT, callback);
+  };
 }
 
-function getThemeSnapshot(): boolean {
+function getSnapshot(): boolean {
   return localStorage.getItem("theme") !== "light";
 }
 
@@ -25,23 +31,21 @@ function getServerSnapshot(): boolean {
 }
 
 export function ThemeToggle() {
-  const isDarkFromStorage = useSyncExternalStore(
-    subscribeToTheme,
-    getThemeSnapshot,
+  const isDark = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
     getServerSnapshot,
   );
 
-  const [isDark, setIsDark] = useState(isDarkFromStorage);
-
   const toggle = useCallback(() => {
     const next = !isDark;
-    setIsDark(next);
     localStorage.setItem("theme", next ? "dark" : "light");
     if (next) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+    window.dispatchEvent(new Event(THEME_EVENT));
   }, [isDark]);
 
   return (
