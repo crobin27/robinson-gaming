@@ -44,7 +44,7 @@ export const techRow1: TechItem[] = [
     srcDark: iconify("skill-icons", "supabase-dark"),
   },
   { name: "Postgres", src: logos("postgresql") },
-  { name: "SQL Server", src: si("microsoftsqlserver") },
+  { name: "SQL Server", src: "/logos/mssql.png" },
   {
     name: "Linux",
     src: iconify("skill-icons", "linux-light"),
@@ -52,7 +52,11 @@ export const techRow1: TechItem[] = [
   },
   { name: "Jest", src: logos("jest") },
   { name: "Playwright", src: logos("playwright") },
-  { name: "OpenAI", src: logos("openai-icon"), tintDark: true },
+  {
+    name: "OpenAI",
+    src: si("openai") + "?color=%23000000",
+    srcDark: si("openai") + "?color=%23ffffff",
+  },
   { name: "Google Maps", src: logos("google-maps") },
   { name: "EC2", src: logos("aws-ec2") },
   { name: "Lambda", src: logos("aws-lambda") },
@@ -60,8 +64,8 @@ export const techRow1: TechItem[] = [
   { name: "CloudWatch", src: logos("aws-cloudwatch") },
   { name: "Terraform", src: logos("terraform-icon") },
   { name: "Azure", src: logos("microsoft-azure") },
-  { name: "ESP32", src: null },
-  { name: "FPGA", src: null },
+  { name: "ESP32", src: "/logos/esp32.png" },
+  { name: "FPGA", src: "/logos/fpga.png" },
   { name: "VS Code", src: logos("visual-studio-code") },
   {
     name: "GitHub",
@@ -110,7 +114,7 @@ export const techRow2: TechItem[] = [
     srcDark: si("claude") + "?color=%23D4A574",
     sizeBoost: 1.5,
   },
-  { name: "Microsoft Graph", src: null },
+  { name: "Microsoft Graph", src: "/logos/microsoft-graph.png" },
   {
     name: "Excel",
     src: si("microsoftexcel") + "?color=%23217346",
@@ -128,7 +132,7 @@ export const techRow2: TechItem[] = [
     srcDark: iconify("skill-icons", "cloudflare-dark"),
     sizeBoost: 1.3,
   },
-  { name: "STM32", src: null },
+  { name: "STM32", src: "/logos/stm32.svg" },
   { name: "Figma", src: logos("figma") },
   {
     name: "Cursor",
