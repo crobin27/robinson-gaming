@@ -11,8 +11,15 @@ interface NavLink {
   label: string;
 }
 
+interface SocialLink {
+  href: string;
+  label: string;
+  path: string;
+}
+
 interface NavbarClientProps {
   navLinks?: NavLink[];
+  socialLinks?: SocialLink[];
 }
 
 const defaultLinks: NavLink[] = [
@@ -23,7 +30,10 @@ const defaultLinks: NavLink[] = [
   { href: "/#contact", label: "Contact" },
 ];
 
-export function NavbarClient({ navLinks = defaultLinks }: NavbarClientProps) {
+export function NavbarClient({
+  navLinks = defaultLinks,
+  socialLinks = [],
+}: NavbarClientProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   function closeMenu() {
@@ -67,6 +77,36 @@ export function NavbarClient({ navLinks = defaultLinks }: NavbarClientProps) {
                 {link.label}
               </a>
             ))}
+            {socialLinks.length > 0 && (
+              <div className="mt-2 flex items-center gap-1 border-t border-border pt-3">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    onClick={closeMenu}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={link.path} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            )}
           </nav>
         </div>
       )}
