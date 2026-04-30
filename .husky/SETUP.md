@@ -28,13 +28,13 @@ After cloning the repository or pulling these changes, run:
 
 ```bash
 # Install all dependencies (includes Husky)
-npm install
+pnpm install
 
 # Install Playwright browsers for E2E tests
-npx playwright install
+pnpm exec playwright install
 
 # Verify installation
-npm run test:all
+pnpm test:all
 ```
 
 ## Troubleshooting
@@ -44,15 +44,15 @@ npm run test:all
 If you see errors about missing browser executables, run:
 
 ```bash
-npx playwright install --with-deps
+pnpm exec playwright install --with-deps
 ```
 
 Or install specific browsers:
 
 ```bash
-npx playwright install chromium
-npx playwright install firefox
-npx playwright install webkit
+pnpm exec playwright install chromium
+pnpm exec playwright install firefox
+pnpm exec playwright install webkit
 ```
 
 ### Hooks Not Running
@@ -88,14 +88,14 @@ Run all checks manually without committing:
 
 ```bash
 # Run all checks
-npm run test:all
+pnpm test:all
 
 # Or run individually
-npm run format:check
-npm run lint:all
-npm run typecheck
-npm run test
-npm run test:e2e
+pnpm format:check
+pnpm lint:all
+pnpm typecheck
+pnpm test
+pnpm test:e2e
 ```
 
 ## Debugging E2E Tests
@@ -103,7 +103,7 @@ npm run test:e2e
 For interactive debugging of E2E tests:
 
 ```bash
-npm run test:e2e:ui
+pnpm test:e2e:ui
 ```
 
 This opens the Playwright UI for step-by-step test execution and debugging.

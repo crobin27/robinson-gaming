@@ -2,14 +2,14 @@ echo "🚀 Running pre-push checks..."
 
 # Type checking
 echo "🔍 Type checking..."
-npm run typecheck || {
+pnpm typecheck || {
   echo "❌ Type check failed. Please fix type errors."
   exit 1
 }
 
 # Linting
 echo "🧹 Running linters..."
-npm run lint:all || {
+pnpm lint:all || {
   echo "❌ Linting failed. Please fix the issues above."
   exit 1
 }

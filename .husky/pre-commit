@@ -5,14 +5,14 @@ echo "🔍 Running pre-commit checks..."
 
 # Format check
 echo "📝 Checking code formatting..."
-npm run format:check || {
-  echo "❌ Format check failed. Run 'npm run format' to fix."
+pnpm format:check || {
+  echo "❌ Format check failed. Run 'pnpm format' to fix."
   exit 1
 }
 
 # Linting
 echo "🧹 Running linters..."
-npm run lint:all || {
+pnpm lint:all || {
   echo "❌ Linting failed. Please fix the issues above."
   exit 1
 }
