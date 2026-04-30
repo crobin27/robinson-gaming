@@ -1,0 +1,134 @@
+---
+import { NavbarClient } from "./NavbarClient";
+
+const isHome = Astro.url.pathname === "/";
+const homeHref = (hash: string) => (isHome ? hash : `/${hash}`);
+
+const navLinks = [
+  { href: homeHref("#about"), label: "About" },
+  { href: homeHref("#skills"), label: "Stack" },
+  { href: homeHref("#journey"), label: "Journey" },
+  { href: "/photography", label: "Photography" },
+  { href: homeHref("#contact"), label: "Contact" },
+];
+---
+
+<header
+  class="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-md"
+>
+  <div class="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
+    <!-- Logo — CR monogram -->
+    <a
+      href="/"
+      aria-label="Cole Robinson — home"
+      class="group inline-flex items-center"
+    >
+      <span
+        class="flex h-9 w-9 items-center justify-center rounded-lg border-[1.5px] border-primary/70 bg-primary/10 text-[0.72rem] font-bold tracking-[0.05em] text-primary transition-all duration-200 group-hover:border-primary group-hover:bg-primary/20 group-hover:scale-[1.04]"
+      >
+        CR
+      </span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="hidden items-center gap-6 md:flex">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            data-nav-link
+            data-active="false"
+            class="nav-link text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Theme toggle + mobile menu (React island) -->
+    <div class="relative flex items-center">
+      <NavbarClient client:load navLinks={navLinks} />
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  // Active section highlighter — observes homepage sections via
+  // IntersectionObserver and toggles data-active on the matching nav links.
+  // Works alongside Astro View Transitions by re-initialising on
+  // astro:page-load.
+  (function () {
+    var currentObserver = null;
+
+    function initSectionHighlighter() {
+      if (currentObserver) {
+        currentObserver.disconnect();
+        currentObserver = null;
+      }
+
+      var navLinks = document.querySelectorAll("[data-nav-link]");
+      if (!navLinks.length) return;
+
+      var linkBySectionId = new Map();
+      navLinks.forEach(function (link) {
+        var href = link.getAttribute("href") || "";
+        var hashIndex = href.indexOf("#");
+        if (hashIndex < 0) return;
+        var id = href.slice(hashIndex + 1);
+        if (!id) return;
+        var existing = linkBySectionId.get(id) || [];
+        existing.push(link);
+        linkBySectionId.set(id, existing);
+      });
+
+      var sections = [];
+      linkBySectionId.forEach(function (_, id) {
+        var el = document.getElementById(id);
+        if (el) sections.push(el);
+      });
+      if (!sections.length) return;
+
+      var activeId = null;
+      function setActive(id) {
+        if (id === activeId) return;
+        activeId = id;
+        navLinks.forEach(function (link) {
+          link.setAttribute("data-active", "false");
+        });
+        if (!id) return;
+        var matches = linkBySectionId.get(id) || [];
+        matches.forEach(function (link) {
+          link.setAttribute("data-active", "true");
+        });
+      }
+
+      var observer = new IntersectionObserver(
+        function (entries) {
+          var visible = entries
+            .filter(function (e) {
+              return e.isIntersecting;
+            })
+            .sort(function (a, b) {
+              return a.boundingClientRect.top - b.boundingClientRect.top;
+            });
+          if (visible.length > 0) {
+            setActive(visible[0].target.id);
+          }
+        },
+        {
+          rootMargin: "-30% 0px -55% 0px",
+          threshold: 0,
+        },
+      );
+
+      sections.forEach(function (s) {
+        observer.observe(s);
+      });
+      currentObserver = observer;
+    }
+
+    initSectionHighlighter();
+    document.addEventListener("astro:page-load", initSectionHighlighter);
+  })();
+</script>

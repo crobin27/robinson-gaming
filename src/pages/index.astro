@@ -1,19 +1,27 @@
 ---
-import "/src/styles/global.css";
-import "../styles/layout.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import AboutSection from "../components/AboutSection.astro";
-import PhotographySection from "../components/PhotographySection.astro";
-import ProjectsSection from "../components/ProjectsSection.astro";
-const pageTitle = "Robinson Gaming - Software Engineer";
-const pageDescription =
-  "Discover Robinson Gaming, a game development studio led by Cole Robinson, focusing on mobile games, web applications, and IoT solutions.";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import HeroSection from "../components/sections/HeroSection.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import TechMarqueeSection from "../components/sections/TechMarqueeSection.astro";
+import TimelineSection from "../components/sections/TimelineSection.astro";
+import ResumeSection from "../components/sections/ResumeSection.astro";
+import PhotographySection from "../components/sections/PhotographySection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-  <Hero />
-  <ProjectsSection id="Projects" />
+<BaseLayout
+  title="Robinson Gaming — Cole Robinson"
+  description="Software engineer and cloud infrastructure architect. Building web apps, automating systems, and designing AWS infrastructure."
+>
+  <Navbar />
+  <HeroSection />
   <AboutSection />
+  <TechMarqueeSection />
+  <TimelineSection />
   <PhotographySection />
+  <ResumeSection />
+  <ContactSection />
+  <Footer />
 </BaseLayout>

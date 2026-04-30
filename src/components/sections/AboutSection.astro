@@ -1,0 +1,552 @@
+---
+import SectionHeading from "@/components/shared/SectionHeading.astro";
+import { photos } from "@/data/photos";
+import { cldForVariant, cldLqip } from "@/lib/cloudinary";
+
+const featuredPhotos = photos.filter((p) => p.featured).slice(0, 4);
+const photoSlotSeconds = 5;
+const photoCycleSeconds = featuredPhotos.length * photoSlotSeconds;
+
+const currentlyItems = [
+  "Architecting cloud systems on AWS",
+  "Shipping full-stack apps in Nest.js and Next.js",
+  "Writing Python ETL pipelines for data work",
+  "Building AI-powered analytics with OpenAI",
+  "Running IaC and CI/CD for production workloads",
+];
+
+const outsideWork = [
+  { label: "Hiking", icon: "mountain" },
+  { label: "Skiing", icon: "snowflake" },
+  { label: "Beer", icon: "beer" },
+  { label: "Building", icon: "code" },
+  { label: "Learning", icon: "grad-cap" },
+  { label: "Competing", icon: "trophy" },
+];
+
+const iconifyLogos = (slug: string) =>
+  `https://api.iconify.design/logos:${slug}.svg`;
+const iconifySkill = (slug: string) =>
+  `https://api.iconify.design/skill-icons:${slug}.svg`;
+
+interface StackIcon {
+  name: string;
+  src: string;
+  /** Optional alternate src for dark mode (skill-icons style theme variants). */
+  srcDark?: string;
+}
+
+const stackIcons: StackIcon[] = [
+  {
+    name: "AWS",
+    src: iconifySkill("aws-light"),
+    srcDark: iconifySkill("aws-dark"),
+  },
+  { name: "TypeScript", src: iconifyLogos("typescript") },
+  { name: "Postgres", src: iconifyLogos("postgresql") },
+  { name: "Windows", src: iconifyLogos("microsoft-windows-icon") },
+  { name: "Linux", src: iconifyLogos("tux") },
+  { name: "Docker", src: iconifyLogos("docker-icon") },
+  {
+    name: "GitHub",
+    src: iconifySkill("github-light"),
+    srcDark: iconifySkill("github-dark"),
+  },
+  { name: "Python", src: iconifyLogos("python") },
+];
+---
+
+<section id="about" class="mx-auto max-w-5xl px-6 py-20 md:py-32">
+  <div data-reveal class="mb-12">
+    <SectionHeading
+      title="About me"
+      subtitle="A snapshot of who I am, what I'm working on, and what fills the rest of my days."
+    />
+  </div>
+
+  <div class="bento-grid">
+    <!-- Big intro card (4x2) -->
+    <article
+      class="bento-card bento-intro md:col-span-4 md:row-span-2"
+      data-reveal
+      data-reveal-delay="1"
+    >
+      <div class="flex h-full flex-col justify-between gap-6">
+        <div>
+          <p
+            class="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+          >
+            Hey there
+          </p>
+          <h3
+            class="text-3xl font-bold leading-tight tracking-tight md:text-4xl"
+          >
+            I'm Cole — I build <span class="text-primary"
+              >software and the systems it runs on.</span
+            >
+          </h3>
+        </div>
+        <div class="space-y-4 text-sm text-muted-foreground md:text-base">
+          <p>
+            Full-stack engineer and cloud architect. I build web apps, automate
+            the tedious parts of business operations, and ship everything to
+            AWS.
+          </p>
+          <p>
+            On the product side I design and deploy full-stack apps on Next.js
+            and Nest.js — internal tools and external portals alike — with React
+            frontends, Postgres data layers, and OpenAI analysis where it adds
+            real value.
+          </p>
+          <p>
+            The rest is automation: Python ETL pipelines, Microsoft Graph email
+            workflows, and keeping the infrastructure behind it all stable.
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <!-- Currently card -->
+    <article class="bento-card md:col-span-2" data-reveal data-reveal-delay="2">
+      <p
+        class="mb-4 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+      >
+        Currently
+      </p>
+      <ul class="space-y-3 text-sm">
+        {
+          currentlyItems.map((item) => (
+            <li class="flex items-start gap-2.5">
+              <span class="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
+              <span class="text-foreground/85">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+
+    <!-- Location / education card -->
+    <article class="bento-card md:col-span-2" data-reveal data-reveal-delay="3">
+      <div class="flex h-full flex-col gap-5">
+        <div>
+          <p
+            class="mb-2 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+          >
+            Based in
+          </p>
+          <div class="flex items-start gap-2.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mt-0.5 shrink-0 text-primary"
+            >
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <p class="text-base font-semibold leading-tight">
+              Southern California
+            </p>
+          </div>
+        </div>
+
+        <div class="h-px bg-border" aria-hidden="true"></div>
+
+        <div>
+          <p
+            class="mb-2 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+          >
+            Studied at
+          </p>
+          <div class="flex items-start gap-2.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="mt-0.5 shrink-0 text-primary"
+            >
+              <path
+                d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"
+              ></path>
+              <path d="M22 10v6"></path>
+              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+            </svg>
+            <div>
+              <p class="text-base font-semibold leading-tight">Cal Poly SLO</p>
+              <p class="mt-0.5 text-xs text-muted-foreground">
+                Computer Engineering, cum laude
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Photo card — crossfades through featured photos -->
+    {
+      featuredPhotos.length > 0 && (
+        <a
+          href="/photography"
+          class="bento-card bento-photo group relative overflow-hidden p-0 md:col-span-2"
+          data-reveal
+          data-reveal-delay="4"
+          style={`--bento-photo-cycle: ${photoCycleSeconds}s; --bento-photo-slot: ${photoSlotSeconds}s; background-image: url(${cldLqip(featuredPhotos[0].publicId)});`}
+        >
+          {featuredPhotos.map((photo, i) => (
+            <div
+              class="bento-photo-slide"
+              style={`--i: ${i}; background-image: url(${cldLqip(photo.publicId)});`}
+            >
+              <img
+                src={cldForVariant(photo.publicId, "native", 800)}
+                alt={photo.title ?? "Photograph by Cole Robinson"}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))}
+          <div class="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+          <div class="relative z-[2] flex h-full flex-col justify-end p-5">
+            <p class="text-[0.65rem] font-medium uppercase tracking-[0.18em] text-white/75">
+              From the camera
+            </p>
+            <p class="mt-1 text-sm font-semibold text-white">
+              View the gallery →
+            </p>
+          </div>
+        </a>
+      )
+    }
+
+    <!-- Stack card -->
+    <article class="bento-card md:col-span-3" data-reveal data-reveal-delay="5">
+      <p
+        class="mb-4 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+      >
+        Go-to stack
+      </p>
+      <div class="grid grid-cols-4 gap-3">
+        {
+          stackIcons.map((icon) => (
+            <div class="stack-icon" title={icon.name}>
+              {icon.srcDark ? (
+                <>
+                  <img
+                    src={icon.src}
+                    alt={icon.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="block dark:hidden"
+                  />
+                  <img
+                    src={icon.srcDark}
+                    alt={icon.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="hidden dark:block"
+                  />
+                </>
+              ) : (
+                <img
+                  src={icon.src}
+                  alt={icon.name}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </article>
+
+    <!-- Outside work card — narrow vertical list -->
+    <article
+      class="bento-card bento-outside md:col-span-1"
+      data-reveal
+      data-reveal-delay="5"
+    >
+      <p
+        class="mb-4 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-muted-foreground"
+      >
+        Offline
+      </p>
+      <ul class="space-y-2.5 text-xs">
+        {
+          outsideWork.map((item) => (
+            <li class="flex items-center gap-2 text-foreground/80">
+              {item.icon === "mountain" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+                </svg>
+              )}
+              {item.icon === "snowflake" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M2 12h20" />
+                  <path d="M12 2v20" />
+                  <path d="m20 16-4-4 4-4" />
+                  <path d="m4 8 4 4-4 4" />
+                  <path d="m16 4-4 4-4-4" />
+                  <path d="m8 20 4-4 4 4" />
+                </svg>
+              )}
+              {item.icon === "beer" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 11h1a3 3 0 0 1 0 6h-1" />
+                  <path d="M9 12v6" />
+                  <path d="M13 12v6" />
+                  <path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5C9.44 3.5 10 3 11 3s1.56.5 3 .5c.78 0 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z" />
+                  <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />
+                </svg>
+              )}
+              {item.icon === "code" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              )}
+              {item.icon === "grad-cap" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+                  <path d="M22 10v6" />
+                  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+                </svg>
+              )}
+              {item.icon === "trophy" && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                  <path d="M4 22h16" />
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                </svg>
+              )}
+              <span>{item.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+  </div>
+</section>
+
+<style>
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: minmax(170px, auto);
+      gap: 1.25rem;
+    }
+  }
+
+  .bento-card {
+    position: relative;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: color-mix(in oklab, var(--card) 100%, transparent);
+    border: 1px solid var(--border);
+    transition:
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+    box-shadow: 0 14px 40px -20px rgba(0, 0, 0, 0.5);
+  }
+
+  .bento-intro {
+    background:
+      radial-gradient(
+        circle at 0% 0%,
+        color-mix(in oklab, var(--primary) 12%, transparent),
+        transparent 60%
+      ),
+      var(--card);
+    padding: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .bento-intro {
+      padding: 2.5rem;
+    }
+  }
+
+  .bento-photo {
+    min-height: 220px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .bento-outside {
+    padding: 1.25rem 1rem;
+  }
+
+  .bento-photo-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-size: cover;
+    background-position: center;
+    animation-name: bento-photo-cycle;
+    animation-duration: var(--bento-photo-cycle, 20s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: calc(var(--i) * var(--bento-photo-slot, 5s));
+    will-change: opacity, transform;
+  }
+
+  .bento-photo-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+
+  .bento-photo:hover .bento-photo-slide img {
+    transform: scale(1.05);
+  }
+
+  @keyframes bento-photo-cycle {
+    0% {
+      opacity: 0;
+      transform: scale(1.03);
+    }
+    5% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+      transform: scale(1.09);
+    }
+    30% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bento-photo-slide {
+      animation: none;
+    }
+    .bento-photo-slide:first-child {
+      opacity: 1;
+    }
+  }
+
+  .stack-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 0.6rem;
+    background: color-mix(in oklab, var(--muted) 60%, transparent);
+    border: 1px solid var(--border);
+    transition:
+      transform 0.3s ease,
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
+
+  .stack-icon:hover {
+    transform: translateY(-2px) scale(1.04);
+    background: color-mix(in oklab, var(--muted) 90%, transparent);
+    border-color: color-mix(in oklab, var(--primary) 35%, var(--border));
+  }
+
+  .stack-icon img {
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+    opacity: 0.95;
+    transition: opacity 0.3s ease;
+  }
+
+  .stack-icon:hover img {
+    opacity: 1;
+  }
+</style>

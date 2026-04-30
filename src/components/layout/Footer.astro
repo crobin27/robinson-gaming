@@ -1,0 +1,18 @@
+---
+// Simple footer — using a plain border-top instead of importing the React Separator
+// component, since it's a purely decorative static element.
+---
+
+<footer class="mx-auto max-w-5xl px-6 pb-8">
+  <div class="border-t border-border"></div>
+  <div
+    class="flex items-center justify-between pt-6 text-xs text-muted-foreground"
+  >
+    <p>
+      &copy; {new Date().getFullYear()} Robinson Gaming. All rights reserved.
+    </p>
+    <a href="/privacy-policy" class="transition-colors hover:text-foreground">
+      Privacy Policy
+    </a>
+  </div>
+</footer>

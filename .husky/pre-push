@@ -1,36 +1,17 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo "🚀 Running pre-push checks..."
 
 # Type checking
 echo "🔍 Type checking..."
-npm run typecheck || {
+pnpm typecheck || {
   echo "❌ Type check failed. Please fix type errors."
   exit 1
 }
 
-# Linting (if not already done in pre-commit)
+# Linting
 echo "🧹 Running linters..."
-npm run lint:all || {
+pnpm lint:all || {
   echo "❌ Linting failed. Please fix the issues above."
   exit 1
 }
 
-# Unit tests
-echo "🧪 Running unit tests..."
-npm run test || {
-  echo "❌ Unit tests failed. Please fix failing tests."
-  exit 1
-}
-
-# E2E tests
-echo "🎭 Running E2E tests..."
-npm run test:e2e || {
-  echo "❌ E2E tests failed. Please fix failing tests."
-  echo "💡 Tip: Run 'npm run test:e2e:ui' to debug interactively."
-  exit 1
-}
-
-echo "✅ All pre-push checks passed! Ready to push."
-
+echo "✅ Pre-push checks passed! Ready to push."

@@ -1,0 +1,181 @@
+---
+import { photos } from "@/data/photos";
+import { cldForVariant, cldLqip } from "@/lib/cloudinary";
+
+const featured = photos.filter((p) => p.featured).slice(0, 4);
+const slideCount = featured.length;
+const slotSeconds = 5;
+const cycleSeconds = slideCount * slotSeconds;
+---
+
+<section id="photography" class="photo-hero-section relative mt-16 md:mt-24">
+  <div
+    class="photo-hero"
+    style={`--cycle: ${cycleSeconds}s; --slot: ${slotSeconds}s;`}
+  >
+    {
+      featured.length === 0 ? (
+        <div class="photo-hero-empty">
+          <p>No featured photos yet.</p>
+        </div>
+      ) : (
+        featured.map((photo, i) => (
+          <div
+            class="photo-slide"
+            style={`--i: ${i}; background-image: url(${cldLqip(photo.publicId)});`}
+          >
+            <img
+              src={cldForVariant(photo.publicId, "hero", 2400)}
+              alt={photo.title ?? "Featured photograph"}
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </div>
+        ))
+      )
+    }
+
+    <div class="photo-hero-overlay"></div>
+
+    <div class="photo-hero-content">
+      <div class="mx-auto max-w-5xl px-6 pb-12 md:pb-20">
+        <p
+          class="mb-3 text-[0.7rem] font-medium uppercase tracking-[0.2em] text-white/75"
+        >
+          Photography
+        </p>
+        <h2
+          class="max-w-2xl text-4xl font-bold tracking-tight text-white md:text-6xl"
+        >
+          Moments, <span class="text-primary">framed.</span>
+        </h2>
+        <p class="mt-5 max-w-xl text-sm text-white/75 md:text-base">
+          When I'm not coding, I'm behind a camera — landscapes, city scenes,
+          and anything that catches the light right.
+        </p>
+        <a
+          href="/photography"
+          class="mt-8 inline-flex h-11 items-center gap-2 rounded-md bg-white px-6 text-sm font-semibold text-black shadow-lg transition-transform hover:scale-[1.02] hover:bg-white/95"
+        >
+          View Gallery
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .photo-hero-section {
+    width: 100%;
+  }
+
+  .photo-hero {
+    position: relative;
+    width: 100%;
+    height: 78vh;
+    min-height: 520px;
+    max-height: 820px;
+    overflow: hidden;
+    background-color: #000;
+  }
+
+  .photo-hero-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+  }
+
+  .photo-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background-size: cover;
+    background-position: center;
+    animation: photo-cycle var(--cycle) linear infinite;
+    animation-delay: calc(var(--i) * var(--slot));
+    will-change: opacity, transform;
+  }
+
+  .photo-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @keyframes photo-cycle {
+    0% {
+      opacity: 0;
+      transform: scale(1.05) translate(0%, 0%);
+    }
+    5% {
+      opacity: 1;
+    }
+    25% {
+      opacity: 1;
+      transform: scale(1.14) translate(-1%, -0.6%);
+    }
+    30% {
+      opacity: 0;
+      transform: scale(1.15) translate(-1.2%, -0.8%);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .photo-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.35) 35%,
+        rgba(0, 0, 0, 0) 60%
+      ),
+      linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 50%);
+    pointer-events: none;
+  }
+
+  .photo-hero-content {
+    position: absolute;
+    inset: auto 0 0 0;
+    z-index: 2;
+  }
+
+  @media (max-width: 640px) {
+    .photo-hero {
+      height: 68vh;
+      min-height: 460px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-slide {
+      animation: none;
+    }
+    .photo-slide:first-child {
+      opacity: 1;
+    }
+  }
+</style>

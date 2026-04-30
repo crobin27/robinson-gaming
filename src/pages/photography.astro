@@ -1,13 +1,40 @@
 ---
-import "/src/styles/global.css";
-import "../styles/layout.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PhotographyComponent from "../components/PhotographyComponent.astro";
-const pageTitle = "Photography by Cole Robinson ";
-const pageDescription =
-  "Explore landscape and portrait photography by Cole Robinson, featuring scenic shots from Lake Tahoe, Mt. Whitney, and more.";
+import Navbar from "../components/layout/Navbar.astro";
+import Footer from "../components/layout/Footer.astro";
+import { Gallery } from "../components/photography/Gallery";
+import { photos } from "../data/photos";
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription}>
-  <PhotographyComponent />
+<BaseLayout
+  title="Photography — Cole Robinson"
+  description="A selection of photos I've taken — landscapes, portraits, and whatever catches the light."
+>
+  <Navbar />
+
+  <main class="mx-auto max-w-6xl px-6 pt-16 pb-24 md:pt-24">
+    <!-- Header -->
+    <header class="mb-12 max-w-2xl" data-reveal>
+      <p
+        class="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+      >
+        Photography
+      </p>
+      <h1 class="text-4xl font-bold tracking-tight md:text-6xl">
+        Moments, <span class="text-primary">framed.</span>
+      </h1>
+      <p class="mt-6 text-base text-muted-foreground md:text-lg">
+        A running collection of shots I've taken — landscapes from weekend
+        trips, street scenes, and anything else that caught the light right.
+        Click any photo to see it larger or download the full-resolution
+        version.
+      </p>
+    </header>
+
+    <div data-reveal>
+      <Gallery client:load photos={photos} />
+    </div>
+  </main>
+
+  <Footer />
 </BaseLayout>

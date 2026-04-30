@@ -32,37 +32,37 @@ This project uses a combination of front-end frameworks, storage solutions, and 
 1. **Install dependencies**:
 
 ```bash
-npm install
+pnpm install
 ```
 
 2. **Install Playwright browsers** (for E2E tests):
 
 ```bash
-npx playwright install
+pnpm exec playwright install
 ```
 
 3. **Start development server**:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run typecheck` - Run TypeScript type checking
-- `npm run lint` - Run ESLint
-- `npm run lint:css` - Run Stylelint
-- `npm run lint:all` - Run all linters
-- `npm run format` - Format code with Prettier
-- `npm run format:check` - Check code formatting
-- `npm run test` - Run unit tests
-- `npm run test:watch` - Run unit tests in watch mode
-- `npm run test:e2e` - Run E2E tests with Playwright
-- `npm run test:e2e:ui` - Run E2E tests with Playwright UI
-- `npm run test:all` - Run all checks (typecheck, lint, unit tests, E2E tests)
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm preview` - Preview production build
+- `pnpm typecheck` - Run TypeScript type checking
+- `pnpm lint` - Run ESLint
+- `pnpm lint:css` - Run Stylelint
+- `pnpm lint:all` - Run all linters
+- `pnpm format` - Format code with Prettier
+- `pnpm format:check` - Check code formatting
+- `pnpm test` - Run unit tests
+- `pnpm test:watch` - Run unit tests in watch mode
+- `pnpm test:e2e` - Run E2E tests with Playwright
+- `pnpm test:e2e:ui` - Run E2E tests with Playwright UI
+- `pnpm test:all` - Run all checks (typecheck, lint, unit tests, E2E tests)
 
 ### Git Hooks
 
@@ -94,7 +94,7 @@ git push --no-verify
 **Run all checks manually**:
 
 ```bash
-npm run test:all
+pnpm test:all
 ```
 
 ## Key Features Implemented

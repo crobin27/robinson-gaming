@@ -1,0 +1,90 @@
+---
+// Hero section — full-viewport landing with radial gradient background.
+// Uses plain <a> tags styled as buttons to stay fully static (no React hydration needed).
+---
+
+<section
+  class="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center px-6 text-center"
+>
+  <!-- Aurora animated background blobs -->
+  <div
+    class="aurora-container pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+    aria-hidden="true"
+  >
+    <div class="aurora-blob aurora-blob-1"></div>
+    <div class="aurora-blob aurora-blob-2"></div>
+    <div class="aurora-blob aurora-blob-3"></div>
+  </div>
+
+  <!-- Eyebrow -->
+  <p
+    class="hero-enter mb-6 text-xs font-medium uppercase tracking-widest text-muted-foreground"
+    style="animation-delay: 0.1s"
+  >
+    Web Apps &middot; Automation &middot; IT Infrastructure &middot; Software
+    Development
+  </p>
+
+  <!-- Headline -->
+  <h1
+    class="hero-enter max-w-3xl text-5xl font-bold tracking-tight md:text-7xl"
+    style="animation-delay: 0.25s"
+  >
+    Building software that solves real <span class="text-primary"
+      >problems.</span
+    >
+  </h1>
+
+  <!-- Subheading -->
+  <p
+    class="hero-enter mt-6 max-w-xl text-base text-muted-foreground md:text-lg"
+    style="animation-delay: 0.4s"
+  >
+    Cole Robinson &mdash; full-stack engineer and cloud architect. I build web
+    apps, automate the tedious parts of running a business, and deploy them on
+    AWS.
+  </p>
+
+  <!-- CTAs -->
+  <div
+    class="hero-enter mt-10 flex flex-wrap items-center justify-center gap-3"
+    style="animation-delay: 0.55s"
+  >
+    <a
+      href="#about"
+      class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/80"
+    >
+      About Me
+    </a>
+    <a
+      href="#contact"
+      class="inline-flex h-9 items-center justify-center rounded-md border border-border bg-transparent px-5 text-sm font-medium transition-colors hover:bg-muted"
+    >
+      Get in Touch
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 flex flex-col items-center gap-1">
+    <a
+      href="#about"
+      aria-label="Scroll to about section"
+      class="text-muted-foreground/50 transition-colors hover:text-muted-foreground"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="animate-bounce"
+      >
+        <path d="m6 9 6 6 6-6"></path>
+      </svg>
+    </a>
+  </div>
+</section>
